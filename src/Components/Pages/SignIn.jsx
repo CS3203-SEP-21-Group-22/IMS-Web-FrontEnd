@@ -1,8 +1,11 @@
 import React from 'react'
+import '../../styles/css/SignIn.css'
 
 function SignIn() {
   return (
-    <div>SignIn</div>
+    <div className='signin'>
+
+    </div>
   )
 }
 

@@ -1,0 +1,21 @@
+:root {
+  --antiflash-white: #f6f9fdff;
+  --alice-blue: #e3edf8ff;
+  --columbia-blue: #d4e5f6ff;
+  --powder-blue: #b3c3e3ff;
+  --picton-blue: #03ade5ff;
+  --glaucous: #6d7aa4ff;
+  --yinmn-blue: #3c4d71ff;
+  --space-cadet: #202652ff;
+  --vermilion: #e94b37ff;
+
+  --antiflash-white-hsl: hsla(214, 64%, 98%, 1);
+  --alice-blue-hsl: hsla(211, 60%, 93%, 1);
+  --columbia-blue-hsl: hsla(210, 65%, 90%, 1);
+  --powder-blue-hsl: hsla(220, 46%, 80%, 1);
+  --picton-blue-hsl: hsla(195, 97%, 45%, 1);
+  --glaucous-hsl: hsla(226, 23%, 54%, 1);
+  --yinmn-blue-hsl: hsla(221, 31%, 34%, 1);
+  --space-cadet-hsl: hsla(233, 44%, 22%, 1);
+  --vermilion-hsl: hsla(7, 80%, 56%, 1);
+}
