@@ -5,7 +5,7 @@ import leftIcon from '../styles/images/leftticon.png'
 import rightIcon from '../styles/images/righticon.png'
 import middleIcon from '../styles/images/middleicon.png'
 import page3 from '../styles/images/page3.png'
-import signinpic from '../styles/images/siginpic.png'
+import signinpic from '../styles/images/siginpicnew.png'
 
 export const Home = () => {
   return (
@@ -43,7 +43,7 @@ export const Home = () => {
         <p className='flexible'>FLEXIBLE AND DIVERSE</p>
         <p className='flexible-descript'> From Lab administrators to students , role based profiling makes sure the user gets a simple, easy to use experience.</p>
         <img src={page3} alt='page3pic' className='page3-pic'/>
-        <img src={signinpic} alt='signinpic' className='signin-pic'/>
+        <img src={signinpic} alt='signinpic' className='sign-pic'/>
       </div>
     </div>
   )

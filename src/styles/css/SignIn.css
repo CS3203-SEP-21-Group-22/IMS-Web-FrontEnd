@@ -1,6 +1,130 @@
 .signin{
   height:1000px;
   width: 100%;
-  background-color: lightblue;
+  background: linear-gradient(180deg, #202652 0%, #E3EDF8 100%);
   display: flex;
+}
+
+.sign-div{
+  position: relative;
+  width: 349px;
+  height: 450px;
+  left: 200px;
+  top: 303px;
+  background: linear-gradient(157.91deg, #3C4D71 0%, #202652 58.47%);
+  box-shadow: 0px -20px 60px rgba(0, 0, 0, 0.25);
+  border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 5;
+  animation: glowAnimation 3s infinite;
+
+}
+
+/* Group 1 */
+
+/* Rectangle 11 */
+
+
+/* SIGN IN */
+
+.sign-title{
+  position: absolute;
+  width: 156px;
+  height: 32px;
+  top: 10px;
+
+  font-family: 'Josefin Sans';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 32px;
+
+  text-align: center;
+  letter-spacing: -0.3px;
+
+  color: #FFFFFF;
+
+}
+
+
+.email-input{
+  
+  height: 50px;
+  width: 306px;
+  border-radius: 10px;
+  border-color: transparent;
+  margin-bottom: 10px;
+  
+  
+}
+
+.password-input{
+  
+  height: 50px;
+  width: 306px;
+  border-radius: 10px;
+  border-color: transparent;
+  margin: 5px;
+  
+}
+
+.sign-login{
+  
+
+  box-sizing: border-box;
+
+  width: 306px;
+  height: 46.99px;
+
+  background: linear-gradient(152.72deg, #34C8E8 1.7%, #4E4AF2 114.52%);  
+  box-shadow: 0px 30px 60px #1A1F2C;
+
+  border-radius: 10px; 
+  margin-top: 30px;
+  border-color: transparent;
+
+
+
+}
+
+/* Input/Text */
+
+.forgot{
+  background-color: transparent;
+  border-color: transparent;
+  color: white;
+  margin-top: 5px;
+  cursor: pointer;
+}
+
+.forgot:hover{
+  text-decoration: underline;
+}
+
+.signin-pic{
+  position: absolute;
+  width: 700px;
+  height: 500px;
+  left: 485px;
+  top: 340px;
+  z-index: 1;
+  
+  border: none;
+}
+
+
+
+@keyframes glowAnimation {
+  0% {
+    box-shadow: 0 0 5px #000000;
+  }
+  50% {
+    box-shadow: 0 0 10px #000000, 0 0 15px #0f169d, 0 0 20px #1a1f7b;
+  }
+  100% {
+    box-shadow: 0 0 5px #000000;
+  }
 }

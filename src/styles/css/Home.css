@@ -63,6 +63,7 @@
   justify-content: center;
   align-items: center;
   position: relative;
+  
 }
 
 .page1-main-text{
@@ -72,6 +73,7 @@
   left: 84px;
   top: 377px;
 
+  text-align: left;
   font-family: 'Josefin Sans';
   font-style: normal;
   font-weight: 700;
@@ -88,7 +90,7 @@
   height: 74px;
   left: 84px;
   top: 494px;
-
+  text-align: left;
   font-family: 'Istok Web';
   font-style: normal;
   font-weight: 400;
@@ -167,6 +169,7 @@
   height: 500px;
   left: 621px;
   top: 260px;
+  animation: scaleAnimation 3s infinite;
 }
 
 
@@ -282,17 +285,26 @@
 
 }
 
-.signin-pic{
 
 
-width: 309px;
-height: 400px;
-position: absolute;
-left: 150px;
-top: 300px;
 
-
+.sign-pic{
+  
+  width: 320px;
+  height: 400px;
+  position: absolute;
+  left: 150px;
+  top: 300px;
 }
 
-
-
+@keyframes scaleAnimation{
+  0%{
+    transform: scale(1);
+  }
+  50%{
+    transform: scale(1.05);
+  }
+  100%{
+    transform: scale(1);
+  }
+}
