@@ -4,9 +4,11 @@ import {Routes,Route} from 'react-router-dom';
 import {Layout} from './Components/Layout';
 import SignIn from './Components/Pages/SignIn';
 import SignUp from './Components/Pages/SignUp';
+import {UserProfile} from './Components/Pages/UserProfile';
 import StudentDashboard from './Components/Pages/StudentDashboard';
 import { StudentSelect } from './Components/Pages/StudentSelect';
-import LabTechnicianDashboard from './Components/Pages/LabTechnicianDashboard';
+
+import {LabTechDash} from './Components/Pages/LabTechDash';
 
 function App() {
   return (
@@ -19,7 +21,8 @@ function App() {
             <Route path='/sign-out' element={<SignUp/>}/>
             <Route path='/student' element={<StudentDashboard/>}/>
             <Route path='/student-select' element={<StudentSelect/>}/>
-            <Route path='/labTechnician' element={<LabTechnicianDashboard/>}/>
+            <Route path='/labTechnician' element={<LabTechDash/>}/>
+            <Route path='/user' element={<UserProfile/>}/>
           </Route>
         </Route>
       </Routes>
