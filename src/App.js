@@ -7,6 +7,8 @@ import SignUp from './Components/Pages/SignUp';
 import {UserProfile} from './Components/Pages/UserProfile';
 import StudentDashboard from './Components/Pages/StudentDashboard';
 import { StudentSelect } from './Components/Pages/StudentSelect';
+import StaffDashboard  from './Components/Pages/AcaStaff/StaffDash';
+import AdminDashboard from './Components/Pages/Admin/AdminDash';
 
 import {LabTechDash} from './Components/Pages/LabTechDash';
 
@@ -23,6 +25,8 @@ function App() {
             <Route path='/student-select' element={<StudentSelect/>}/>
             <Route path='/labTechnician' element={<LabTechDash/>}/>
             <Route path='/user' element={<UserProfile/>}/>
+            <Route path='/staff' element={<StaffDashboard/>}/>
+            <Route path='/admin' element={<AdminDashboard/>}/>
           </Route>
         </Route>
       </Routes>

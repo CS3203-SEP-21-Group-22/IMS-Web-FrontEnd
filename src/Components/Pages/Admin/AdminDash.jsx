@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import checklist from "../../styles/images/checklist.png";
-import cardreserve from "../../styles/images/cardreserve.png";
-import laptop from "../../styles/images/laptop.png";
-import Card from "../Card";
-import LargeCard from "../LargeCard";
-import LabItems from "../LabItems";
+import checklist from "../../../styles/images/checklist.png";
+import cardreserve from "../../../styles/images/cardreserve.png";
+import laptop from "../../../styles/images/laptop.png";
+import Card from "../../Card";
+import LargeCard from "../../LargeCard";
+import LabItems from "../../LabItems";
 
-const StudentDashboard = () => {
+const AdminDashboard = () => {
   const [expandedBox1, setExpandedBox1] = useState(false);
   const [expandedBox2, setExpandedBox2] = useState(false);
 
@@ -47,7 +47,6 @@ const StudentDashboard = () => {
       lab="ICE LAB"
       datereq="08/25/2024"
       wantButton={false}
-      
     />,
   ];
 
@@ -57,10 +56,10 @@ const StudentDashboard = () => {
         {!expandedBox1 && !expandedBox2 ? (
           <>
             <div className="flex justify-center items-center">
-              <Card imgsrc={checklist} altname="checklist" Children="VIEW YOUR BOOKINGS" onClick={toggleBox1} />
+              <Card imgsrc={checklist} altname="checklist" Children="VIEW USER PROFILES" onClick={toggleBox1} />
             </div>
             <Link to="/student-select" className="flex justify-center items-center">
-              <Card imgsrc={cardreserve} altname="cardreserve" Children="RESERVE A SLOT" />
+              <Card imgsrc={cardreserve} altname="cardreserve" Children="VIEW LABS" />
             </Link>
             <div className="flex justify-center items-center">
               <Card Children="DUE ITEMS" onClick={toggleBox2} />
@@ -68,7 +67,7 @@ const StudentDashboard = () => {
           </>
         ) : expandedBox1 ? (
           <div className="flex justify-center items-center w-full col-span-3">
-            <LargeCard onClick={toggleBox1} Children={reqItems} columns={columns}  />
+            <LargeCard onClick={toggleBox1} Children={reqItems} columns={columns} />
           </div>
         ) : (
           <div className="flex justify-center items-center w-full col-span-3">
@@ -80,4 +79,4 @@ const StudentDashboard = () => {
   );
 };
 
-export default StudentDashboard;
+export default AdminDashboard;
