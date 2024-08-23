@@ -9,8 +9,12 @@ import StudentDashboard from './Components/Pages/StudentDashboard';
 import { StudentSelect } from './Components/Pages/StudentSelect';
 import StaffDashboard  from './Components/Pages/AcaStaff/StaffDash';
 import AdminDashboard from './Components/Pages/Admin/AdminDash';
-
+import  OfficeClerkDashboard  from './Components/Pages/OfficeClerk/OfficeClerkDashboard';
 import {LabTechDash} from './Components/Pages/LabTechDash';
+import AproveLisTRequest from './Components/AproveLisTRequest';
+import { StaffProfile } from './Components/Pages/AcaStaff/StaffProfile';
+import { AdminProfile } from './Components/Pages/Admin/AdminProfile';
+import { OfficeClerkProfile } from './Components/Pages/OfficeClerk/OfficeClerkProfile';
 
 function App() {
   return (
@@ -27,6 +31,11 @@ function App() {
             <Route path='/user' element={<UserProfile/>}/>
             <Route path='/staff' element={<StaffDashboard/>}/>
             <Route path='/admin' element={<AdminDashboard/>}/>
+            <Route path='/officeclerk' element={<OfficeClerkDashboard/>}/>
+            <Route path='/aprove-list-request' element={<AproveLisTRequest/>}/>
+            <Route path='/staff-profile' element={<StaffProfile/>}/>
+            <Route path='/admin-profile' element={<AdminProfile/>}/>
+            <Route path='/officeclerk-profile' element={<OfficeClerkProfile/>}/>
           </Route>
         </Route>
       </Routes>
