@@ -15,6 +15,7 @@ import AproveLisTRequest from './Components/AproveLisTRequest';
 import { StaffProfile } from './Components/Pages/AcaStaff/StaffProfile';
 import { AdminProfile } from './Components/Pages/Admin/AdminProfile';
 import { OfficeClerkProfile } from './Components/Pages/OfficeClerk/OfficeClerkProfile';
+import { StaffRequest } from './Components/Pages/AcaStaff/StaffRequest';
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
             <Route path='/staff-profile' element={<StaffProfile/>}/>
             <Route path='/admin-profile' element={<AdminProfile/>}/>
             <Route path='/officeclerk-profile' element={<OfficeClerkProfile/>}/>
+            <Route path='/staff-request' element={<StaffRequest/>}/>
           </Route>
         </Route>
       </Routes>

@@ -24,7 +24,7 @@ export const AdminProfile = () => {
           </div>
           <div className="h-[40px]  w-[200px] rounded-[20px] flex flex-col justify-center items-center mt-2 absolute top-[300px] left-8">
             <p className="font-medium font-josefin-sans tracking-[0.06em]">STATUS</p>
-            <p className="font-light mt-2">Student</p>
+            <p className="font-light mt-2">Admin</p>
           </div>
           <div className="h-[40px] w-[200px] rounded-[20px] flex flex-col justify-center items-center mt-2 absolute top-[300px] right-2">
             <p className="font-medium font-josefin-sans tracking-[0.06em] ">DATE JOINED</p>

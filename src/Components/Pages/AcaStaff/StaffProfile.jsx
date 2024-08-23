@@ -16,7 +16,7 @@ export const StaffProfile = () => {
         <div className="w-[550px] h-[496px] bg-[#F6F9FD] rounded-tr-[60px] rounded-br-[60px] flex-col flex justify-center items-center relative">
           <div className="h-[40px] w-[200px] rounded-[20px] flex flex-col justify-center items-center absolute top-[100px] left-8">
             <FontAwesomeIcon icon={faEnvelope} className="h-[30px] w-[30px] mr-2" />
-            <p className="font-light mt-2">walrussmithslekmgmlknerlgeolutions@gmail.com</p>
+            <p className="font-light mt-2">walrussmithslgeolutions@gmail.com</p>
           </div>
           <div className="h-[40px] w-[200px] rounded-[20px] flex flex-col justify-center items-center mt-2 absolute top-[100px] right-2">
             <p className="font-medium font-josefin-sans tracking-[0.06em]">INDEX </p>
@@ -24,7 +24,7 @@ export const StaffProfile = () => {
           </div>
           <div className="h-[40px]  w-[200px] rounded-[20px] flex flex-col justify-center items-center mt-2 absolute top-[300px] left-8">
             <p className="font-medium font-josefin-sans tracking-[0.06em]">STATUS</p>
-            <p className="font-light mt-2">Student</p>
+            <p className="font-light mt-2">Staff</p>
           </div>
           <div className="h-[40px] w-[200px] rounded-[20px] flex flex-col justify-center items-center mt-2 absolute top-[300px] right-2">
             <p className="font-medium font-josefin-sans tracking-[0.06em] ">DATE JOINED</p>

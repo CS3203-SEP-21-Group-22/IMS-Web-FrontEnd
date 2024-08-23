@@ -59,20 +59,23 @@ const OfficeClerkDashboard = () => {
             <>
               <div className="flex justify-center items-center">
                 <Link to="/aprove-list-request" className="flex justify-center items-center">
-                    <Card imgsrc={checklist} altname="checklist" Children="Aprove Request" onClick={toggleBox1} />
+                    <Card imgsrc={checklist} altname="checklist" Children="APPROVE REQUESTS" onClick={toggleBox1} />
                 </Link>
               </div>
               <Link to="/student-select" className="flex justify-center items-center">
-                <Card imgsrc={cardreserve} altname="cardreserve" Children="RESERVE A SLOT" />
+                <Card imgsrc={cardreserve} altname="cardreserve" Children="VIEW EQUIPMENTS" />
               </Link>
               <div className="flex justify-center items-center">
-                <Card Children="DUE ITEMS" onClick={toggleBox2} />
+                <Card Children="ASSIGN TECHNICIANS" onClick={toggleBox2} />
               </div>
               <div className="flex justify-center items-center">
-                <Card Children="DUE ITEMS" onClick={toggleBox2} />
+                <Card Children="VIEW MAINTANCES HISTORY" onClick={toggleBox2} />
               </div>
               <div className="flex justify-center items-center">
-                <Card Children="DUE ITEMS" onClick={toggleBox2} />
+                <Card Children="VIEW MAINTANENCE STATUS" onClick={toggleBox2} />
+              </div>
+              <div className="flex justify-center items-center">
+                <Card Children="VIEW APPROVAL HISTORY" onClick={toggleBox2} />
               </div>
             </>
           ) : expandedBox1 ? (
