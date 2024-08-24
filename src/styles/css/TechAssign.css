@@ -1,0 +1,110 @@
+.student-select{
+    height: 800px;
+    width: 100%;
+    background: linear-gradient(180deg, #202652 0%, #E3EDF8 100%);
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .router-box{
+  
+    width: 277px;
+    height: 258px;
+  
+    filter: drop-shadow(4px 4px 4px rgba(0, 0, 0, 0.25));
+    background: #B3C3E3;
+    border-radius: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* transition: transform 1s ease; */
+    transition: height 1s ease;
+    transition: width 1s ease;
+    cursor: pointer;
+  
+  }
+  
+  .router-box.opened{
+  
+    width: 377px;
+    height: 500px;
+    transition: height 1s ease;
+    transition: width 1s ease;
+   
+  }
+  
+  .router-box:hover{
+    transform: scale(1.05);
+    transition: transform 0.5s ease;
+  }
+  
+  .box-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 1000px;
+    gap: 20px;
+  }
+  
+  .line{
+  
+    width: 228px;
+    height: 0px;
+  
+    border: 1px solid #000000;
+  
+  }
+  
+  /* Line 2 */
+  
+  .laptop{
+  
+  
+    width: 183px;
+    height: 183px;
+  
+  
+  }
+  
+  .projector{
+  
+  
+  
+    width: 275px;
+    height: 170px;
+  }
+  
+  .microcontroller{
+  
+    width: 210px;
+    height: 159px;
+  
+  }
+  
+  .keyboard{
+  
+    width: 245px;
+    height: 184px;
+  
+   
+  
+  }
+  
+  .mouse{
+  
+    width: 210px;
+    height: 210px;
+  
+  
+  }
+  
+  .router{
+  
+    width: 155px;
+    height: 155px;
+    border-radius: 2px;
+  
+  }

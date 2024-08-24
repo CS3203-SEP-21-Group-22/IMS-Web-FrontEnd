@@ -16,6 +16,7 @@ import { StaffProfile } from './Components/Pages/AcaStaff/StaffProfile';
 import { AdminProfile } from './Components/Pages/Admin/AdminProfile';
 import { OfficeClerkProfile } from './Components/Pages/OfficeClerk/OfficeClerkProfile';
 import { StaffRequest } from './Components/Pages/AcaStaff/StaffRequest';
+import  TechAssign  from './Components/Pages/TechAssign';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
             <Route path='/sign-out' element={<SignUp/>}/>
             <Route path='/student' element={<StudentDashboard/>}/>
             <Route path='/student-select' element={<StudentSelect/>}/>
+            <Route path='/assign-technicians' element={<TechAssign/>}/>
             <Route path='/labTechnician' element={<LabTechDash/>}/>
             <Route path='/user' element={<UserProfile/>}/>
             <Route path='/staff' element={<StaffDashboard/>}/>

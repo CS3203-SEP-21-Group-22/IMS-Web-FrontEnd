@@ -65,9 +65,9 @@ const OfficeClerkDashboard = () => {
               <Link to="/student-select" className="flex justify-center items-center">
                 <Card imgsrc={cardreserve} altname="cardreserve" Children="VIEW EQUIPMENTS" />
               </Link>
-              <div className="flex justify-center items-center">
+              <Link to="/assign-technicians" className="flex justify-center items-center">
                 <Card Children="ASSIGN TECHNICIANS" onClick={toggleBox2} />
-              </div>
+              </Link>
               <div className="flex justify-center items-center">
                 <Card Children="VIEW MAINTANCES HISTORY" onClick={toggleBox2} />
               </div>
