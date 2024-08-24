@@ -17,6 +17,8 @@ import { AdminProfile } from './Components/Pages/Admin/AdminProfile';
 import { OfficeClerkProfile } from './Components/Pages/OfficeClerk/OfficeClerkProfile';
 import { StaffRequest } from './Components/Pages/AcaStaff/StaffRequest';
 import  TechAssign  from './Components/Pages/TechAssign';
+import {UserProfiles} from './Components/Pages/UserProfileView';
+import {ViewLabs} from './Components/Pages/ViewLabs';
 
 function App() {
   return (
@@ -40,6 +42,8 @@ function App() {
             <Route path='/admin-profile' element={<AdminProfile/>}/>
             <Route path='/officeclerk-profile' element={<OfficeClerkProfile/>}/>
             <Route path='/staff-request' element={<StaffRequest/>}/>
+            <Route path='/user-profiles' element={<UserProfiles/>}/>
+            <Route path='/view-labs' element={<ViewLabs/>}/>
           </Route>
         </Route>
       </Routes>
