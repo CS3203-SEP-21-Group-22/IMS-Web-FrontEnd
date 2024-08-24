@@ -11,7 +11,7 @@ const AproveLisTRequest = ({onClick}) => {
     
   const columns = ["Request By","Item Name", "Serial No", "Date Requested", "due date"];
   return (
-    
+    <body class="h-screen flex items-center justify-center bg-gray-100">
     <div className="h-[496px] w-[1100px] bg-[#3C4D71] rounded-[60px] flex flex-col items-center justify-center relative content-center">
       <p className="font-josefin-sans font-normal text-[20px] text-white leading-[20px] tracking-[0.06em] absolute left-8 top-12">
         REPAIR REQUESTS
@@ -41,6 +41,7 @@ const AproveLisTRequest = ({onClick}) => {
         description="Scroll button is damaged"
       />
     </div>
+    </body>
   );
 };
 
