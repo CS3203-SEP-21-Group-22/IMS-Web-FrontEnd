@@ -49,7 +49,11 @@ const StudentDashboard = () => {
       lab="ICE LAB"
       datereq="09/10/2024"
       wantButton={false}
+<<<<<<< HEAD
       wantHarddatereq={true}
+=======
+      
+>>>>>>> origin/Ameera
     />,
   ];
 
@@ -70,7 +74,7 @@ const StudentDashboard = () => {
           </>
         ) : expandedBox1 ? (
           <div className="flex justify-center items-center w-full col-span-3">
-            <LargeCard onClick={toggleBox1} Children={reqItems} columns={columns} />
+            <LargeCard onClick={toggleBox1} Children={reqItems} columns={columns}  />
           </div>
         ) : (
           <div className="flex justify-center items-center w-full col-span-3">

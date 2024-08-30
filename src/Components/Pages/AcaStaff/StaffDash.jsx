@@ -6,7 +6,10 @@ import laptop from "../../../styles/images/laptop.png";
 import Card from "../../Card";
 import LargeCard from "../../LargeCard";
 import LabItems from "../../LabItems";
+<<<<<<< HEAD
 import Due from "../../../styles/images/Due.png";
+=======
+>>>>>>> origin/Ameera
 
 const StaffDashboard = () => {
   const [expandedBox1, setExpandedBox1] = useState(false);
@@ -63,7 +66,11 @@ const StaffDashboard = () => {
               <Card imgsrc={cardreserve} altname="cardreserve" Children="RESERVE A SLOT" />
             </Link>
             <div className="flex justify-center items-center">
+<<<<<<< HEAD
               <Card imgsrc={Due} altname="due-items" Children="DUE ITEMS" onClick={toggleBox2} />
+=======
+              <Card Children="DUE ITEMS" onClick={toggleBox2} />
+>>>>>>> origin/Ameera
             </div>
           </>
         ) : expandedBox1 ? (
