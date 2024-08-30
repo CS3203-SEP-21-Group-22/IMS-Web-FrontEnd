@@ -11,7 +11,7 @@ const Card = ({ onClick, Children, columns }) => {
         &lt;BACK
       </button>
 
-      <TableHeaders columns={columns} top="105px" width="650px" left="172px" />
+      <TableHeaders columns={columns} top="105px" width="640px" left="182px" paddingLeft="50px" />
       <div className="mt-10">{Children}</div>
     </div>
   );

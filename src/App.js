@@ -1,32 +1,49 @@
-import {Home} from './Components/Home'
+import { Home } from './Components/Home';
 import './index.css';
-import {Routes,Route} from 'react-router-dom';
-import {Layout} from './Components/Layout';
+import { Routes, Route } from 'react-router-dom';
+import { Layout } from './Components/Layout';
 import SignIn from './Components/Pages/SignIn';
 import SignUp from './Components/Pages/SignUp';
-import {UserProfile} from './Components/Pages/UserProfile';
+import { UserProfile } from './Components/Pages/UserProfile';
 import StudentDashboard from './Components/Pages/StudentDashboard';
 import { StudentSelect } from './Components/Pages/StudentSelect';
-
-import {LabTechDash} from './Components/Pages/LabTechDash';
+import { LabTechDash } from './Components/Pages/LabTechDash';
+import SendRequest from './Components/Pages/SendRequest';
+import { ContactUs } from './Components/Pages/ContactUs';
+import AproveLisTRequest from './Components/AproveLisTRequest';
+import { StaffProfile } from './Components/Pages/AcaStaff/StaffProfile';
+import { AdminProfile } from './Components/Pages/Admin/AdminProfile';
+import { OfficeClerkProfile } from './Components/Pages/OfficeClerk/OfficeClerkProfile';
+import { StaffRequest } from './Components/Pages/AcaStaff/StaffRequest';
+import StaffDashboard  from './Components/Pages/AcaStaff/StaffDash';
+import AdminDashboard from './Components/Pages/Admin/AdminDash';
+import  OfficeClerkDashboard  from './Components/Pages/OfficeClerk/OfficeClerkDashboard';
 
 function App() {
   return (
-    <div className="App">
-      <Routes>
-        <Route>
-          <Route path='/' element={<Layout/>}>
-            <Route index element={<Home/>}/>
-            <Route path='/sign-in' element={<SignIn/>}/>
-            <Route path='/sign-out' element={<SignUp/>}/>
-            <Route path='/student' element={<StudentDashboard/>}/>
-            <Route path='/student-select' element={<StudentSelect/>}/>
-            <Route path='/labTechnician' element={<LabTechDash/>}/>
-            <Route path='/user' element={<UserProfile/>}/>
+    <div className="min-h-screen flex flex-col">
+  
+        <Routes>
+          <Route path='/' element={<Layout />}>
+            <Route index element={<Home />} />
+            <Route path='/sign-in' element={<SignIn />} />
+            <Route path='/sign-out' element={<SignUp />} />
+            <Route path='/student' element={<StudentDashboard />} />
+            <Route path='/student-select' element={<StudentSelect />} />
+            <Route path='/labTechnician' element={<LabTechDash />} />
+            <Route path='/user' element={<UserProfile />} />
+            <Route path='/request' element={<SendRequest />} />
+            <Route path='/contactus' element={<ContactUs />} />
+            <Route path='/staff' element={<StaffDashboard/>}/>
+            <Route path='/admin' element={<AdminDashboard/>}/>
+            <Route path='/officeclerk' element={<OfficeClerkDashboard/>}/>
+            <Route path='/aprove-list-request' element={<AproveLisTRequest/>}/>
+            <Route path='/staff-profile' element={<StaffProfile/>}/>
+            <Route path='/admin-profile' element={<AdminProfile/>}/>
+            <Route path='/officeclerk-profile' element={<OfficeClerkProfile/>}/>
+            <Route path='/staff-request' element={<StaffRequest/>}/>
           </Route>
-        </Route>
-      </Routes>
-      
+        </Routes>
     </div>
   );
 }

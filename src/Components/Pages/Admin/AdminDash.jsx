@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import checklist from "../../styles/images/checklist.png";
-import cardreserve from "../../styles/images/cardreserve.png";
-import laptop from "../../styles/images/laptop.png";
-import Due from "../../styles/images/Due.png";
-import Card from "../Card";
-import LargeCard from "../LargeCard";
-import LabItems from "../LabItems";
+import checklist from "../../../styles/images/checklist.png";
+import cardreserve from "../../../styles/images/cardreserve.png";
+import laptop from "../../../styles/images/laptop.png";
+import Card from "../../Card";
+import LargeCard from "../../LargeCard";
+import LabItems from "../../LabItems";
+import Due from "../../../styles/images/Due.png";
 
-const StudentDashboard = () => {
+const AdminDashboard = () => {
   const [expandedBox1, setExpandedBox1] = useState(false);
   const [expandedBox2, setExpandedBox2] = useState(false);
 
@@ -30,26 +30,24 @@ const StudentDashboard = () => {
       itmname="LAPTOP"
       serial="123S9X9"
       lab="ICE LAB"
-      datereq="09/10/2024"
-      wantHarddatereq={true}
+      datereq="08/25/2024"
+      wantButton={false}
     />,
     <LabItems
       reqimg={laptop}
       itmname="LAPTOP"
       serial="123S9X9"
       lab="ICE LAB"
-      datereq="09/10/2024"
+      datereq="08/25/2024"
       wantButton={false}
-      wantHarddatereq={true}
     />,
     <LabItems
       reqimg={laptop}
       itmname="LAPTOP"
       serial="123S9X9"
       lab="ICE LAB"
-      datereq="09/10/2024"
+      datereq="08/25/2024"
       wantButton={false}
-      wantHarddatereq={true}
     />,
   ];
 
@@ -59,10 +57,10 @@ const StudentDashboard = () => {
         {!expandedBox1 && !expandedBox2 ? (
           <>
             <div className="flex justify-center items-center">
-              <Card imgsrc={checklist} altname="checklist" Children="VIEW YOUR BOOKINGS" onClick={toggleBox1} />
+              <Card imgsrc={checklist} altname="checklist" Children="VIEW USER PROFILES" onClick={toggleBox1} />
             </div>
             <Link to="/student-select" className="flex justify-center items-center">
-              <Card imgsrc={cardreserve} altname="cardreserve" Children="RESERVE A SLOT" />
+              <Card imgsrc={cardreserve} altname="cardreserve" Children="VIEW LABS" />
             </Link>
             <div className="flex justify-center items-center">
               <Card imgsrc={Due} altname="due-items" Children="DUE ITEMS" onClick={toggleBox2} />
@@ -82,4 +80,4 @@ const StudentDashboard = () => {
   );
 };
 
-export default StudentDashboard;
+export default AdminDashboard;

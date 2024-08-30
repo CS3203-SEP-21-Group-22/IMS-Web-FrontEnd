@@ -1,19 +1,19 @@
 import React, { useState } from "react";
-import "../../styles/css/Studentselect.css";
-import laptop from "../../styles/images/laptop.png";
-import router from "../../styles/images/router.png";
-import keyboard from "../../styles/images/keyboard.png";
-import microcontroller from "../../styles/images/microcontroller.png";
-import projector from "../../styles/images/projector.png";
-import mouse from "../../styles/images/mouse.png";
-import { Slot } from "../Slot.jsx";
-import LabItems from "../LabItems.jsx";
-import Headers from "../TableHeaders.jsx";
+import "../../../styles/css/Studentselect.css";
+import laptop from "../../../styles/images/laptop.png";
+import router from "../../../styles/images/router.png";
+import keyboard from "../../../styles/images/keyboard.png";
+import microcontroller from "../../../styles/images/microcontroller.png";
+import projector from "../../../styles/images/projector.png";
+import mouse from "../../../styles/images/mouse.png";
+import { Slot } from "../../Slot.jsx";
+import LabItems from "../../LabItems.jsx";
+import Headers from "../../TableHeaders.jsx";
 
-export const StudentSelect = () => {
+export const StaffRequest = () => {
   const [expandedBox, setExpandedBox] = useState(null);
 
-  const columns = ["ITEM NAME", "SERIAL NO", "LAB", "RETURN DATE"];
+  const columns = ["ITEM NAME", "SERIAL NO", "LAB", "DATE REQUESTED"];
   const lists = {
     laptop: [
       <LabItems
@@ -21,27 +21,21 @@ export const StudentSelect = () => {
         itmname="4-Port WiFi Router (Cisco SRP541W) "
         serial="FOC1234X56Y"
         lab="Network Lab"
-        wantButton={true}
-        wantReturnDate={true}
-        wantDateReq={false}
+        datereq="09/07/2024"
       />,
       <LabItems
         reqimg={laptop}
         itmname="4-Port WiFi Router (Cisco SRP541W) "
         serial="FOC1234X56Y"
         lab="Network Lab"
-        wantButton={true}
-        wantReturnDate={true}
-        wantDateReq={false}
+        datereq="09/07/2024"
       />,
       <LabItems
         reqimg={laptop}
         itmname="4-Port WiFi Router (Cisco SRP541W) "
         serial="FOC1234X56Y"
         lab="Network Lab"
-        wantButton={true}
-        wantReturnDate={true}
-        wantDateReq={false}
+        datereq="09/07/2024"
       />,
     ],
     router: ["Router 1", "Router 2", "Router 3"],
@@ -55,9 +49,6 @@ export const StudentSelect = () => {
     if (expandedBox === boxType) {
       return (
         <div>
-          <div className="absolute left-8 top-12 font-josefin-sans tracking-[0.06rem] text-2xl font-medium text-[#202652]">
-            LAPTOPS
-          </div>
           <button
             className="right-8 bg-[#D4E5F6] top-12 absolute rounded-lg  text-[14px] font-josefin-sans font-normal p-1 shadow-lg"
             onClick={() => setExpandedBox(null)}
@@ -130,3 +121,6 @@ export const StudentSelect = () => {
     </div>
   );
 };
+
+//transition-[height,width] duration-1000
+//transition-[height_1s_ease,width_1s_ease]

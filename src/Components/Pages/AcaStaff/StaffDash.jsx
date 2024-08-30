@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import checklist from "../../styles/images/checklist.png";
-import cardreserve from "../../styles/images/cardreserve.png";
-import laptop from "../../styles/images/laptop.png";
-import Due from "../../styles/images/Due.png";
-import Card from "../Card";
-import LargeCard from "../LargeCard";
-import LabItems from "../LabItems";
+import checklist from "../../../styles/images/checklist.png";
+import cardreserve from "../../../styles/images/cardreserve.png";
+import laptop from "../../../styles/images/laptop.png";
+import Card from "../../Card";
+import LargeCard from "../../LargeCard";
+import LabItems from "../../LabItems";
+import Due from "../../../styles/images/Due.png";
 
-const StudentDashboard = () => {
+const StaffDashboard = () => {
   const [expandedBox1, setExpandedBox1] = useState(false);
   const [expandedBox2, setExpandedBox2] = useState(false);
 
@@ -30,26 +30,24 @@ const StudentDashboard = () => {
       itmname="LAPTOP"
       serial="123S9X9"
       lab="ICE LAB"
-      datereq="09/10/2024"
-      wantHarddatereq={true}
+      datereq="08/25/2024"
+      wantButton={false}
     />,
     <LabItems
       reqimg={laptop}
       itmname="LAPTOP"
       serial="123S9X9"
       lab="ICE LAB"
-      datereq="09/10/2024"
+      datereq="08/25/2024"
       wantButton={false}
-      wantHarddatereq={true}
     />,
     <LabItems
       reqimg={laptop}
       itmname="LAPTOP"
       serial="123S9X9"
       lab="ICE LAB"
-      datereq="09/10/2024"
+      datereq="08/25/2024"
       wantButton={false}
-      wantHarddatereq={true}
     />,
   ];
 
@@ -82,4 +80,4 @@ const StudentDashboard = () => {
   );
 };
 
-export default StudentDashboard;
+export default StaffDashboard;
