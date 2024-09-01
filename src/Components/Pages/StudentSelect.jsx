@@ -55,11 +55,11 @@ export const StudentSelect = () => {
     if (expandedBox === boxType) {
       return (
         <div>
-          <div className="absolute left-8 top-12 font-josefin-sans tracking-[0.06rem] text-2xl font-medium text-[#202652]">
+          <div className="absolute left-8 top-12 font-josefin-sans tracking-[0.06rem] text-2xl font-medium text-white">
             LAPTOPS
           </div>
           <button
-            className="right-8 bg-[#D4E5F6] top-12 absolute rounded-lg  text-[14px] font-josefin-sans font-normal p-1 shadow-lg"
+            className="right-8 bg-[#6D7AA4] top-12 absolute rounded-lg  text-[14px] font-josefin-sans font-normal p-1 shadow-lg"
             onClick={() => setExpandedBox(null)}
           >
             &lt;BACK
@@ -109,15 +109,15 @@ export const StudentSelect = () => {
   };
 
   return (
-    <div className="h-[800px] w-full bg-gradient-to-b from-[#202652] to-[#E3EDF8] flex justify-center items-center relative">
+    <div className="h-[800px] w-full  bg-[#202652]  flex justify-center items-center relative">
       <div className="flex flex-wrap justify-between w-[1000px] gap-[20px] ">
         {Object.keys(lists).map(
           (boxType) =>
             (expandedBox === null || expandedBox === boxType) && (
               <div
                 key={boxType}
-                className={`w-[277px] h-[238px] bg-[#B3C3E3] rounded-[60px] flex flex-col justify-center items-center cursor-pointer  ease z-0 drop-shadow-[4px_4px_4px_rgba(0,0,0,0.25)]   ${
-                  expandedBox === boxType ? "w-[999px] h-[496px]  z-20 " : ""
+                className={`w-[277px] h-[238px] bg-[#3C4D71] rounded-[60px] flex flex-col justify-center items-center cursor-pointer  ease z-0 drop-shadow-[4px_4px_4px_rgba(0,0,0,0.25)] text-white    ${
+                  expandedBox === boxType ? "w-[999px] h-[496px]  z-20  " : "hover:scale-[1.1] transition duration-200"
                 }`}
                 onClick={() => handleBoxClick(boxType)}
               >

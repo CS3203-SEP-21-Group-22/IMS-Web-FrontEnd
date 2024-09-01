@@ -3,7 +3,7 @@ import React from "react";
 const TableHeaders = ({ columns, width, left, top, paddingLeft }) => {
   return (
     <div
-      className=" h-[29px] rounded-[10px] shadow absolute bg-[#03ADE5] flex flex-row items-center"
+      className=" h-[29px] rounded-[10px] shadow absolute bg-[#6D7AA4] flex flex-row items-center"
       style={{ width: width, top: top, left: left, paddingLeft: paddingLeft }}
     >
       {columns.map((column, index) => (

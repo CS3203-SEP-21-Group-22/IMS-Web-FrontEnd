@@ -14,8 +14,8 @@ export const Navbar = () => {
     setBox(!box);
   };
   return (
-    <div className="w-full h-[60px] bg-[var(--space-cadet)]">
-      <div className="grid grid-cols-[1fr_500px_1fr]">
+    <div className="w-full h-[60px] bg-[#202652] ">
+      <div className="grid grid-cols-[1fr_500px_1fr] shadow-lg">
         <div className="bg-transparent h-[55px] text-white relative left-[10px] flex items-center z-[1]">
           <Link to="/">
             <img
@@ -76,7 +76,7 @@ export const Navbar = () => {
                 to="/student"
                 className="mr-14 tracking-[0.06em] text-[#FFFFFF] cursor-pointer font-[Josefin_Sans]  text-[10px]"
               >
-                HOME
+                DASHBOARD
               </Link>
               <div className="flex flex-col justify-center items-center">
                 <button onClick={toggleBox}>
@@ -91,9 +91,9 @@ export const Navbar = () => {
                     <p className="text-white text-sm cursor-pointer hover:bg-[#3C4D71] h-[30px]">LOG OUT</p>
                   </div>
                 )}
-                </div>
+              </div>
             </div>
-          )}   
+          )}
           {location.pathname == "/staff" && (
             <div className="flex flex-col justify-center items-center">
               <button onClick={toggleBox}>
@@ -144,7 +144,7 @@ export const Navbar = () => {
               )}
             </div>
           )}
-          
+
           {location.pathname == "/admin" && (
             <div className="flex flex-col justify-center items-center">
               <button onClick={toggleBox}>
@@ -161,7 +161,6 @@ export const Navbar = () => {
               )}
             </div>
           )}
-
         </div>
       </div>
     </div>

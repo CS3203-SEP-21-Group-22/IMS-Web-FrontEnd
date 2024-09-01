@@ -6,10 +6,6 @@ import laptop from "../../../styles/images/laptop.png";
 import Card from "../../Card";
 import LargeCard from "../../LargeCard";
 import LabItems from "../../LabItems";
-<<<<<<< HEAD
-import Due from "../../../styles/images/Due.png";
-=======
->>>>>>> origin/Ameera
 
 const AdminDashboard = () => {
   const [expandedBox1, setExpandedBox1] = useState(false);
@@ -55,59 +51,31 @@ const AdminDashboard = () => {
   ];
 
   return (
-<<<<<<< HEAD
-    <div className="h-[600px] w-full bg-gradient-to-b from-[#202652] to-[#E3EDF8] flex relative justify-center">
-      <div className="h-full w-[1000px] grid grid-cols-3 gap-5">
-        {!expandedBox1 && !expandedBox2 ? (
-          <>
-            <div className="flex justify-center items-center">
-              <Card imgsrc={checklist} altname="checklist" Children="VIEW USER PROFILES" onClick={toggleBox1} />
-            </div>
-            <Link to="/student-select" className="flex justify-center items-center">
-              <Card imgsrc={cardreserve} altname="cardreserve" Children="VIEW LABS" />
-            </Link>
-            <div className="flex justify-center items-center">
-              <Card imgsrc={Due} altname="due-items" Children="DUE ITEMS" onClick={toggleBox2} />
-            </div>
-          </>
-        ) : expandedBox1 ? (
-          <div className="flex justify-center items-center w-full col-span-3">
-            <LargeCard onClick={toggleBox1} Children={reqItems} columns={columns} />
-          </div>
-        ) : (
-          <div className="flex justify-center items-center w-full col-span-3">
-=======
     <div className="h-[600px] w-full bg-gradient-to-b from-[#202652] to-[#E3EDF8] flex relative ">
       <div className="h-full w-full flex justify-center items-center ">
-      <div className="h-full w-[1000px] grid grid-cols-2 gap-3">
-        {!expandedBox1 && !expandedBox2 ? (
-          <>
-        
-            <div className="flex justify-center items-center ">
-              <Link to="/user-profiles">
-              <Card imgsrc={checklist} altname="checklist" Children="VIEW USER PROFILES" onClick={toggleBox1} />
+        <div className="h-full w-[1000px] grid grid-cols-2 gap-3">
+          {!expandedBox1 && !expandedBox2 ? (
+            <>
+              <div className="flex justify-center items-center ">
+                <Link to="/user-profiles">
+                  <Card imgsrc={checklist} altname="checklist" Children="VIEW USER PROFILES" onClick={toggleBox1} />
+                </Link>
+              </div>
+              <Link to="/view-labs" className="flex justify-center items-center ">
+                <Card imgsrc={cardreserve} altname="cardreserve" Children="VIEW LABS" />
               </Link>
+            </>
+          ) : expandedBox1 ? (
+            <div className="flex justify-center items-center w-full col-span-2">
+              <LargeCard onClick={toggleBox1} Children={reqItems} columns={columns} />
             </div>
-            <Link to="/view-labs" className="flex justify-center items-center ">
-              <Card imgsrc={cardreserve} altname="cardreserve" Children="VIEW LABS" />
-            </Link>
-            
-          </>
-        ) : expandedBox1 ? (
-          <div className="flex justify-center items-center w-full col-span-2">
-            <LargeCard onClick={toggleBox1} Children={reqItems} columns={columns} />
-          </div>
-        ) : (
-          <div className="flex justify-center items-center w-full col-span-2">
->>>>>>> origin/Ameera
-            <LargeCard onClick={toggleBox2} Children={reqItems} columns={columns} />
-          </div>
-        )}
+          ) : (
+            <div className="flex justify-center items-center w-full col-span-2">
+              <LargeCard onClick={toggleBox2} Children={reqItems} columns={columns} />
+            </div>
+          )}
+        </div>
       </div>
-<<<<<<< HEAD
-=======
-      </div>
->>>>>>> origin/Ameera
     </div>
   );
 };

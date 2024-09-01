@@ -33,7 +33,7 @@ const RepairRequest = ({
   };
   return (
     <div
-      className=" h-20 bg-[#03ADE5] rounded-[10px] shadow-sm flex flex-row justify-evenly items-center my-2"
+      className=" h-20 bg-[#6D7AA4] rounded-[10px] shadow-sm flex flex-row justify-evenly items-center my-2"
       style={{ width: width }}
     >
       <div className="flex justify-center items-center mr-12 w-[67px] ">
@@ -58,7 +58,7 @@ const RepairRequest = ({
 
       {wantButton && (
         <button
-          className="w-[90px] h-[47px] bg-[#B3C3E3] shadow rounded-[10px] text-[#202652] font-josefin-sans font-[500] ml-5 mr-2 "
+          className="w-[90px] h-[47px] bg-[#03ADE5] shadow rounded-[10px] text-white font-josefin-sans font-[500] ml-5 mr-2 "
           onClick={handleRequest}
         >
           ACCEPT

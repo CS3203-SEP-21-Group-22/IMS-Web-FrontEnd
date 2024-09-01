@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import checklist from "../../styles/images/checklist.png";
 import cardreserve from "../../styles/images/cardreserve.png";
 import laptop from "../../styles/images/laptop.png";
-import Due from "../../styles/images/Due.png";
+import clock from "../../styles/images/clockk.png";
 import Card from "../Card";
 import LargeCard from "../LargeCard";
 import LabItems from "../LabItems";
@@ -49,16 +49,11 @@ const StudentDashboard = () => {
       lab="ICE LAB"
       datereq="09/10/2024"
       wantButton={false}
-<<<<<<< HEAD
-      wantHarddatereq={true}
-=======
-      
->>>>>>> origin/Ameera
     />,
   ];
 
   return (
-    <div className="h-[600px] w-full bg-gradient-to-b from-[#202652] to-[#E3EDF8] flex relative justify-center">
+    <div className="h-[600px] w-full  bg-[#202652]  flex relative justify-center">
       <div className="h-full w-[1000px] grid grid-cols-3 gap-5">
         {!expandedBox1 && !expandedBox2 ? (
           <>
@@ -69,12 +64,12 @@ const StudentDashboard = () => {
               <Card imgsrc={cardreserve} altname="cardreserve" Children="RESERVE A SLOT" />
             </Link>
             <div className="flex justify-center items-center">
-              <Card imgsrc={Due} altname="due-items" Children="DUE ITEMS" onClick={toggleBox2} />
+              <Card imgsrc={clock} altname="due-items" Children="DUE ITEMS" onClick={toggleBox2} />
             </div>
           </>
         ) : expandedBox1 ? (
-          <div className="flex justify-center items-center w-full col-span-3">
-            <LargeCard onClick={toggleBox1} Children={reqItems} columns={columns}  />
+          <div className="flex justify-center items-center w-full col-span-3 transition-all duration-200 ease-in-out">
+            <LargeCard onClick={toggleBox1} Children={reqItems} columns={columns} />
           </div>
         ) : (
           <div className="flex justify-center items-center w-full col-span-3">
