@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import checklist from "../../styles/images/checklist.png";
-import cardreserve from "../../styles/images/cardreserve.png";
-import laptop from "../../styles/images/laptop.png";
-import clock from "../../styles/images/clockk.png";
-import Card from "../Card";
-import LargeCard from "../LargeCard";
-import LabItems from "../LabItems";
+import checklist from "../../../styles/images/checklist.png";
+import cardreserve from "../../../styles/images/cardreserve.png";
+import laptop from "../../../styles/images/laptop.png";
+import clock from "../../../styles/images/clockk.png";
+import Card from "../../Card";
+import LargeCard from "../../LargeCard";
+import LabItems from "../../LabItems";
 
 const StudentDashboard = () => {
   const [expandedBox1, setExpandedBox1] = useState(false);

@@ -5,12 +5,13 @@ import { Layout } from './Components/Layout';
 import SignIn from './Components/Pages/SignIn';
 import SignUp from './Components/Pages/SignUp';
 import { UserProfile } from './Components/Pages/UserProfile';
-import StudentDashboard from './Components/Pages/StudentDashboard';
-import { StudentSelect } from './Components/Pages/StudentSelect';
+import StudentDashboard from './Components/Pages/Student/StudentDashboard';
+import { StudentSelect } from './Components/Pages/Student/StudentSelect';
 import StaffDashboard  from './Components/Pages/AcaStaff/StaffDash';
 import AdminDashboard from './Components/Pages/Admin/AdminDash';
 import  OfficeClerkDashboard  from './Components/Pages/OfficeClerk/OfficeClerkDashboard';
-import {LabTechDash} from './Components/Pages/LabTechDash';
+
+import LabTechDash2 from './Components/Pages/LabTechnician/LabTechDash2';
 import AproveLisTRequest from './Components/AproveLisTRequest';
 import { StaffProfile } from './Components/Pages/AcaStaff/StaffProfile';
 import { AdminProfile } from './Components/Pages/Admin/AdminProfile';
@@ -21,6 +22,7 @@ import {UserProfiles} from './Components/Pages/UserProfileView';
 import {ViewLabs} from './Components/Pages/ViewLabs';
 import SendRequest from './Components/Pages/SendRequest';
 import Testpage from './Components/Pages/Testpage';
+import TechnicianReq from './Components/Pages/LabTechnician/TechnicianReq';
 
 function App() {
   return (
@@ -34,7 +36,8 @@ function App() {
             <Route path='/student' element={<StudentDashboard/>}/>
             <Route path='/student-select' element={<StudentSelect/>}/>
             <Route path='/assign-technicians' element={<TechAssign/>}/>
-            <Route path='/labTechnician' element={<LabTechDash/>}/>
+          
+            <Route path='/labTechnician2' element={<LabTechDash2/>}/>
             <Route path='/user' element={<UserProfile/>}/>
             <Route path='/staff' element={<StaffDashboard/>}/>
             <Route path='/admin' element={<AdminDashboard/>}/>
@@ -48,6 +51,7 @@ function App() {
             <Route path='/view-labs' element={<ViewLabs/>}/>
             <Route path='/request' element={<SendRequest/>}/>
             <Route path='/test' element={<Testpage/>}/>
+            <Route path='/techreq' element={<TechnicianReq/>}/>
 
           </Route>
           

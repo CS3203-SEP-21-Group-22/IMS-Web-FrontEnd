@@ -4,7 +4,7 @@ import signindesign from "../../styles/images/signindesign.png";
 
 function SignIn() {
   return (
-    <div className="h-[1000px] w-full bg-gradient-to-b from-[#202652] to-[#E3EDF8] flex">
+    <div className="h-[1000px] w-full bg-[#202652] flex">
       <div className="relative w-[349px] h-[400px] left-[200px] top-[53px] bg-gradient-to-br from-[#3C4D71] to-[#202652] shadow-[0_-20px_60px_rgba(0,0,0,0.25)] rounded-[30px] flex flex-col justify-center items-center z-[5] animate-[glowAnimation_3s_infinite]">
         <p className="absolute w-[156px] h-[32px] top-[10px] text-[32px] leading-[32px] font-bold text-center tracking-[-0.3px] text-white font-josefin">
           SIGN IN

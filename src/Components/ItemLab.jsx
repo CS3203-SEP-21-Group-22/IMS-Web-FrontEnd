@@ -2,18 +2,20 @@ import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const ItemRow = ({ serial, lab, itmname, imgsrc }) => {
+const ItemLab = ({ serial, lab, itmname, imgsrc, foundDate, description }) => {
   const navigate = useNavigate();
-  const [returnDate, setReturnDate] = useState("");
+
   const handleRequest = () => {
     const currentDate = new Date().toISOString().split("T")[0];
-    navigate("/request", {
+    navigate("/techreq", {
       state: {
         itmname,
         serial,
+        imgsrc,
         lab,
+        description,
         datereq: currentDate,
-        returnDate,
+        foundDate,
       },
     });
   };
@@ -26,16 +28,8 @@ const ItemRow = ({ serial, lab, itmname, imgsrc }) => {
         </td>
         <td className=" ">{serial}</td>
         <td className=" ">{lab}</td>
-        <td className=" ">
-          <div className="flex justify-center items-center">
-            <input
-              type="date"
-              value={returnDate}
-              onChange={(e) => setReturnDate(e.target.value)}
-              className="w-[140px] h-[35px] bg-[#3C4D71] text-center"
-            />
-          </div>
-        </td>
+        <td className=" ">{foundDate}</td>
+        <td>{description}</td>
         <td className=" ">
           <button className="bg-[#03ADE5] text-white rounded-md p-1 shadow-sm" onClick={handleRequest}>
             PICK
@@ -46,4 +40,4 @@ const ItemRow = ({ serial, lab, itmname, imgsrc }) => {
   );
 };
 
-export default ItemRow;
+export default ItemLab;

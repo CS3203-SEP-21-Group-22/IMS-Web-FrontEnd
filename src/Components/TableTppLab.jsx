@@ -4,8 +4,9 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import ItemRow from "./ItemRow";
+import ItemLab from "./ItemLab";
 
-const TableTop = ({ reqimg, itmname, serial, lab, onClick, items }) => {
+const TableTppLab = ({ reqimg, itmname, serial, lab, onClick, items }) => {
   const [returnDate, setReturnDate] = useState("");
   const navigate = useNavigate();
   const handleRequest = () => {
@@ -16,6 +17,7 @@ const TableTop = ({ reqimg, itmname, serial, lab, onClick, items }) => {
         itmname,
         serial,
         lab,
+
         datereq: currentDate,
         returnDate,
       },
@@ -34,40 +36,24 @@ const TableTop = ({ reqimg, itmname, serial, lab, onClick, items }) => {
           <th className="">SERIAL NO</th>
           <th className=" ">LAB</th>
           <th className=" ">RETURN DATE</th>
+          <th className=" ">DESCRIPTION</th>
           <th></th>
         </tr>
 
-        <tr className="bg-[#6D7AA4] border-[#3C4D71] border-[2px] text-center">
-          <td className="flex flex-row items-center justify-center h-full ">
-            <img src={laptop} className="h-[60px] w-[60px]" alt="item-pic" />
-            <p>Dell XPS 15</p>
-          </td>
-          <td className=" ">FOC1234X56Y</td>
-          <td className=" ">Network Lab</td>
-          <td className=" ">
-            <div className="flex justify-center items-center ">
-              <input
-                type="date"
-                value={returnDate}
-                placeholder="Enter date"
-                onChange={(e) => setReturnDate(e.target.value)}
-                className="w-[140px] h-[35px] bg-[#3C4D71]  text-center"
-              />
-            </div>
-          </td>
-          <td className=" ">
-            <button className="bg-[#03ADE5] text-white rounded-md p-1 shadow-sm" onClick={handleRequest}>
-              PICK
-            </button>
-          </td>
-        </tr>
         {items.map((item, index) => (
-          <ItemRow key={index} imgsrc={item.reqimg} itmname={item.itmname} lab={item.lab} serial={item.serial} />
+          <ItemLab
+            key={index}
+            imgsrc={item.reqimg}
+            itmname={item.itmname}
+            lab={item.lab}
+            serial={item.serial}
+            description={item.description}
+            foundDate={item.foundDate}
+          />
         ))}
-        <ItemRow imgsrc={laptop} itmname="LAPTOP" lab="ICE LAB" serial="FXCS021" />
       </table>
     </div>
   );
 };
 
-export default TableTop;
+export default TableTppLab;

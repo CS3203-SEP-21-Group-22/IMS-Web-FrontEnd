@@ -5,7 +5,7 @@ const SendRequest = () => {
   const location = useLocation();
   const { reqimg, itmname, serial, lab, datereq, returnDate } = location.state || {};
   return (
-    <div className="h-[600px] w-full bg-gradient-to-b from-[#202652] to-[#E3EDF8] flex relative justify-center">
+    <div className="h-[600px] w-full bg-[#202652] flex relative justify-center">
       <div className="w-[600px] h-[398px] bg-[#B3C3E3] rounded-[60px] mx-6 flex flex-row justify-center items-center cursor-pointer absolute top-9">
         <div className="bg-[#202652]  w-[250px] h-full rounded-bl-[60px] rounded-tl-[60px]">
           <img src={reqimg} alt="req-photo" />
