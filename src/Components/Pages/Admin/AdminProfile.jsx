@@ -36,8 +36,3 @@ export const AdminProfile = () => {
   );
 };
 
-{
-  /* <div className=" font-josefin-sans bg-slate-400 ">JOHN DOE</div>
-          <div className=" font-josefin-sans bg-slate-500 ">johndoesolutions@gmail.com</div>
-          <div className=" font-josefin-sans bg-slate-400  ">STATUS : Student</div> */
-}
