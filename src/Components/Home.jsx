@@ -10,26 +10,28 @@ import { Link } from "react-router-dom";
 export const Home = () => {
   return (
     <div className="w-full h-[full] bg-[#202652] flex flex-col">
-      <div className="grid grid-cols-2 w-full  h-[600px]">
-        <div className="h-[500px] ">
-          <p className="absolute w-[498px] h-[64px] left-[84px] top-[177px] text-left font-josefin-sans font-bold text-[40px] leading-[40px] text-white">
+      <div className="grid grid-cols-2  h-svh items-center p-4 ">
+        <div className="h-[500px] flex flex-col items-center justify-center gap-7 ml-[200px]">
+          <p className=" w-[498px] h-[64px]  text-left font-josefin-sans font-bold text-[40px] leading-[40px] text-white">
             THE PERFECT TOOL TO MANAGE YOUR LAB
           </p>
-          <p className="absolute w-[561px] h-[74px] left-[84px] top-[294px] text-left  font-normal text-[25px] leading-[43px] text-[#E3EDF8]">
+          <p className=" w-[498px] h-[64px]  text-left  font-normal text-[25px] leading-[43px] text-[#E3EDF8]">
             Lab tracker is an inventory management system for computer laboratories.
           </p>
-          <Link
-            to="/sign-in"
-            className="flex flex-row justify-center items-center p-[20px] gap-[10px] text-center absolute w-[249px] h-[68px] left-[74px] top-[430px] cursor-pointer bg-[#00ABE4] rounded-[10px] border-transparent font-josefin-sans font-bold text-[25px] leading-[28px] tracking-[0.06em] text-white"
-          >
-            GET STARTED
-          </Link>
+          <div className="w-[498px] flex justify-start">
+            <Link
+              to="/sign-in"
+              className="p-[20px] cursor-pointer bg-[#00ABE4] rounded-[10px] border-transparent font-josefin-sans font-bold text-[25px] leading-[28px] tracking-[0.06em] text-white"
+            >
+              GET STARTED
+            </Link>
+          </div>
         </div>
-        <div className="h-[700px]">
+        <div className="h-[700px]  flex flex-col items-center justify-center mr-[200px]">
           <img
             src={topImage}
             alt="top-image"
-            className="absolute w-[600px] h-[500px] left-[621px] top-[80px] animate-[scaleAnimation_3s_infinite]"
+            className=" w-[700px] h-[550px]  animate-[scaleAnimation_3s_infinite]"
           />
         </div>
       </div>

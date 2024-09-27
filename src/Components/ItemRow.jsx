@@ -37,6 +37,7 @@ const ItemRow = ({ serial, lab, itmname, imgsrc }) => {
           </div>
         </td>
         <td className=" ">
+          
           <button className="bg-[#03ADE5] text-white rounded-md p-1 shadow-sm" onClick={handleRequest}>
             PICK
           </button>

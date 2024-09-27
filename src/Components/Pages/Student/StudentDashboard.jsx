@@ -7,8 +7,10 @@ import clock from "../../../styles/images/clockk.png";
 import Card from "../../Card";
 import LargeCard from "../../LargeCard";
 import LabItems from "../../LabItems";
+import TableBookings from "../../TableBookings";
 
 const StudentDashboard = () => {
+
   const [expandedBox1, setExpandedBox1] = useState(false);
   const [expandedBox2, setExpandedBox2] = useState(false);
 
@@ -69,11 +71,11 @@ const StudentDashboard = () => {
           </>
         ) : expandedBox1 ? (
           <div className="flex justify-center items-center w-full col-span-3 transition-all duration-200 ease-in-out">
-            <LargeCard onClick={toggleBox1} Children={reqItems} columns={columns} />
+            <TableBookings onClick={() => setExpandedBox1(false)} items={reqItems} />
           </div>
         ) : (
           <div className="flex justify-center items-center w-full col-span-3">
-            <LargeCard onClick={toggleBox2} Children={reqItems} columns={columns} />
+             <TableBookings onClick={() => setExpandedBox2(false)} items={reqItems} />
           </div>
         )}
       </div>
