@@ -1,11 +1,12 @@
 import React from "react";
 import { useState } from "react";
 import signindesign from "../../styles/images/signindesign.png";
+import axios from "axios";
 
 function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [redirectUri] = useState("https://your-redirect-uri.com"); // Set your redirectUri
+  const [redirectUri] = useState("http://localhost:3001/student"); // Set your redirectUri
   const [clientId] = useState("group22-client-id"); // Client ID from your auth server
   const [error, setError] = useState("");
 
@@ -13,33 +14,28 @@ function SignIn() {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:3000/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email,
-          password,
-          redirectUri,
-          clientId,
-        }),
+      const response = await axios.post("https://auth-server-g6hmcdavbgayb3fe.eastus-01.azurewebsites.net/login", {
+        email,
+        password,
+        redirectUri,
+        clientId,
       });
 
-      if (!response.ok) {
-        throw new Error("Login failed");
-      }
+      // Log response details
+      console.log("Response Status:", response.status);
+      console.log("Response Type:", response.headers.get("Content-Type"));
 
-      const data = await response.json();
-      // Store tokens in localStorage or sessionStorage
-      localStorage.setItem("id_token", data.id_token);
-      localStorage.setItem("access_token", data.access_token);
-      localStorage.setItem("refresh_token", data.refresh_token);
-
-      // Redirect or navigate to the next page
-      window.location.href = "/student"; // Redirect to dashboard or another page
+      const data = await response.json(); // Attempt to parse JSON
     } catch (error) {
-      setError("Invalid credentials or server error");
+      if (error.response) {
+        // The request was made and the server responded with a status code
+        console.error(`Login failed with status ${error.response.status}:`, error.response.data);
+        setError("Invalid credentials or server error");
+      } else {
+        // The request was made but no response was received
+        console.error("Error caught in catch block:", error.message);
+        setError("Invalid credentials or server error");
+      }
     }
   };
 

@@ -5,7 +5,7 @@ import { faPenToSquare } from "@fortawesome/free-regular-svg-icons";
 import walrus from "../../styles/images/walrus.png";
 export const UserProfile = () => {
   return (
-    <div className="h-[800px] w-full bg-gradient-to-b from-[#202652] to-[#E3EDF8] flex justify-center items-center relative ">
+    <div className="h-[800px] w-full bg-[#202652]  flex justify-center items-center relative ">
       <div className="h-[496px] w-[900px] flex relative flex-row bg-yellow-200 rounded-[60px]">
         <div className="bg-[#202652] flex w-[350px] h-[496px] rounded-bl-[60px] rounded-tl-[60px] flex-col justify-center items-center ">
           <img className="w-[[200px] h-[200px] " src={walrus} alt="walrus" />

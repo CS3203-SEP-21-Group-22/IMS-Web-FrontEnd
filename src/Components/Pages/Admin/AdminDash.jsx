@@ -51,7 +51,7 @@ const AdminDashboard = () => {
   ];
 
   return (
-    <div className="h-[600px] w-full bg-gradient-to-b from-[#202652] to-[#E3EDF8] flex relative ">
+    <div className="h-[600px] w-full bg-[#202652] flex relative ">
       <div className="h-full w-full flex justify-center items-center ">
         <div className="h-full w-[1000px] grid grid-cols-2 gap-3">
           {!expandedBox1 && !expandedBox2 ? (
