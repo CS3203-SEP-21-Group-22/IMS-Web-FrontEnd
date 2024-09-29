@@ -5,9 +5,13 @@ import logo from "../styles/images/logo.png";
 import { Link, useLocation } from "react-router-dom";
 import walrus from "../styles/images/walrus.png";
 import { useState } from "react";
+import { AUTH_CLIENT_ID, AUTH_SERVER_URL } from "../config";
 
 export const Navbar = () => {
   const location = useLocation();
+
+  const redirectUri = "http://localhost:3000/profile";
+  const loginUrl = `${AUTH_SERVER_URL}/login?redirectUri=${encodeURIComponent(redirectUri)}&clientId=${AUTH_CLIENT_ID}`;
 
   const [box, setBox] = useState(false);
   const toggleBox = () => {
