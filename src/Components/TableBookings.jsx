@@ -1,9 +1,5 @@
 import React from "react";
-import laptop from "../styles/images/laptop.png";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import DatePicker from "react-datepicker";
-import ItemRow from "./ItemRow";
+
 import ItemRowBookings from "./ItemRowBookings";
 
 const TableBookings = ({ onClick, items }) => {
@@ -26,11 +22,11 @@ const TableBookings = ({ onClick, items }) => {
         {items.map((item, index) => (
           <ItemRowBookings
             key={index}
-            imgsrc={item.reqimg}
-            itmname={item.itmname}
-            lab={item.lab}
-            serial={item.serial}
-            date={item.datereq}
+            imgsrc={item.imageUrl}
+            itmname={item.itemName}
+            lab={item.labName}
+            serial={item.itemSerialNumber}
+            date={item.startDate}
           />
         ))}
       </table>
