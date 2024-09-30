@@ -62,14 +62,11 @@ const StudentDashboard = () => {
   const fetchEquipment = async () => {
     setError(null);
     try {
-      const response = await axios.get(
-        "http://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/user/equipments",
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-          },
+      const response = await axios.get("http://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/user/items", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
         },
-      );
+      });
       console.log("Fetched equipment:", response.data);
     } catch (errror) {
       console.error("Error when fetching res", error);

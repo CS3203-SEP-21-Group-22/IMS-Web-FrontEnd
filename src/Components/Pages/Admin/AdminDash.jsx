@@ -15,9 +15,11 @@ const AdminDashboard = () => {
   const [loading, setLoading] = useState("");
   const [error, setError] = useState("");
   const [labs, setLabs] = useState("");
+  const [users, setUsers] = useState("");
 
   const toggleBox1 = () => {
     setExpandedBox1(!expandedBox1);
+    fetchUsers();
     if (expandedBox2) setExpandedBox2(false); // Ensure only one box is expanded at a time
   };
 
@@ -67,6 +69,26 @@ const AdminDashboard = () => {
       setLabs(response.data);
       navigate("/view-labs", { state: { labs: response.data } });
       console.log("Fetched labs:", response.data);
+    } catch (errror) {
+      console.error("Error when fetching res", error);
+      setError("Failed to load reservations");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const fetchUsers = async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      const response = await axios.get("http://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/admin/users", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+        },
+      });
+      setUsers(response.data);
+      navigate("/user-profiles", { state: { users: response.data } });
+      // console.log("Fetched users:", response.data);
     } catch (errror) {
       console.error("Error when fetching res", error);
       setError("Failed to load reservations");
