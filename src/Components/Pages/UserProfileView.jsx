@@ -7,7 +7,7 @@ export const UserProfiles = () => {
   const users = location.state?.users || [];
   console.log(users);
   return (
-    <div className="h-[600px] w-full bg-[#202652]  flex relative flex-col items-center justify-center">
+    <div className="h-full w-full bg-[#202652]  flex relative flex-col items-center justify-center p-10">
       <TableUsers userData={users} />
     </div>
   );

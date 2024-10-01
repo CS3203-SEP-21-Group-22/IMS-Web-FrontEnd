@@ -22,6 +22,7 @@ const TableBookings = ({ onClick, items }) => {
         {items.map((item, index) => (
           <ItemRowBookings
             key={index}
+            resId={item.reservationId}
             imgsrc={item.imageUrl}
             itmname={item.itemName}
             lab={item.labName}

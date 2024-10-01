@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import checklist from "../../../styles/images/checklist.png";
 import cardreserve from "../../../styles/images/cardreserve.png";
 import laptop from "../../../styles/images/laptop.png";
@@ -11,6 +11,7 @@ import axios from "axios";
 const StudentDashboard = () => {
   const [expandedBox1, setExpandedBox1] = useState(false);
   const [expandedBox2, setExpandedBox2] = useState(false);
+  const navigate = useNavigate();
 
   const [reqItems, setReqItems] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -27,16 +28,9 @@ const StudentDashboard = () => {
   const toggleBox2 = () => {
     setExpandedBox2(!expandedBox2);
     if (!expandedBox2) {
-      fetchEquipment();
     }
     if (expandedBox1) setExpandedBox1(false);
   };
-
-  // const reqItems = [
-  //   { reqimg: laptop, itmname: "LAPTOP", serial: "123S9X9", lab: "ICE LAB", datereq: "09/10/2024" },
-  //   { reqimg: laptop, itmname: "LAPTOP", serial: "123S9X9", lab: "ICE LAB", datereq: "09/10/2024" },
-  //   { reqimg: laptop, itmname: "LAPTOP", serial: "123S9X9", lab: "ICE LAB", datereq: "09/10/2024" },
-  // ];
 
   const fetchReservations = async () => {
     setLoading(true);
@@ -59,15 +53,16 @@ const StudentDashboard = () => {
       setLoading(false);
     }
   };
-  const fetchEquipment = async () => {
+  const fetchLabs = async () => {
     setError(null);
     try {
-      const response = await axios.get("http://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/user/items", {
+      const response = await axios.get(`http://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/user/labs`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("access_token")}`,
         },
       });
-      console.log("Fetched equipment:", response.data);
+      console.log("Fetched labs:", response.data);
+      navigate("/student-select", { state: { labs: response.data } });
     } catch (errror) {
       console.error("Error when fetching res", error);
       setError("Failed to load reservations");
@@ -85,7 +80,7 @@ const StudentDashboard = () => {
             </div>
             <div className="flex justify-center items-center">
               {/*to="/student-select" */}
-              <Card imgsrc={cardreserve} altname="cardreserve" Children="RESERVE A SLOT" onClick={fetchEquipment} />
+              <Card imgsrc={cardreserve} altname="cardreserve" Children="RESERVE EQUIPMENT" onClick={fetchLabs} />
             </div>
             <div className="flex justify-center items-center">
               <Card imgsrc={clock} altname="due-items" Children="DUE ITEMS" onClick={toggleBox2} />

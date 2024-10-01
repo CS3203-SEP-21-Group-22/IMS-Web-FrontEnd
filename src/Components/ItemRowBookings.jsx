@@ -1,8 +1,28 @@
 import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
-const ItemRowBookings = ({ serial, lab, itmname, imgsrc, date }) => {
+const ItemRowBookings = ({ serial, lab, itmname, imgsrc, date, resId }) => {
+  const [error, setError] = useState(null);
+  const deleteReservation = async () => {
+    setError(null);
+    try {
+      const response = await axios.delete(
+        `http://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/student/reservations/${resId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+          },
+        },
+      );
+
+      console.log("Fetched deleted reserve:", response.data);
+    } catch (errror) {
+      console.error("Error when fetching res", error);
+      setError("Failed to load reservations");
+    }
+  };
   const [showPopup, setShowPopup] = useState(false);
 
   const handleCancelClick = () => {
@@ -12,6 +32,7 @@ const ItemRowBookings = ({ serial, lab, itmname, imgsrc, date }) => {
   const handleConfirmCancel = () => {
     // Add logic to cancel the booking here
     setShowPopup(false);
+    deleteReservation();
   };
 
   const handleClosePopup = () => {

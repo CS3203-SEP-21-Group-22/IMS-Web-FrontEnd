@@ -14,11 +14,6 @@ const LabTechDash2 = () => {
   const [loading, setLoading] = useState("");
   const [error, setError] = useState("");
 
-  const images = {
-    status: repairstatImg,
-    requests: repaireqImg,
-  };
-
   const lists = {
     status: [
       {
@@ -96,11 +91,10 @@ const LabTechDash2 = () => {
     }
   };
 
-  const handleCardClick = (category) => {
-    setSelectedCard(category);
-    setSelectedItems(lists[category]);
+  const handleCardClick = () => {
     fetchMaintainenceReq();
   };
+
   return (
     <div className="h-[600px] w-full  bg-[#202652]  flex justify-center items-center relative">
       {selectedCard ? (
@@ -112,17 +106,22 @@ const LabTechDash2 = () => {
         />
       ) : (
         <div className="flex flex-row gap-10 items-center justify-center ">
-          {Object.keys(lists).map((Name, index) => (
-            <Card
-              key={index}
-              imgsrc={images[Name]}
-              altname={Name}
-              Children={Name.toUpperCase()}
-              onClick={() => {
-                handleCardClick(Name);
-              }}
-            />
-          ))}
+          <Card
+            imgsrc={repairstatImg}
+            altname="status"
+            Children="STATUS"
+            onClick={() => {
+              handleCardClick();
+            }}
+          />
+          <Card
+            imgsrc={repaireqImg}
+            altname="request"
+            Children="REQUESTS"
+            onClick={() => {
+              handleCardClick();
+            }}
+          />
         </div>
       )}
     </div>
