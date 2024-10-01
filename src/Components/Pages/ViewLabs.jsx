@@ -61,21 +61,36 @@ export const ViewLabs = () => {
   };
   return (
     <div className="h-full w-full bg-[#202652]  flex relative flex-col items-center justify-center p-10">
-      <div>
-        <div className="mt-10 p-2 px-4 bg-blue-300 rounded-[30px] cursor-pointer" onClick={sendLab}>
-          ADD LAB +
-        </div>
-        <input type="text" name="labName" value={newLab.labName} onChange={handleInput} placeholder="Enter Lab Name" />
-        <input type="text" name="labCode" value={newLab.labCode} onChange={handleInput} placeholder="Enter Lab Code" />
+      <div className="flex flex-row items-center justify-center bg-[#3C4D71] rounded-[40px] p-4 m-6">
+        <input
+          type="text"
+          name="labName"
+          value={newLab.labName}
+          onChange={handleInput}
+          placeholder="Enter Lab Name"
+          className="bg-[#3C4D71] rounded-l-[30px] text-center text-[20px] shadow-lg shadow-[#32405e]"
+        />
+        <input
+          type="text"
+          name="labCode"
+          value={newLab.labCode}
+          onChange={handleInput}
+          placeholder="Enter Lab Code"
+          className="bg-[#3C4D71] text-center text-[20px] shadow-lg shadow-[#32405e]"
+        />
         <input
           type="text"
           name="imageURL"
           value={newLab.imageURL}
           onChange={handleInput}
           placeholder="Enter Lab Image URL"
+          className="bg-[#3C4D71] text-center text-[20px] shadow-lg shadow-[#32405e]"
         />
 
-        <div className="mt-10 p-2 px-4 bg-blue-300 rounded-[30px] cursor-pointer" onClick={sendLab}>
+        <div
+          className="px-4 text-center text-[20px] bg-blue-300 rounded-r-[30px] cursor-pointer shadow-[#32405e] shadow-lg"
+          onClick={sendLab}
+        >
           +
         </div>
       </div>
