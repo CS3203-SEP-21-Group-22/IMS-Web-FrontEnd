@@ -23,6 +23,10 @@ import {ViewLabs} from './Components/Pages/ViewLabs';
 import SendRequest from './Components/Pages/SendRequest';
 import Testpage from './Components/Pages/Testpage';
 import TechnicianReq from './Components/Pages/LabTechnician/TechnicianReq';
+import Profile from './Components/Pages/Profile';
+import AuthCallback from './Components/Pages/AuthCallback';
+import SampleLogin from './Components/Pages/SampleLoading';
+import { SamplePage } from './Components/Pages/SamplePage';
 
 function App() {
   return (
@@ -52,6 +56,9 @@ function App() {
             <Route path='/request' element={<SendRequest/>}/>
             <Route path='/test' element={<Testpage/>}/>
             <Route path='/techreq' element={<TechnicianReq/>}/>
+            <Route path='/profile' element={<Profile/>}/>
+            <Route path='/callback' element={<AuthCallback/>}/>
+            <Route path='/loading' element={<SamplePage/>}/>
 
           </Route>
           

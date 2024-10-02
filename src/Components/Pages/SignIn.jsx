@@ -1,92 +1,82 @@
-import React from "react";
-import { useState } from "react";
+import React, { useEffect } from "react";
 import signindesign from "../../styles/images/signindesign.png";
+import { AUTH_CLIENT_ID, AUTH_SERVER_URL } from "../../config";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { jwtDecode } from "jwt-decode";
 
 function SignIn() {
+  const navigate = useNavigate();
+  const getRoleFromServer = async (access_token, refresh_token, token) => {
+    try {
+      const { data } = await axios.get("/api/user/role", {
+        baseURL: "http://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      });
+      const { role } = data;
+      const roleRoutes = {
+        SystemAdmin: "/admin",
+        Clerk: "/officeclerk",
+        Student: "/student",
+        AcademicStaff: "/staff",
+        Technician: "/labTechnician2",
+      };
 
-  const authServer = "http://localhost:3000/login";
+      if (roleRoutes[role]) {
+        const decodedToken = jwtDecode(access_token);
+        const userProfile = {
+          id: 0,
 
-  const [email,setEmail] = useState("");
-  const [password,setPassword] = useState("");
-  const [error,setError] = useState("");
+          firstName: decodedToken.firstName,
 
-  const handleSubmit = async (e)=>{
-    e.preventDefault();
+          lastName: decodedToken.lastName,
 
-    console.log("Form submitted");
-    setError("");
+          email: decodedToken.email,
+          role: role,
 
-    const redirectUri = "http://localhost:3001/student"; 
-    const clientId = "group22-client-id"; 
-
-    try{
-      const response = await fetch(authServer, {
-        method:"POST",
-        headers:{"Content-Type":"application/json",},
-        body:JSON.stringify({email,password,redirectUri, clientId}),
+          contactNumber: decodedToken.contactNumber,
+        };
+        // await storeUserProfile(userProfile);
+        // await storeTokens(access_token, refresh_token, token);
+        // await setLoginStatusLoggedIn();
+        navigate(roleRoutes[role]);
+      } else {
+        console.error("Unknown role");
       }
-      
-    );
-    console.log("Response Status:", response.status);
-    const text = await response.text(); // Read the response as text
-    console.log("Response Body:", text); // Log the response body
-    if (!response.ok){
-      throw new Error("Login failed.Please check your credentials");
+    } catch (error) {
+      console.error(error);
+      navigate("/login");
     }
-    console.log("Forming submitted");
-    const data = await response.json();
-    console.log("Login Successful",data)
-    
-    }
+  };
 
-    
-    catch(err){
-      setError(err.message);
+  const handleLoginRedirect = async () => {
+    const token = localStorage.getItem("access_token");
+    if (token) {
+      await getRoleFromServer(token);
     }
-  }
+  };
+
+  useEffect(() => {
+    handleLoginRedirect();
+  }, []);
+  const redirectUri = "http://localhost:3000/callback";
+  const loginUrl = `${AUTH_SERVER_URL}/login?redirectUri=${encodeURIComponent(redirectUri)}&clientId=${AUTH_CLIENT_ID}`;
 
   return (
-    <div className="h-[1000px] w-full bg-[#202652] flex">
-      <div className="relative w-[349px] h-[400px] left-[200px] top-[53px] bg-gradient-to-br from-[#3C4D71] to-[#202652] shadow-[0_-20px_60px_rgba(0,0,0,0.25)] rounded-[30px] flex flex-col justify-center items-center z-[5] animate-[glowAnimation_3s_infinite]">
-        <p className="absolute w-[156px] h-[32px] top-[10px] text-[32px] leading-[32px] font-bold text-center tracking-[-0.3px] text-white font-josefin">
-          SIGN IN
-        </p>
-        <form onSubmit={handleSubmit} className="flex flex-col items-center">
-          <input
-            className="h-[50px] w-[306px] rounded-[10px] border-transparent mb-[10px]"
-            id="email"
-            placeholder="Email"
-            required
-            value={email}
-            onChange={(e) =>setEmail(e.target.value)}
-          />
-          <input
-            className="h-[50px] w-[306px] rounded-[10px] border-transparent m-[5px]"
-            id="password"
-            placeholder="Password"
-            required
-            value={password}
-            onChange={(e)=>setPassword(e.target.value)}
-          />
-          <button
-            type="submit"
-            className="box-border w-[306px] h-[46.99px] bg-gradient-to-br from-[#34C8E8] to-[#4E4AF2] shadow-[0px_30px_60px_#1A1F2C] rounded-[10px] mt-[30px] border-transparent"
-          >
-            LOGIN
-          </button>
-          <button className="bg-transparent border-transparent text-white mt-[5px] cursor-pointer hover:underline">
-            Forgot your password?
-          </button>
+    <div className="h-screen w-full bg-[#202652] flex flex-col items-center justify-center">
+      <div className="relative w-[700px] h-[450px]">
+        <img src={signindesign} alt="signinpic" className="w-full h-full object-cover z-[1] border-none" />
 
-        </form>
-        
-      </div>
-      <div>
-        <img
-          src={signindesign}
-          alt="siginpic"
-          className="absolute w-[700px] h-[450px] left-[485px] top-[90px] z-[1] border-none"
-        />
+        <Link
+          to={loginUrl}
+          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 bg-blue-400 text-white font-semibold py-4 px-4 rounded-md text-[20px]"
+        >
+          Login with UMS
+        </Link>
       </div>
     </div>
   );
