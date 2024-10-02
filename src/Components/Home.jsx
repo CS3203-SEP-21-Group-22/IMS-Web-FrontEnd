@@ -6,6 +6,7 @@ import middleIcon from "../styles/images/middleicon.png";
 import page3 from "../styles/images/page3.png";
 import signinpic from "../styles/images/siginpicnew.png";
 import { Link } from "react-router-dom";
+import Footer from "./Footer";
 
 export const Home = () => {
   return (
@@ -80,6 +81,7 @@ export const Home = () => {
         <img src={page3} alt="page3pic" className="w-[790px] h-[509px] absolute top-[100px]" />
         <img src={signinpic} alt="signinpic" className="w-[320px] h-[400px] absolute left-[150px] top-[300px] " />
       </div>
+      <Footer />
     </div>
   );
 };

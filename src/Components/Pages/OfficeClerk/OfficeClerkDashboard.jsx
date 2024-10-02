@@ -1,90 +1,71 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import checklist from "../../../styles/images/checklist.png";
 import cardreserve from "../../../styles/images/cardreserve.png";
-import laptop from "../../../styles/images/laptop.png";
+import repair from "../../../styles/images/repairstat.png";
 import Card from "../../Card";
-import LargeCard from "../../LargeCard";
-import LabItems from "../../LabItems";
+
+import axios from "axios";
 
 const OfficeClerkDashboard = () => {
   const [expandedBox1, setExpandedBox1] = useState(false);
   const [expandedBox2, setExpandedBox2] = useState(false);
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const toggleBox1 = () => {
     setExpandedBox1(!expandedBox1);
     if (expandedBox2) setExpandedBox2(false); // Ensure only one box is expanded at a time
   };
 
-  const toggleBox2 = () => {
-    setExpandedBox2(!expandedBox2);
-    if (expandedBox1) setExpandedBox1(false); // Ensure only one box is expanded at a time
-  };
-
   const columns = ["ITEM NAME", "SERIAL NO", "LAB", "DATE REQUESTED"];
 
-  const reqItems = [
-    <LabItems
-      reqimg={laptop}
-      itmname="LAPTOP"
-      serial="123S9X9"
-      lab="ICE LAB"
-      datereq="08/25/2024"
-      wantButton={false}
-    />,
-    <LabItems
-      reqimg={laptop}
-      itmname="LAPTOP"
-      serial="123S9X9"
-      lab="ICE LAB"
-      datereq="08/25/2024"
-      wantButton={false}
-    />,
-    <LabItems
-      reqimg={laptop}
-      itmname="LAPTOP"
-      serial="123S9X9"
-      lab="ICE LAB"
-      datereq="08/25/2024"
-      wantButton={false}
-    />,
-  ];
+  const fetchEquipment = async () => {
+    setError(null);
+    try {
+      const response = await axios.get("http://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/user/labs", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+        },
+      });
+
+      // navigate("/view-labs", { state: { labs: response.data } });
+      console.log("Fetched labs:", response.data);
+    } catch (errror) {
+      console.error("Error when fetching res", error);
+      setError("Failed to load reservations");
+    }
+  };
+
+  const fetchLabs = async () => {
+    setError(null);
+    try {
+      const response = await axios.get("http://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/user/labs", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+        },
+      });
+
+      navigate("/clerk-labs", { state: { labs: response.data } });
+      console.log("Fetched labs:", response.data);
+    } catch (errror) {
+      console.error("Error when fetching res", error);
+      setError("Failed to load reservations");
+    }
+  };
+
+  const fetchMaintenance = () => {
+    navigate("/clerk-maintenance");
+  };
 
   return (
-    <div className="h-[600px] w-full bg-gradient-to-b from-[#202652] to-[#E3EDF8] flex relative justify-center">
-      <div className="h-full w-[1000px] grid grid-cols-3 gap-5 justify-center ">
-        {!expandedBox1 && !expandedBox2 ? (
-          <>
-            <div className="flex justify-center items-center">
-              <Link to="/aprove-list-request" className="flex justify-center items-center">
-                <Card imgsrc={checklist} altname="checklist" Children="APPROVE REQUESTS" onClick={toggleBox1} />
-              </Link>
-            </div>
-            <Link to="/student-select" className="flex justify-center items-center">
-              <Card imgsrc={cardreserve} altname="cardreserve" Children="VIEW EQUIPMENTS" />
-            </Link>
-            <Link to="/assign-technicians" className="flex justify-center items-center">
-              <Card Children="ASSIGN TECHNICIANS" onClick={toggleBox2} />
-            </Link>
-            <div className="flex justify-center items-center">
-              <Card Children="VIEW MAINTANCES HISTORY" onClick={toggleBox2} />
-            </div>
-            <div className="flex justify-center items-center">
-              <Card Children="VIEW MAINTANENCE STATUS" onClick={toggleBox2} />
-            </div>
-            <div className="flex justify-center items-center">
-              <Card Children="VIEW APPROVAL HISTORY" onClick={toggleBox2} />
-            </div>
-          </>
-        ) : expandedBox1 ? (
-          <div className="flex justify-center items-center w-full col-span-3">
-            <LargeCard onClick={toggleBox1} Children={reqItems} columns={columns} />
-          </div>
-        ) : (
-          <div className="flex justify-center items-center w-full col-span-3">
-            <LargeCard onClick={toggleBox2} Children={reqItems} columns={columns} />
-          </div>
-        )}
+    <div className="h-lvh w-full bg-[#202652]  flex relative justify-center">
+      <div className="h-full w-[1000px] grid grid-cols-3 gap-x-10 gap-y-0  justify-center p-10 items-center">
+        <Card imgsrc={checklist} altname="checklist" Children="RESERVATIONS" onClick={toggleBox1} />
+
+        <Card imgsrc={cardreserve} altname="cardreserve" Children="EQUIPMENTS" onClick={fetchLabs} />
+
+        <Card imgsrc={repair} Children="MAINTENANCE" onClick={fetchMaintenance} />
       </div>
     </div>
   );

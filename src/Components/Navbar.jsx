@@ -29,7 +29,38 @@ export const Navbar = () => {
             />
           </Link>
         </div>
-        <div className="bg-transparent z-[1]"></div>
+        <div className="bg-transparent z-[1] flex-row flex items-center justify-center font-[Josefin_Sans] gap-10">
+          {location.pathname.startsWith("/clerk-maintenance") && (
+            <>
+              <Link
+                to="/clerk-maintenance"
+                className={`flex flex-col justify-center items-center tracking-[0.06em] cursor-pointer ${
+                  location.pathname === "/clerk-maintenance" ? "text-[#color]" : "text-[#default-color]"
+                }`}
+              >
+                PENDING
+              </Link>
+
+              <Link
+                to="/clerk-maintenance/ongoing"
+                className={`flex flex-col justify-center items-center tracking-[0.06em] cursor-pointer ${
+                  location.pathname === "/clerk-maintenance/ongoing" ? "text-[#color]" : "text-[#default-color]"
+                }`}
+              >
+                ONGOING
+              </Link>
+
+              <Link
+                to="/clerk-maintenance/completed"
+                className={`flex flex-col justify-center items-center tracking-[0.06em] cursor-pointer ${
+                  location.pathname === "/clerk-maintenance/completed" ? "text-[#color]" : "text-[#default-color]"
+                }`}
+              >
+                COMPLETED
+              </Link>
+            </>
+          )}
+        </div>
         <div className="bg-transparent flex justify-evenly items-center z-[1]">
           <button className="w-[141px] h-[20px] bg-transparent border-transparent cursor-pointer font-[Josefin_Sans]  text-[10px] leading-[20px] tracking-[0.06em] text-[#FFFFFF]">
             CONTACT US

@@ -25,8 +25,14 @@ import Testpage from './Components/Pages/Testpage';
 import TechnicianReq from './Components/Pages/LabTechnician/TechnicianReq';
 import Profile from './Components/Pages/Profile';
 import AuthCallback from './Components/Pages/AuthCallback';
-import SampleLogin from './Components/Pages/SampleLoading';
 import { SamplePage } from './Components/Pages/SamplePage';
+import { ClerkEquipment } from './Components/Pages/OfficeClerk/ClerkEquipment';
+import { ViewClerkLabs } from './Components/Pages/OfficeClerk/ViewClerkLabs';
+import { ClerkItems } from './Components/Pages/OfficeClerk/ClerkItems';
+import ClerkMaintenance from './Components/Pages/OfficeClerk/ClerkMaintenance';
+import PendingMaintain from './Components/Pages/OfficeClerk/PendingMaintain';
+import OngoingMaintain from './Components/Pages/OfficeClerk/OngoingMaintain';
+import CompletedMaintain from './Components/Pages/OfficeClerk/CompletedMaintain';
 
 function App() {
   return (
@@ -59,6 +65,12 @@ function App() {
             <Route path='/profile' element={<Profile/>}/>
             <Route path='/callback' element={<AuthCallback/>}/>
             <Route path='/loading' element={<SamplePage/>}/>
+            <Route path='/clerk-equipment' element={<ClerkEquipment/>}/>
+            <Route path='/clerk-labs' element={<ViewClerkLabs/>}/>
+            <Route path='/clerk-items' element={<ClerkItems/>}/>
+            <Route path='/clerk-maintenance' element={<PendingMaintain/>}/>
+            <Route path='/clerk-maintenance/ongoing' element={<OngoingMaintain/>}/>
+            <Route path='/clerk-maintenance/completed' element={<CompletedMaintain/>}/>
 
           </Route>
           
