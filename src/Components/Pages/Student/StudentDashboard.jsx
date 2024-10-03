@@ -71,7 +71,7 @@ const StudentDashboard = () => {
     }
   };
   return (
-    <div className="h-[600px] w-full  bg-[#202652]  flex relative justify-center">
+    <div className="h-svh w-full  bg-[#202652]  flex relative justify-center">
       <div className="h-full w-[1000px] grid grid-cols-3 gap-5">
         {!expandedBox1 && !expandedBox2 ? (
           <>

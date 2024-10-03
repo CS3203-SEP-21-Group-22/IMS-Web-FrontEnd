@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import { useLocation } from "react-router-dom";
-import UserLabCard from "../../UserLabCard.jsx";
+import UserLabCard from "./UserLabCard";
 
 export const StudentSelect = () => {
   const location = useLocation();

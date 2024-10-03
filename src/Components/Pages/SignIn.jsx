@@ -49,7 +49,7 @@ function SignIn() {
       }
     } catch (error) {
       console.error(error);
-      navigate("/login");
+      navigate("/sign-in");
     }
   };
 
