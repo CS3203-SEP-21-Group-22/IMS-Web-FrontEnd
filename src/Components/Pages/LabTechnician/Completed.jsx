@@ -7,7 +7,6 @@ export const Completed = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [expandedCard, setExpandedCard] = useState(null);
-  const [extraDetails, setExtraDetails] = useState({});
 
   const fetchCompleted = async () => {
     setLoading(true);
@@ -33,10 +32,10 @@ export const Completed = () => {
     }
   };
 
-  const fetchExtraDetails = async (maintenanceId) => {
+  const fetchExtraDetails = async (newmaintenanceId) => {
     try {
       const response = await axios.get(
-        `http://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/technician/maintenance/${maintenanceId}`,
+        `http://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/technician/maintenance/${newmaintenanceId}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("access_token")}`,
@@ -45,10 +44,14 @@ export const Completed = () => {
           },
         },
       );
-      setExtraDetails((prevDetails) => ({
-        ...prevDetails,
-        [maintenanceId]: response.data,
-      }));
+      // Update the specific maintenance item with the extra details
+      setCompletedMaintenances((prevMaintenances) =>
+        prevMaintenances.map((item) =>
+          item.maintenanceId === newmaintenanceId ? { ...item, extraDetails: response.data } : item,
+        ),
+      );
+
+      console.log(completedMaintenances);
     } catch (error) {
       console.error("Error fetching extra details:", error);
     }
@@ -58,14 +61,14 @@ export const Completed = () => {
     fetchCompleted();
   }, []);
 
-  const toggleCard = (maintenanceId) => {
-    if (expandedCard === maintenanceId) {
+  const toggleCard = (newId) => {
+    if (expandedCard === newId) {
       setExpandedCard(null);
     } else {
-      setExpandedCard(maintenanceId);
-      if (!extraDetails[maintenanceId]) {
-        console.log(maintenanceId);
-        fetchExtraDetails(maintenanceId);
+      setExpandedCard(newId);
+      const maintenance = completedMaintenances.find((item) => item.maintenanceId === newId);
+      if (!maintenance.extraDetails) {
+        fetchExtraDetails(newId);
       }
     }
   };
@@ -105,12 +108,12 @@ export const Completed = () => {
                 </div>
               </div>
               {/* Expand to show more information */}
-              {expandedCard === maintenance.maintenanceId && extraDetails[maintenance.itemId] && (
+              {expandedCard === maintenance.maintenanceId && maintenance.extraDetails && (
                 <div className="mt-4">
-                  <p>Serial No: {extraDetails[maintenance.itemId].itemSerialNumber}</p>
-                  <p>Maintenance Description: {extraDetails[maintenance.maintenanceId].description}</p>
-                  <p>Reported Issues: {extraDetails[maintenance.maintenanceId].reportedIssues}</p>
-                  <p>Maintenance Notes: {extraDetails[maintenance.maintenanceId].maintenanceNotes}</p>
+                  <p>Serial No: {maintenance.extraDetails.itemSerialNumber}</p>
+                  <p>Maintenance Description: {maintenance.extraDetails.description}</p>
+                  <p>Reported Issues: {maintenance.extraDetails.reportedIssues}</p>
+                  <p>Maintenance Notes: {maintenance.extraDetails.maintenanceNotes}</p>
                 </div>
               )}
             </div>

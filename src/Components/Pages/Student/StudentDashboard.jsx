@@ -9,29 +9,12 @@ import TableBookings from "./TableBookings";
 import axios from "axios";
 
 const StudentDashboard = () => {
-  const [expandedBox1, setExpandedBox1] = useState(false);
-  const [expandedBox2, setExpandedBox2] = useState(false);
   const navigate = useNavigate();
 
   const [reqItems, setReqItems] = useState([]);
   const [borrowedItems, setBorrowedItems] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-
-  const toggleBox1 = () => {
-    setExpandedBox1(!expandedBox1);
-    if (!expandedBox1) {
-      fetchReservations();
-    }
-    if (expandedBox2) setExpandedBox2(false);
-  };
-
-  const toggleBox2 = () => {
-    setExpandedBox2(!expandedBox2);
-    if (!expandedBox2) {
-    }
-    if (expandedBox1) setExpandedBox1(false);
-  };
 
   const fetchReservations = async () => {
     setLoading(true);
@@ -46,6 +29,7 @@ const StudentDashboard = () => {
         },
       );
       setReqItems(response.data);
+      navigate("/student-reservation", { state: { reservations: response.data } });
       console.log("Fetched reqItems:", response.data);
     } catch (errror) {
       console.error("Error when fetching res", error);
@@ -67,7 +51,8 @@ const StudentDashboard = () => {
         },
       );
       setBorrowedItems(response.data);
-      console.log("Fetched reqItems:", response.data);
+      console.log("Fetched borrowed:", response.data);
+      navigate("/student-borrowed", { state: { borrowed: response.data } });
     } catch (errror) {
       console.error("Error when fetching res", error);
       setError("Failed to load reservations");
@@ -95,28 +80,18 @@ const StudentDashboard = () => {
   return (
     <div className="h-svh w-full  bg-[#202652]  flex relative justify-center">
       <div className="h-full w-[1000px] grid grid-cols-3 gap-5">
-        {!expandedBox1 && !expandedBox2 ? (
-          <>
-            <div className="flex justify-center items-center">
-              <Card imgsrc={checklist} altname="checklist" Children="VIEW YOUR BOOKINGS" onClick={toggleBox1} />
-            </div>
-            <div className="flex justify-center items-center">
-              {/*to="/student-select" */}
-              <Card imgsrc={cardreserve} altname="cardreserve" Children="RESERVE EQUIPMENT" onClick={fetchLabs} />
-            </div>
-            <div className="flex justify-center items-center">
-              <Card imgsrc={clock} altname="due-items" Children="BORROWED ITEMS" onClick={toggleBox2} />
-            </div>
-          </>
-        ) : expandedBox1 ? (
-          <div className="flex justify-center items-center w-full col-span-3 transition-all duration-200 ease-in-out">
-            <TableBookings onClick={toggleBox1} items={reqItems} />
+        <>
+          <div className="flex justify-center items-center">
+            <Card imgsrc={checklist} altname="checklist" Children="VIEW YOUR BOOKINGS" onClick={fetchReservations} />
           </div>
-        ) : (
-          <div className="flex justify-center items-center w-full col-span-3">
-            <TableBookings onClick={toggleBox2} items={borrowedItems} />
+          <div className="flex justify-center items-center">
+            {/*to="/student-select" */}
+            <Card imgsrc={cardreserve} altname="cardreserve" Children="RESERVE EQUIPMENT" onClick={fetchLabs} />
           </div>
-        )}
+          <div className="flex justify-center items-center">
+            <Card imgsrc={clock} altname="due-items" Children="BORROWED ITEMS" onClick={fetchBorrowed} />
+          </div>
+        </>
       </div>
     </div>
   );

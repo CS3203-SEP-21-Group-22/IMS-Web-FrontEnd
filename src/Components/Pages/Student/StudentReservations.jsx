@@ -4,14 +4,16 @@ import ReservationMiniCard from "./ReservationMiniCard";
 
 const StudentReservations = () => {
   const location = useLocation();
-  const equipments = location.state.equipment;
-  console.log(equipments);
+  const reservations = location.state.reservations;
+  console.log(reservations);
 
   return (
-    <div className="h-svh w-full bg-[#202652] flex flex-wrap justify-center gap-2 gap-y-0 p-10">
-      {equipments.map((equipment, index) => (
-        <ReservationMiniCard key={index} equipmentData={equipment} />
-      ))}
+    <div className="h-svh w-full bg-[#202652] p-10 flex justify-center">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 h-[138px]">
+        {reservations.map((reservation, index) => (
+          <ReservationMiniCard key={index} reservationData={reservation} />
+        ))}
+      </div>
     </div>
   );
 };

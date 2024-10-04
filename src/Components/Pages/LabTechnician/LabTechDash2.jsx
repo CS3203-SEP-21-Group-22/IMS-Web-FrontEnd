@@ -42,10 +42,6 @@ const LabTechDash2 = () => {
     }
   };
 
-  const handleCardClick = () => {
-    fetchMaintainenceReq();
-  };
-
   return (
     <div className="h-svh w-full  bg-[#202652]  flex justify-center items-center relative">
       {selectedCard ? (
@@ -58,14 +54,7 @@ const LabTechDash2 = () => {
       ) : (
         <div className="flex flex-row gap-10 items-center justify-center ">
           <Card imgsrc={repairstatImg} altname="status" Children="MAINTENANCES" onClick={fetchMaintainenceReq} />
-          <Card
-            imgsrc={repaireqImg}
-            altname="request"
-            Children="EQUIPMENTS"
-            onClick={() => {
-              handleCardClick();
-            }}
-          />
+          <Card imgsrc={repaireqImg} altname="request" Children="EQUIPMENTS" onClick={fetchMaintainenceReq} />
         </div>
       )}
     </div>
