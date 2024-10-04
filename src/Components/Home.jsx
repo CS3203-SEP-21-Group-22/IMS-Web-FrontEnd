@@ -11,31 +11,27 @@ import Footer from "./Footer";
 export const Home = () => {
   return (
     <div className="w-full h-[full] bg-[#202652] flex flex-col">
-      <div className="grid grid-cols-2 w-full  h-[600px]">
-        <div className="h-[500px] ">
-          <p className="absolute w-[498px] h-[64px] left-[84px] top-[177px] text-left font-josefin-sans font-bold text-[40px] leading-[40px] text-white">
+      <div className="grid grid-cols-2 w-full  h-svh gap-0 ">
+        <div className="h-[600px] flex flex-col items-center justify-center gap-10">
+          <p className="w-[498px] h-[64px]  text-left font-josefin-sans font-bold text-[40px] leading-[40px] text-white">
             THE PERFECT TOOL TO MANAGE YOUR LAB
           </p>
-          <p className="absolute w-[561px] h-[74px] left-[84px] top-[294px] text-left  font-normal text-[25px] leading-[43px] text-[#E3EDF8]">
+          <p className=" w-[498px] h-[74px]  text-left  font-normal text-[25px] leading-[43px] text-[#E3EDF8]">
             Lab tracker is an inventory management system for computer laboratories.
           </p>
           <Link
             to="/sign-in"
-            className="flex flex-row justify-center items-center p-[20px] gap-[10px] text-center absolute w-[249px] h-[68px] left-[74px] top-[430px] cursor-pointer bg-[#00ABE4] rounded-[10px] border-transparent font-josefin-sans font-bold text-[25px] leading-[28px] tracking-[0.06em] text-white"
+            className="flex flex-row justify-center  p-5 px-10 text-center  cursor-pointer bg-[#00ABE4] rounded-[10px] border-transparent font-josefin-sans font-bold text-[25px] leading-[28px] tracking-[0.06em] text-white"
           >
             GET STARTED
           </Link>
         </div>
-        <div className="h-[700px]">
-          <img
-            src={topImage}
-            alt="top-image"
-            className="absolute w-[600px] h-[500px] left-[621px] top-[80px] animate-[scaleAnimation_3s_infinite]"
-          />
+        <div className="h-[700px] flex flex-col items-center justify-center">
+          <img src={topImage} alt="top-image" className=" w-[600px] h-[500px]  animate-[scaleAnimation_3s_infinite]" />
         </div>
       </div>
-      <div className="flex flex-row justify-center items-center w-ful relative gap-6 p-6">
-        <div className="h-[450px] w-[500px] flex flex-col justify-center items-center bg-[#3C4D71] shadow-lg rounded-[20px] hover:scale-[1.05] transition duration-[200]">
+      <div className="flex flex-row justify-center items-center w-ful relative gap-6 p-6 h-svh">
+        <div className="h-[450px] w-[450px] flex flex-col justify-center items-center bg-[#3C4D71] shadow-lg rounded-[20px] hover:scale-[1.05] transition duration-[200]">
           <img src={leftIcon} alt="lefticon" className="w-[280px] h-[250px]" />
           <div className="flex flex-col items-center justify-center mt-4 p-2">
             <p className=" font-[josefin-sans] font-bold text-[28px] leading-[28px] tracking-[0.06em] text-white  text-center">
@@ -46,7 +42,7 @@ export const Home = () => {
             </p>
           </div>
         </div>
-        <div className="h-[450px]  w-[500px] flex flex-col justify-center items-center bg-[#3C4D71] shadow-lg rounded-[20px] hover:scale-[1.05] transition duration-[200]">
+        <div className="h-[450px]  w-[450px] flex flex-col justify-center items-center bg-[#3C4D71] shadow-lg rounded-[20px] hover:scale-[1.05] transition duration-[200]">
           <img src={middleIcon} alt="middleicon" className="" />
           <div className="flex flex-col items-center justify-center mt-[-30px] p-2">
             <p className="font-[josefin-sans] font-bold text-[28px] leading-[28px] tracking-[0.06em] text-white text-center">
@@ -57,7 +53,7 @@ export const Home = () => {
             </p>
           </div>
         </div>
-        <div className="h-[450px]  w-[500px] flex flex-col justify-center items-center bg-[#3C4D71] shadow-lg gap-2 rounded-[20px] hover:scale-[1.05] transition duration-[200]">
+        <div className="h-[450px]  w-[450px] flex flex-col justify-center items-center bg-[#3C4D71] shadow-lg gap-2 rounded-[20px] hover:scale-[1.05] transition duration-[200]">
           <img src={rightIcon} alt="rightticon" className=" mr-10" />
           <div className="flex flex-col items-center justify-center mt-[-30px] p-2">
             <p className="font-[josefin-sans] font-bold text-[28px] leading-[28px] tracking-[0.06em] text-white text-center">

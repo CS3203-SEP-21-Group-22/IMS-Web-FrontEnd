@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const ItemRowBookings = ({ serial, lab, itmname, imgsrc, date, resId }) => {
+const ItemRowBorrowed = ({ lab, itmname, imgsrc, startDate, endDate, resId, itmModel, status }) => {
   const [error, setError] = useState(null);
   const deleteReservation = async () => {
     setError(null);
@@ -38,6 +38,12 @@ const ItemRowBookings = ({ serial, lab, itmname, imgsrc, date, resId }) => {
   const handleClosePopup = () => {
     setShowPopup(false);
   };
+
+  const formattedStartDate =
+    startDate instanceof Date ? startDate.toISOString().split("T")[0] : new Date(startDate).toISOString().split("T")[0];
+  const formattedEndDate =
+    endDate instanceof Date ? endDate.toISOString().split("T")[0] : new Date(endDate).toISOString().split("T")[0];
+
   return (
     <>
       <tr className="bg-[#6D7AA4] border-[#3C4D71] border-[2px] text-center">
@@ -45,16 +51,15 @@ const ItemRowBookings = ({ serial, lab, itmname, imgsrc, date, resId }) => {
           <img src={imgsrc} className="h-[60px] w-[60px]" alt="item-pic" />
           <p>{itmname}</p>
         </td>
-        <td className=" ">{serial}</td>
+        <td className=" ">{itmModel}</td>
         <td className=" ">{lab}</td>
         <td className=" ">
-          <div className="flex justify-center items-center">{date}</div>
+          <div className="flex justify-center items-center">{formattedStartDate}</div>
         </td>
         <td className=" ">
-          <button className="bg-[#03ADE5] text-white rounded-md p-1 shadow-sm" onClick={handleCancelClick}>
-            CANCEL
-          </button>
+          <div className="flex justify-center items-center">{formattedEndDate}</div>
         </td>
+        <td>{status}</td>
       </tr>
       {showPopup && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
@@ -75,4 +80,4 @@ const ItemRowBookings = ({ serial, lab, itmname, imgsrc, date, resId }) => {
   );
 };
 
-export default ItemRowBookings;
+export default ItemRowBorrowed;

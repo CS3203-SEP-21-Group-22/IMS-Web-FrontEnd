@@ -1,5 +1,4 @@
 import React from "react";
-
 import ItemRowBookings from "./ItemRowBookings";
 
 const TableBookings = ({ onClick, items }) => {
@@ -12,10 +11,11 @@ const TableBookings = ({ onClick, items }) => {
       <table className="table-auto w-[744px]  border-collapse">
         <tr className="bg-[#6D7AA4] shadow-lg border-[#3C4D71] border-[1px] text-center h-[50px]">
           <th className="">ITEM NAME</th>
-
-          <th className="">SERIAL NO</th>
+          <th className="">ITEM MODEL</th>
           <th className=" ">LAB</th>
-          <th className=" ">DATE REQUESTED</th>
+          <th className=" ">START DATE</th>
+          <th className=" ">END DATE</th>
+          <th className=" ">STATUS</th>
           <th></th>
         </tr>
 
@@ -25,9 +25,12 @@ const TableBookings = ({ onClick, items }) => {
             resId={item.reservationId}
             imgsrc={item.imageUrl}
             itmname={item.itemName}
+            itmModel={item.itemModel}
             lab={item.labName}
             serial={item.itemSerialNumber}
-            date={item.startDate}
+            startDate={item.startDate}
+            endDate={item.endDate}
+            status={item.status}
           />
         ))}
       </table>

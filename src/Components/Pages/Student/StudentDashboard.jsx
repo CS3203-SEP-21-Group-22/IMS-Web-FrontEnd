@@ -5,7 +5,7 @@ import cardreserve from "../../../styles/images/cardreserve.png";
 import laptop from "../../../styles/images/laptop.png";
 import clock from "../../../styles/images/clockk.png";
 import Card from "../../Card";
-import TableBookings from "../../TableBookings";
+import TableBookings from "./TableBookings";
 import axios from "axios";
 
 const StudentDashboard = () => {
@@ -14,6 +14,7 @@ const StudentDashboard = () => {
   const navigate = useNavigate();
 
   const [reqItems, setReqItems] = useState([]);
+  const [borrowedItems, setBorrowedItems] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -37,7 +38,7 @@ const StudentDashboard = () => {
     setError(null);
     try {
       const response = await axios.get(
-        "http://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/student/reservations",
+        "http://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/student/reservations?borrowed=false",
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("access_token")}`,
@@ -45,6 +46,27 @@ const StudentDashboard = () => {
         },
       );
       setReqItems(response.data);
+      console.log("Fetched reqItems:", response.data);
+    } catch (errror) {
+      console.error("Error when fetching res", error);
+      setError("Failed to load reservations");
+    } finally {
+      setLoading(false);
+    }
+  };
+  const fetchBorrowed = async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      const response = await axios.get(
+        "http://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/student/reservations?borrowed=true",
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+          },
+        },
+      );
+      setBorrowedItems(response.data);
       console.log("Fetched reqItems:", response.data);
     } catch (errror) {
       console.error("Error when fetching res", error);
@@ -83,7 +105,7 @@ const StudentDashboard = () => {
               <Card imgsrc={cardreserve} altname="cardreserve" Children="RESERVE EQUIPMENT" onClick={fetchLabs} />
             </div>
             <div className="flex justify-center items-center">
-              <Card imgsrc={clock} altname="due-items" Children="DUE ITEMS" onClick={toggleBox2} />
+              <Card imgsrc={clock} altname="due-items" Children="BORROWED ITEMS" onClick={toggleBox2} />
             </div>
           </>
         ) : expandedBox1 ? (
@@ -92,7 +114,7 @@ const StudentDashboard = () => {
           </div>
         ) : (
           <div className="flex justify-center items-center w-full col-span-3">
-            <TableBookings onClick={toggleBox2} items={reqItems} />
+            <TableBookings onClick={toggleBox2} items={borrowedItems} />
           </div>
         )}
       </div>

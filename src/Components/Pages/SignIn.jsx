@@ -75,7 +75,7 @@ function SignIn() {
           to={loginUrl}
           className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 bg-blue-400 text-white font-semibold py-4 px-4 rounded-md text-[20px]"
         >
-          Login with UMS
+          Login with Institution Account
         </Link>
       </div>
     </div>

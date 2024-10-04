@@ -6,6 +6,7 @@ import laptopImg from "../../../styles/images/laptop.png";
 import TableTop from "../../TableTop.jsx";
 import TableTppLab from "../../TableTppLab.jsx";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const LabTechDash2 = () => {
   const [selectedCard, setSelectedCard] = useState(null);
@@ -14,60 +15,7 @@ const LabTechDash2 = () => {
   const [loading, setLoading] = useState("");
   const [error, setError] = useState("");
 
-  const lists = {
-    status: [
-      {
-        reqimg: laptopImg,
-        itmname: "Lenovo Legion LOQ",
-        serial: "FOC1234X56Y",
-        lab: "ICE Lab",
-        description: "Buttons are not working",
-        foundDate: "21/08/2024",
-      },
-      {
-        reqimg: laptopImg,
-        itmname: "Lenovo Legion LOQ",
-        serial: "FOC1234X56Y",
-        lab: "ICE Lab",
-        description: "Buttons are not working",
-        foundDate: "21/08/2024",
-      },
-      {
-        reqimg: laptopImg,
-        itmname: "Lenovo Legion LOQ",
-        serial: "FOC1234X56Y",
-        lab: "ICE Lab",
-        description: "Buttons are not working",
-        foundDate: "21/08/2024",
-      },
-    ],
-    requests: [
-      {
-        reqimg: laptopImg,
-        itmname: "Lenovo Legion LOQ",
-        serial: "FOC1234X56Y",
-        lab: "ICE Lab",
-        description: "Buttons are not working",
-        foundDate: "21/08/2024",
-      },
-      {
-        reqimg: laptopImg,
-        itmname: "Lenovo Legion LOQ",
-        serial: "FOC1234X56Y",
-        lab: "ICE Lab",
-        description: "Buttons are not working",
-        foundDate: "21/08/2024",
-      },
-      {
-        reqimg: laptopImg,
-        itmname: "Lenovo Legion LOQ",
-        serial: "FOC1234X56Y",
-        lab: "ICE Lab",
-        description: "Buttons are not working",
-        foundDate: "21/08/2024",
-      },
-    ],
-  };
+  const navigate = useNavigate();
 
   const fetchMaintainenceReq = async () => {
     setLoading(true);
@@ -85,6 +33,7 @@ const LabTechDash2 = () => {
       );
 
       console.log("Fetched labs:", response.data);
+      navigate("/tech", { state: { assigned: response.data } });
     } catch (errror) {
       console.error("Error when fetching res", error);
       setError("Failed to load reservations");
@@ -98,7 +47,7 @@ const LabTechDash2 = () => {
   };
 
   return (
-    <div className="h-[600px] w-full  bg-[#202652]  flex justify-center items-center relative">
+    <div className="h-svh w-full  bg-[#202652]  flex justify-center items-center relative">
       {selectedCard ? (
         <TableTppLab
           onClick={() => {
@@ -108,18 +57,11 @@ const LabTechDash2 = () => {
         />
       ) : (
         <div className="flex flex-row gap-10 items-center justify-center ">
-          <Card
-            imgsrc={repairstatImg}
-            altname="status"
-            Children="STATUS"
-            onClick={() => {
-              handleCardClick();
-            }}
-          />
+          <Card imgsrc={repairstatImg} altname="status" Children="MAINTENANCES" onClick={fetchMaintainenceReq} />
           <Card
             imgsrc={repaireqImg}
             altname="request"
-            Children="REQUESTS"
+            Children="EQUIPMENTS"
             onClick={() => {
               handleCardClick();
             }}

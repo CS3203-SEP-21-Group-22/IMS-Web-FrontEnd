@@ -34,6 +34,8 @@ import PendingMaintain from './Components/Pages/OfficeClerk/PendingMaintain';
 import OngoingMaintain from './Components/Pages/OfficeClerk/OngoingMaintain';
 import CompletedMaintain from './Components/Pages/OfficeClerk/CompletedMaintain';
 import StudentEquipment from './Components/Pages/Student/StudentEquipment';
+import { Assigned } from './Components/Pages/LabTechnician/Assigned';
+import { Completed } from './Components/Pages/LabTechnician/Completed';
 
 function App() {
   return (
@@ -73,6 +75,8 @@ function App() {
             <Route path='/clerk-maintenance/ongoing' element={<OngoingMaintain/>}/>
             <Route path='/clerk-maintenance/completed' element={<CompletedMaintain/>}/>
             <Route path='/student-equipment' element={<StudentEquipment/>}/>
+            <Route path='/tech' element={<Assigned/>}/>
+            <Route path='/tech/completed' element={<Completed/>}/>
 
           </Route>
           

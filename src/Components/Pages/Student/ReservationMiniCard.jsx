@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import mouse from "../../../../src/styles/images/mouse.png";
 import axios from "axios";
 
-const EquipmentMiniCard = ({ equipmentData }) => {
+const ReservationMiniCard = ({ equipmentData }) => {
   const [error, setError] = useState(null);
   const [boxExpanded, setBoxExpanded] = useState(false);
   const [startDate, setStartDate] = useState("");
@@ -104,4 +104,4 @@ const EquipmentMiniCard = ({ equipmentData }) => {
   );
 };
 
-export default EquipmentMiniCard;
+export default ReservationMiniCard;

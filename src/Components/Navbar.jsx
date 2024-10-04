@@ -60,11 +60,30 @@ export const Navbar = () => {
               </Link>
             </>
           )}
+          {location.pathname.startsWith("/tech") && (
+            <>
+              <Link
+                to="/tech"
+                className={`flex flex-col justify-center items-center tracking-[0.06em] cursor-pointer ${
+                  location.pathname === "/tech" ? "text-[#color]" : "text-[#default-color]"
+                }`}
+              >
+                ASSIGNED
+              </Link>
+
+              <Link
+                to="/tech/completed"
+                className={`flex flex-col justify-center items-center tracking-[0.06em] cursor-pointer ${
+                  location.pathname === "/tech/completed" ? "text-[#color]" : "text-[#default-color]"
+                }`}
+              >
+                COMPLETED
+              </Link>
+            </>
+          )}
         </div>
+
         <div className="bg-transparent flex justify-evenly items-center z-[1]">
-          <button className="w-[141px] h-[20px] bg-transparent border-transparent cursor-pointer font-[Josefin_Sans]  text-[10px] leading-[20px] tracking-[0.06em] text-[#FFFFFF]">
-            CONTACT US
-          </button>
           {location.pathname == "/" && (
             <Link
               to="/sign-in"
