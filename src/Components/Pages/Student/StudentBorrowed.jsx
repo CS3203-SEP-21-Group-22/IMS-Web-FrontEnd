@@ -12,10 +12,13 @@ const StudentBorrowed = () => {
       {borrowed.length === 0 ? (
         <p className="text-white text-[24px] font-semibold">No items have been borrowed.</p>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {borrowed.map((borrow, index) => (
-            <BorrowedMiniCard key={index} borrowData={borrow} />
-          ))}
+        <div className="flex flex-col items-center just">
+          <div className="text-white text-[25px] font-semibold tracking-[0.06rem]">BORROWED EQUIPMENT</div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
+            {borrowed.map((borrow, index) => (
+              <BorrowedMiniCard key={index} borrowData={borrow} />
+            ))}
+          </div>
         </div>
       )}
     </div>

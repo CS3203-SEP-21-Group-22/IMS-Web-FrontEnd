@@ -2,7 +2,7 @@ import React from "react";
 import "../styles/css/palette.scss";
 import "../styles/css/palette.css";
 import logo from "../styles/images/logo.png";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import walrus from "../styles/images/walrus.png";
 import { useState } from "react";
 import { AUTH_CLIENT_ID, AUTH_SERVER_URL } from "../config";
@@ -13,9 +13,17 @@ export const Navbar = () => {
   const redirectUri = "http://localhost:3000/profile";
   const loginUrl = `${AUTH_SERVER_URL}/login?redirectUri=${encodeURIComponent(redirectUri)}&clientId=${AUTH_CLIENT_ID}`;
 
+  const navigate = useNavigate();
   const [box, setBox] = useState(false);
   const toggleBox = () => {
     setBox(!box);
+  };
+
+  const handleLogOut = () => {
+    localStorage.removeItem("access_token");
+    localStorage.removeItem("refresh_token");
+    console.log("hi");
+    navigate("/sign-in");
   };
   return (
     <div className="w-full h-[60px] bg-[#202652] ">
@@ -83,11 +91,11 @@ export const Navbar = () => {
           )}
         </div>
 
-        <div className="bg-transparent flex justify-evenly items-center z-[1]">
+        <div className="bg-transparent flex flex-row justify-end items-center z-[1] px-4">
           {location.pathname == "/" && (
             <Link
               to="/sign-in"
-              className="flex flex-row justify-center items-center gap-[10px] text-none w-[80px] h-[35px] bg-[#E9F1FA] rounded-[10px] border-transparent cursor-pointer font-[Josefin_Sans]  text-[10px] leading-[20px] tracking-[0.06em]"
+              className="flex flex-row justify-center items-center gap-[10px] text-white w-[80px] h-[35px] bg-[#00ABE4] rounded-[10px] border-transparent cursor-pointer font-[Josefin_Sans]  text-[10px] leading-[20px] tracking-[0.06em]"
             >
               LOGIN
             </Link>
@@ -103,7 +111,9 @@ export const Navbar = () => {
                   <Link to="/user" className="text-white text-sm hover:bg-[#3C4D71] h-[30px]">
                     VIEW PROFILE
                   </Link>
-                  <p className="text-white text-sm cursor-pointer hover:bg-[#3C4D71] h-[30px]">LOG OUT</p>
+                  <p className="text-white text-sm cursor-pointer hover:bg-[#3C4D71] h-[30px]" onClick={handleLogOut}>
+                    LOG OUT
+                  </p>
                 </div>
               )}
             </div>
@@ -142,7 +152,12 @@ export const Navbar = () => {
                     <Link to="/user" className="text-white text-sm hover:bg-[#3C4D71] h-[30px]">
                       VIEW PROFILE
                     </Link>
-                    <p className="text-white text-sm cursor-pointer hover:bg-[#3C4D71] h-[30px]">LOG OUT</p>
+                    <p
+                      className="text-white text-sm cursor-pointer hover:bg-[#3C4D71] h-[30px] "
+                      onClick={handleLogOut}
+                    >
+                      LOG OUT
+                    </p>
                   </div>
                 )}
               </div>

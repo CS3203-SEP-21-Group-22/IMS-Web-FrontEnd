@@ -7,7 +7,6 @@ const EquipmentMiniCard = ({ equipmentData }) => {
   const [boxExpanded, setBoxExpanded] = useState(false);
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
-  const [showConfirmation, setShowConfirmation] = useState(false);
 
   const handleReserveEquipment = async () => {
     if (!startDate || !endDate) {
@@ -42,10 +41,33 @@ const EquipmentMiniCard = ({ equipmentData }) => {
     }
   };
 
+  const handleStartDateChange = (e) => {
+    const selectedStartDate = e.target.value;
+    setStartDate(selectedStartDate);
+
+    if (endDate && endDate <= selectedStartDate) {
+      setEndDate(""); // Reset end date
+      setError("End date must be greater than start date.");
+    } else {
+      setError(null);
+    }
+  };
+
+  const handleEndDateChange = (e) => {
+    const selectedEndDate = e.target.value;
+    setEndDate(selectedEndDate);
+
+    if (selectedEndDate <= startDate) {
+      setError("End date must be greater than start date.");
+    } else {
+      setError(null);
+    }
+  };
+
   return (
     <div className="p-4">
       <div onClick={() => setBoxExpanded(!boxExpanded)}>
-        {error && <p className="text-red-500">{error}</p>}
+        {error && <p className="text-red-500 ">{error}</p>}
         <div
           className={`w-[377px] ${
             boxExpanded ? "h-[320px]" : "h-[138px]"
@@ -64,15 +86,15 @@ const EquipmentMiniCard = ({ equipmentData }) => {
           <div className="flex flex-col items-center justify-center">
             {boxExpanded && (
               <>
-                <div className=" mt-4 flex-row flex items-center justify-center">
+                <div className="mt-4 flex-row flex items-center justify-center">
                   <div className="mr-4 flex-col flex items-center justify-center">
                     <label className="text-white">START DATE</label>
                     <input
                       type="date"
                       className="ml-2 p-3 text-white border-none rounded bg-[#3C4D71] shadow-lg shadow-[#252f46]"
                       value={startDate}
-                      onChange={(e) => setStartDate(e.target.value)}
-                      onClick={(e) => e.stopPropagation()} // Prevents the card from collapsing when clicked
+                      onChange={handleStartDateChange}
+                      onClick={(e) => e.stopPropagation()}
                     />
                   </div>
                   <div className="mr-4 flex-col flex items-center justify-center">
@@ -81,14 +103,14 @@ const EquipmentMiniCard = ({ equipmentData }) => {
                       type="date"
                       className="ml-2 p-3 text-white border-none rounded bg-[#3C4D71] shadow-lg shadow-[#252f46]"
                       value={endDate}
-                      onChange={(e) => setEndDate(e.target.value)}
-                      onClick={(e) => e.stopPropagation()} // Prevents the card from collapsing when clicked
+                      onChange={handleEndDateChange}
+                      onClick={(e) => e.stopPropagation()}
                     />
                   </div>
                 </div>
                 <button
                   onClick={(e) => {
-                    e.stopPropagation(); // Prevents toggling the card on button click
+                    e.stopPropagation();
                     handleReserveEquipment();
                   }}
                   className="mt-4 p-2 bg-blue-500 text-white rounded"
