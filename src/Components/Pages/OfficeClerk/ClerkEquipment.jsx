@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-
 import axios from "axios";
 import LabCard from "../../LabCard";
 import labimage from "../../../styles/images/page3.png";
@@ -47,7 +46,6 @@ export const ClerkEquipment = () => {
           },
         },
       );
-      console.log("i am here");
       console.log("New Equipment added:", response.data);
       setEquipment((prevEquipment) => [...prevEquipment, response.data]);
       setNewEquipment({
@@ -57,7 +55,7 @@ export const ClerkEquipment = () => {
       });
     } catch (error) {
       console.error("Error when fetching res", error);
-      setError("Failed to load reservations");
+      setError("Failed to load equipment");
     }
   };
 
@@ -65,8 +63,9 @@ export const ClerkEquipment = () => {
     const { name, value } = e.target;
     setNewEquipment((prev) => ({ ...prev, [name]: value }));
   };
+
   return (
-    <div className="h-svh w-full bg-[#202652]  flex relative flex-col items-center justify-center p-10">
+    <div className="h-svh w-full bg-[#202652] flex relative flex-col items-center p-10">
       <div className="flex flex-row items-center justify-center bg-[#3C4D71] rounded-[40px] p-4 m-6">
         <input
           type="text"
@@ -100,22 +99,22 @@ export const ClerkEquipment = () => {
           +
         </div>
       </div>
-      <div className="h-svh w-[1300px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4  gap-10 justify-center items-center">
-        {equipment.map((equip, index) => {
-          return (
-            <div key={index} className="flex justify-center items-center ">
-              <div className="flex justify-center items-center ">
-                <ClerkEquipmentCard
-                  imgsrc={labimage}
-                  altname="staff profile"
-                  equipmentData={equip}
-                  // onLabDelete={(labId) => setLabs((prevLabs) => prevLabs.filter((delLab) => delLab.labId !== labId))}
-                />
+
+      {equipment.length === 0 ? (
+        <div className="text-white text-2xl">No equipment available</div>
+      ) : (
+        <div className="h-svh w-[1300px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10 justify-center items-center">
+          {equipment.map((equip, index) => {
+            return (
+              <div key={index} className="flex justify-center items-center ">
+                <div className="flex justify-center items-center ">
+                  <ClerkEquipmentCard imgsrc={labimage} altname="staff profile" equipmentData={equip} />
+                </div>
               </div>
-            </div>
-          );
-        })}
-      </div>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 };

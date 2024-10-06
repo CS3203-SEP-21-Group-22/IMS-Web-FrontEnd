@@ -14,8 +14,7 @@ const OfficeClerkDashboard = () => {
   const navigate = useNavigate();
 
   const toggleBox1 = () => {
-    setExpandedBox1(!expandedBox1);
-    if (expandedBox2) setExpandedBox2(false); // Ensure only one box is expanded at a time
+    navigate("/clerk-reserve");
   };
 
   const columns = ["ITEM NAME", "SERIAL NO", "LAB", "DATE REQUESTED"];

@@ -23,7 +23,8 @@ const ClerkEquipmentCard = ({
 
   const navigate = useNavigate();
 
-  const editLab = async () => {
+  const editLab = async (e) => {
+    e.stopPropagation(); // Stop event from bubbling to parent
     setError(null);
     try {
       const response = await axios.patch(
@@ -43,15 +44,12 @@ const ClerkEquipmentCard = ({
 
       console.log("edited lab:", response.data);
       setEditMode(false);
-
-      //   if (onLabDelete) {
-      //     onLabDelete(labData.labId);
-      //   }
     } catch (error) {
       console.error("Error when fetching res", error);
       setError("Failed to load reservations");
     }
   };
+
   const fetchItem = async () => {
     setError(null);
     try {
@@ -77,7 +75,8 @@ const ClerkEquipmentCard = ({
     setEditEquipmentData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const deleteLab = async () => {
+  const deleteLab = async (e) => {
+    e.stopPropagation(); // Stop event from bubbling to parent
     setError(null);
     try {
       const response = await axios.delete(
@@ -90,10 +89,6 @@ const ClerkEquipmentCard = ({
       );
 
       console.log("deleted equipment:", response.data);
-
-      //   if (onLabDelete) {
-      //     onLabDelete(labData.labId);
-      //   }
     } catch (errror) {
       console.error("Error when fetching res", error);
       setError("Failed to load reservations");
@@ -140,26 +135,41 @@ const ClerkEquipmentCard = ({
             placeholder="Enter Image URL"
             className="bg-[#3C4D71] text-center text-[20px] shadow-lg shadow-[#32405e] rounded-[30px] text-white"
           />
-          <div className="px-4 bg-blue-300 rounded-[30px] cursor-pointer" onClick={editLab}>
+          <div className="px-4 bg-blue-300 rounded-[30px] cursor-pointer " onClick={editLab}>
             SAVE
           </div>
-          <div className="px-4 bg-gray-300 rounded-[30px] cursor-pointer" onClick={() => setEditMode(false)}>
+          <div
+            className="px-4 bg-gray-300 rounded-[30px] cursor-pointer"
+            onClick={(e) => {
+              e.stopPropagation();
+              setEditMode(false);
+            }}
+          >
             CANCEL
           </div>
         </>
       ) : (
-        <div className="flex flex-col justify-center items-center" onClick={handleClick}>
+        <div className="flex flex-col justify-center items-center">
           <img className="object-contain" src={imgsrc} alt={altname} style={{ width: imgWidth, height: imgHeight }} />
-          <p className="font-josefin-sans font-normal text-[20px] text-white leading-[20px] tracking-[0.06em] ">
+          <p
+            className="font-josefin-sans font-normal text-[20px] text-white leading-[20px] tracking-[0.06em]  "
+            onClick={handleClick}
+          >
             {equipmentData.name}
           </p>
           <p className="font-josefin-sans font-normal text-[20px] text-white leading-[20px] tracking-[0.06em] ">
             {equipmentData.model}
           </p>
-          <div className="px-4 bg-blue-300 rounded-[30px] cursor-pointer " onClick={() => setEditMode(true)}>
+          <div
+            className="px-4 bg-blue-300 rounded-[30px] cursor-pointer m-2 text-white"
+            onClick={(e) => {
+              e.stopPropagation();
+              setEditMode(true);
+            }}
+          >
             EDIT
           </div>
-          <div className="px-4 bg-blue-300 rounded-[30px] cursor-pointer" onClick={deleteLab}>
+          <div className="px-4 bg-blue-300 rounded-[30px] cursor-pointer mb-4 text-white" onClick={deleteLab}>
             DELETE
           </div>
         </div>
