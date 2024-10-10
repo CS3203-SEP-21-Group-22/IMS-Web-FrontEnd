@@ -41,6 +41,7 @@ import StudentBorrowed from './Components/Pages/Student/StudentBorrowed';
 import ClerkReserve from './Components/Pages/OfficeClerk/ClerkReserve';
 import ClerkViewReserved from './Components/Pages/OfficeClerk/ClerkViewReserved';
 import ClerkRequest from './Components/Pages/OfficeClerk/ClerkRequest';
+import AdminAnalytics from './Components/Pages/Admin/AdminAnalytics';
 
 function App() {
   return (
@@ -58,11 +59,15 @@ function App() {
             <Route path='/labTechnician2' element={<LabTechDash2/>}/>
             <Route path='/user' element={<UserProfile/>}/>
             <Route path='/staff' element={<StaffDashboard/>}/>
-            <Route path='/admin' element={<AdminDashboard/>}/>
+            
             <Route path='/officeclerk' element={<OfficeClerkDashboard/>}/>
             <Route path='/aprove-list-request' element={<AproveLisTRequest/>}/>
             <Route path='/staff-profile' element={<StaffProfile/>}/>
+
+            <Route path='/admin' element={<AdminDashboard/>}/>
             <Route path='/admin-profile' element={<AdminProfile/>}/>
+            <Route path='/admin-analytics' element={<AdminAnalytics/>}/>
+
             <Route path='/officeclerk-profile' element={<OfficeClerkProfile/>}/>
             <Route path='/staff-request' element={<StaffRequest/>}/>
             <Route path='/user-profiles' element={<UserProfiles/>}/>

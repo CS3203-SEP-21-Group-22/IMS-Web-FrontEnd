@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import mouse from "../../../../src/styles/images/mouse.png";
 
-const ClerkRequestCard = ({ requestData }) => {
+const ClerkRequestCard = ({ requestData, onRemoveRequest }) => {
   const [error, setError] = useState("");
   const [itemId, setItemId] = useState(""); // Track item ID when assigning
   const [rejectNote, setRejectNote] = useState(""); // Track reject note when rejecting
@@ -40,6 +40,10 @@ const ClerkRequestCard = ({ requestData }) => {
 
   // Function to handle item assignment
   const handleAssign = async () => {
+    if (!window.confirm("Are you sure you want to assign this item?")) {
+      return; // Cancelled the action
+    }
+
     if (!itemId) {
       setError("Please select an item to assign.");
       return;
@@ -62,6 +66,7 @@ const ClerkRequestCard = ({ requestData }) => {
         },
       );
       console.log("Item Assigned:", response.data);
+      onRemoveRequest(requestData.reservationId); // Notify parent to remove this request from the list
     } catch (error) {
       console.error("Error when assigning item", error);
       setError("Failed to assign item.");
@@ -70,6 +75,10 @@ const ClerkRequestCard = ({ requestData }) => {
 
   // Function to handle request rejection
   const handleReject = async () => {
+    if (!window.confirm("Are you sure you want to reject this request?")) {
+      return; // Cancelled the action
+    }
+
     if (!rejectNote) {
       setError("Please provide a reason for rejection.");
       return;
@@ -92,6 +101,7 @@ const ClerkRequestCard = ({ requestData }) => {
         },
       );
       console.log("Request Rejected:", response.data);
+      onRemoveRequest(requestData.reservationId); // Notify parent to remove this request from the list
     } catch (error) {
       console.error("Error when rejecting request", error);
       setError("Failed to reject request.");
@@ -108,7 +118,6 @@ const ClerkRequestCard = ({ requestData }) => {
   return (
     <div className="w-[487px] h-auto bg-[#3C4D71] rounded-[20px] flex flex-row p-4 items-center justify-center hover:scale-105 transition duration-200">
       {/* Left side: Image and Name */}
-
       <div className="w-[250px] h-[350px] flex flex-col items-center justify-center bg-[#3C4D71] shadow-lg shadow-[#2e3a56] rounded-[20px] p-2">
         <img src={mouse} alt="mouse" className="mb-4" />
         <p className="text-white text-center text-[20px] font-semibold">{requestData.itemName}</p>
@@ -123,6 +132,7 @@ const ClerkRequestCard = ({ requestData }) => {
         <p>TO: {formattedEndDate}</p>
         <p>REQUESTED AT: {formattedReqDate}</p>
 
+        {/* Assign Item Section */}
         <div className="w-full mt-4">
           <h3 className="text-white text-lg font-semibold">Assign Item</h3>
           <select
@@ -157,8 +167,6 @@ const ClerkRequestCard = ({ requestData }) => {
           </button>
         </div>
       </div>
-
-      {/* Assign Item Section */}
     </div>
   );
 };
