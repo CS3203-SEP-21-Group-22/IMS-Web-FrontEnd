@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { BarChart } from "@mui/x-charts"; // Import BarChart from MUI X
 
 const AdminAnalytics = () => {
   const [loading, setLoading] = useState(false);
@@ -12,6 +13,7 @@ const AdminAnalytics = () => {
   const [equipmentData, setEquipmentData] = useState([]);
   const [year, setYear] = useState("2024");
   const [month, setMonth] = useState("11");
+  const [monthlyCounts, setMonthlyCounts] = useState([]);
 
   // Fetch labs
   const fetchLabs = async () => {
@@ -83,6 +85,13 @@ const AdminAnalytics = () => {
         },
       );
       setEquipmentData(response.data);
+
+      // Process equipment data to get monthly counts
+      const formattedData = response.data.map((item) => ({
+        month: item.month,
+        count: item.count,
+      }));
+      setMonthlyCounts(formattedData);
     } catch (error) {
       console.error("Error fetching equipment data", error);
       setError("Failed to load equipment data");
@@ -95,11 +104,37 @@ const AdminAnalytics = () => {
     fetchLabs();
   }, []);
 
+  // Automatically fetch equipments when a lab is selected
+  useEffect(() => {
+    if (selectedLabId) {
+      fetchEquipments(selectedLabId);
+    } else {
+      setEquipments([]); // Clear equipments if no lab is selected
+      setSelectedEquipmentId(""); // Reset selected equipment
+    }
+  }, [selectedLabId]);
+
+  // Automatically fetch equipment data when an equipment is selected
+  useEffect(() => {
+    if (selectedEquipmentId) {
+      fetchEquipmentData(selectedEquipmentId);
+    } else {
+      setMonthlyCounts([]); // Clear monthly counts if no equipment is selected
+    }
+  }, [selectedEquipmentId]);
+
   return (
     <div className="min-h-screen w-full bg-[#202652] flex flex-col items-center justify-center">
-      <h1 className="text-white">Admin Analytics Dashboard</h1>
-      <div>
-        <select onChange={(e) => setSelectedLabId(e.target.value)} value={selectedLabId}>
+      <p className="text-white text-[25px] font-semibold p-4">Admin Analytics Dashboard</p>
+
+      {/* Styled Selection for Labs */}
+      <div className="flex flex-row items-center justify-center bg-[#3C4D71] rounded-[40px] p-4 mb-6">
+        <label className="px-2 text-white">Select Lab</label>
+        <select
+          onChange={(e) => setSelectedLabId(e.target.value)}
+          value={selectedLabId}
+          className="bg-[#3C4D71] rounded-l-[30px] text-center text-[20px] shadow-lg shadow-[#32405e] text-white"
+        >
           <option value="">Select Lab</option>
           {labs.map((lab) => (
             <option key={lab.labId} value={lab.labId}>
@@ -107,26 +142,39 @@ const AdminAnalytics = () => {
             </option>
           ))}
         </select>
-        <button onClick={() => fetchEquipments(selectedLabId)}>Load Equipments</button>
       </div>
 
-      {equipments.length > 0 && (
-        <div>
-          <select onChange={(e) => setSelectedEquipmentId(e.target.value)} value={selectedEquipmentId}>
-            <option value="">Select Equipment</option>
-            {equipments.map((equipment) => (
-              <option key={equipment.equipmentId} value={equipment.equipmentId}>
-                {equipment.name}
-              </option>
-            ))}
-          </select>
-          <button onClick={() => fetchEquipmentData(selectedEquipmentId)}>Get Equipment Data</button>
-        </div>
-      )}
+      {/* Styled Selection for Equipment */}
+      <div className="flex flex-row items-center justify-center bg-[#3C4D71] rounded-[40px] p-4 mb-6">
+        <label className="px-2 text-white">Select Equipment</label>
+        <select
+          onChange={(e) => setSelectedEquipmentId(e.target.value)}
+          value={selectedEquipmentId}
+          disabled={!selectedLabId} // Disable when no lab is selected
+          className={`bg-[#3C4D71] rounded-l-[30px] text-center text-[20px] shadow-lg shadow-[#32405e] text-white ${
+            !selectedLabId ? "cursor-not-allowed" : ""
+          }`}
+        >
+          <option value="">Select Equipment</option>
+          {equipments.map((equipment) => (
+            <option key={equipment.equipmentId} value={equipment.equipmentId}>
+              {equipment.name}
+            </option>
+          ))}
+        </select>
+      </div>
 
-      <div>
-        <h2>Select Year and Month for Analytics</h2>
-        <input type="number" value={year} onChange={(e) => setYear(e.target.value)} placeholder="Year" min="2020" />
+      {/* Styled Year and Month Inputs */}
+      <div className="flex flex-row items-center justify-center bg-[#3C4D71] rounded-[40px] p-4 mb-6">
+        <label className="px-2 text-white">Select Year and Month</label>
+        <input
+          type="number"
+          value={year}
+          onChange={(e) => setYear(e.target.value)}
+          placeholder="Year"
+          min="2020"
+          className="bg-[#3C4D71] rounded-l-[30px] text-center text-[20px] shadow-lg shadow-[#32405e] text-white px-2"
+        />
         <input
           type="number"
           value={month}
@@ -134,12 +182,19 @@ const AdminAnalytics = () => {
           placeholder="Month"
           min="1"
           max="12"
+          className="bg-[#3C4D71] rounded-l-[30px] text-center text-[20px] shadow-lg shadow-[#32405e] text-white px-2"
         />
-        <button onClick={fetchAnalytics}>Get Analytics</button>
+        <div
+          className="px-4 text-center text-[20px] bg-blue-300 rounded-r-[30px] cursor-pointer shadow-[#32405e] shadow-lg"
+          onClick={fetchAnalytics}
+        >
+          Get Analytics
+        </div>
       </div>
 
+      {/* Visualization Section as it was */}
       <div>
-        <h2>Analytics Data:</h2>
+        <h2 className="text-white text-[20px] font-semibold py-4">Analytics Data</h2>
         {analyticsData.map((data, index) => (
           <div key={index}>
             <p>Count: {data.count}</p>
@@ -151,17 +206,26 @@ const AdminAnalytics = () => {
       </div>
 
       <div>
-        <h2>Equipment Data:</h2>
-        {equipmentData.map((data, index) => (
-          <div key={index}>
-            <p>Year: {data.year}</p>
-            <p>Month: {data.month}</p>
-            <p>Count: {data.count}</p>
-          </div>
-        ))}
+        <h2 className="text-white text-[20px] font-semibold py-4">Monthly Equipment Data</h2>
+        {monthlyCounts.length > 0 ? (
+          <BarChart
+            xAxis={[{ dataKey: "month", scaleType: "band" }]} // Provide xAxis with dataKey
+            series={[{ dataKey: "count", label: "Count" }]} // Use series to provide data
+            dataset={monthlyCounts} // Use dataset to provide data
+            width={600}
+            height={400}
+          />
+        ) : (
+          <p>No data available for the selected equipment.</p>
+        )}
       </div>
 
-      {loading && <p>Loading...</p>}
+      {loading && (
+        <div className="h-[800px] w-full bg-[#202652] flex justify-center items-center relative flex-col ">
+          <span className="loading loading-spinner text-info w-12 h-12"></span>
+          <p className="text-[30px] font-semibold text-white p-2">Loading</p>
+        </div>
+      )}
       {error && <p>{error}</p>}
     </div>
   );
