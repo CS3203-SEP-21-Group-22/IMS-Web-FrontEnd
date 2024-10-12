@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { BarChart } from "@mui/x-charts"; // Import BarChart from MUI X
+import { BarChart } from "@mui/x-charts";
+import LabReservationsPieChart from "./LabReservationsPieChart";
+import MonthlyEquipmentBarChart from "./MonthlyEquipmentBarChart";
+import MonthlyReservationsBarChart from "./MonthlyReservationsBarChart";
+import MostReservedEquipment from "./MostReservedEquipment";
 
 const AdminAnalytics = () => {
   const [loading, setLoading] = useState(false);
@@ -11,9 +15,9 @@ const AdminAnalytics = () => {
   const [selectedEquipmentId, setSelectedEquipmentId] = useState("");
   const [analyticsData, setAnalyticsData] = useState([]);
   const [equipmentData, setEquipmentData] = useState([]);
-  const [year, setYear] = useState("2024");
-  const [month, setMonth] = useState("11");
   const [monthlyCounts, setMonthlyCounts] = useState([]);
+  const [totalCount, setTotalCount] = useState(0);
+  const [mostReserved, setMostReserved] = useState([]);
 
   // Fetch labs
   const fetchLabs = async () => {
@@ -51,12 +55,17 @@ const AdminAnalytics = () => {
     }
   };
 
-  // Fetch analytics data based on year and month
   const fetchAnalytics = async () => {
     setLoading(true);
+
+    // Automatically get current year and month
+    const currentDate = new Date();
+    const currentYear = currentDate.getFullYear();
+    const currentMonth = currentDate.getMonth() + 1; // Month is 0-indexed, so we add 1
+
     try {
       const response = await axios.get(
-        `http://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/admin/reservations?year=${year}&month=${month}`,
+        `http://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/admin/reservations?year=${currentYear}&month=${currentMonth}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("access_token")}`,
@@ -64,6 +73,13 @@ const AdminAnalytics = () => {
         },
       );
       setAnalyticsData(response.data);
+
+      const totalReservations = response.data.reduce((acc, item) => acc + item.count, 0);
+      setTotalCount(totalReservations);
+
+      const maxCount = Math.max(...response.data.map((item) => item.count));
+      const mostReservedItems = response.data.filter((item) => item.count === maxCount);
+      setMostReserved(mostReservedItems);
     } catch (error) {
       console.error("Error fetching analytics data", error);
       setError("Failed to load analytics");
@@ -72,7 +88,6 @@ const AdminAnalytics = () => {
     }
   };
 
-  // Fetch equipment data based on selected equipment
   const fetchEquipmentData = async (equipmentId) => {
     setLoading(true);
     try {
@@ -86,7 +101,6 @@ const AdminAnalytics = () => {
       );
       setEquipmentData(response.data);
 
-      // Process equipment data to get monthly counts
       const formattedData = response.data.map((item) => ({
         month: item.month,
         count: item.count,
@@ -102,32 +116,39 @@ const AdminAnalytics = () => {
 
   useEffect(() => {
     fetchLabs();
+    fetchAnalytics(); // Automatically fetch analytics for the current month and year on component mount
   }, []);
 
-  // Automatically fetch equipments when a lab is selected
   useEffect(() => {
     if (selectedLabId) {
       fetchEquipments(selectedLabId);
     } else {
-      setEquipments([]); // Clear equipments if no lab is selected
-      setSelectedEquipmentId(""); // Reset selected equipment
+      setEquipments([]);
+      setSelectedEquipmentId("");
     }
   }, [selectedLabId]);
 
-  // Automatically fetch equipment data when an equipment is selected
   useEffect(() => {
     if (selectedEquipmentId) {
       fetchEquipmentData(selectedEquipmentId);
     } else {
-      setMonthlyCounts([]); // Clear monthly counts if no equipment is selected
+      setMonthlyCounts([]);
     }
   }, [selectedEquipmentId]);
 
   return (
-    <div className="min-h-screen w-full bg-[#202652] flex flex-col items-center justify-center">
+    <div className="min-h-screen w-svw bg-[#202652] flex flex-col items-center justify-center">
       <p className="text-white text-[25px] font-semibold p-4">Admin Analytics Dashboard</p>
 
-      {/* Styled Selection for Labs */}
+      <div className="flex flex-row items-center">
+        <LabReservationsPieChart analyticsData={analyticsData} totalCount={totalCount} />
+
+        <MostReservedEquipment mostReserved={mostReserved} />
+      </div>
+      <div>
+        <MonthlyReservationsBarChart />
+      </div>
+
       <div className="flex flex-row items-center justify-center bg-[#3C4D71] rounded-[40px] p-4 mb-6">
         <label className="px-2 text-white">Select Lab</label>
         <select
@@ -144,13 +165,12 @@ const AdminAnalytics = () => {
         </select>
       </div>
 
-      {/* Styled Selection for Equipment */}
       <div className="flex flex-row items-center justify-center bg-[#3C4D71] rounded-[40px] p-4 mb-6">
         <label className="px-2 text-white">Select Equipment</label>
         <select
           onChange={(e) => setSelectedEquipmentId(e.target.value)}
           value={selectedEquipmentId}
-          disabled={!selectedLabId} // Disable when no lab is selected
+          disabled={!selectedLabId}
           className={`bg-[#3C4D71] rounded-l-[30px] text-center text-[20px] shadow-lg shadow-[#32405e] text-white ${
             !selectedLabId ? "cursor-not-allowed" : ""
           }`}
@@ -164,35 +184,6 @@ const AdminAnalytics = () => {
         </select>
       </div>
 
-      {/* Styled Year and Month Inputs */}
-      <div className="flex flex-row items-center justify-center bg-[#3C4D71] rounded-[40px] p-4 mb-6">
-        <label className="px-2 text-white">Select Year and Month</label>
-        <input
-          type="number"
-          value={year}
-          onChange={(e) => setYear(e.target.value)}
-          placeholder="Year"
-          min="2020"
-          className="bg-[#3C4D71] rounded-l-[30px] text-center text-[20px] shadow-lg shadow-[#32405e] text-white px-2"
-        />
-        <input
-          type="number"
-          value={month}
-          onChange={(e) => setMonth(e.target.value)}
-          placeholder="Month"
-          min="1"
-          max="12"
-          className="bg-[#3C4D71] rounded-l-[30px] text-center text-[20px] shadow-lg shadow-[#32405e] text-white px-2"
-        />
-        <div
-          className="px-4 text-center text-[20px] bg-blue-300 rounded-r-[30px] cursor-pointer shadow-[#32405e] shadow-lg"
-          onClick={fetchAnalytics}
-        >
-          Get Analytics
-        </div>
-      </div>
-
-      {/* Visualization Section as it was */}
       <div>
         <h2 className="text-white text-[20px] font-semibold py-4">Analytics Data</h2>
         {analyticsData.map((data, index) => (
@@ -204,29 +195,10 @@ const AdminAnalytics = () => {
           </div>
         ))}
       </div>
+      <MonthlyEquipmentBarChart monthlyCounts={monthlyCounts} />
 
-      <div>
-        <h2 className="text-white text-[20px] font-semibold py-4">Monthly Equipment Data</h2>
-        {monthlyCounts.length > 0 ? (
-          <BarChart
-            xAxis={[{ dataKey: "month", scaleType: "band" }]} // Provide xAxis with dataKey
-            series={[{ dataKey: "count", label: "Count" }]} // Use series to provide data
-            dataset={monthlyCounts} // Use dataset to provide data
-            width={600}
-            height={400}
-          />
-        ) : (
-          <p>No data available for the selected equipment.</p>
-        )}
-      </div>
-
-      {loading && (
-        <div className="h-[800px] w-full bg-[#202652] flex justify-center items-center relative flex-col ">
-          <span className="loading loading-spinner text-info w-12 h-12"></span>
-          <p className="text-[30px] font-semibold text-white p-2">Loading</p>
-        </div>
-      )}
-      {error && <p>{error}</p>}
+      {loading && <p>Loading...</p>}
+      {error && <p className="text-red-400">{error}</p>}
     </div>
   );
 };
