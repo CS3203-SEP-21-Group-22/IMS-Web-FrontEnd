@@ -11,9 +11,9 @@ const MostReservedEquipment = ({ mostReserved }) => {
               <p key={index} className="px-2 text-[20px]">
                 {item.name}
               </p>
-              <div key={index} className="flex flex-col items-start justify-center">
-                <p> {item.count} reservations</p>
-                <p>{item.labName}</p>
+              <div key={index} className="flex flex-col items-start justify-center p-8">
+                <p className="text-[15px]"> {item.count} reservations</p>
+                <p className="text-[15px]">{item.labName}</p>
               </div>
             </div>
           ))

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { BarChart } from "@mui/x-charts";
-import { colors } from "@mui/material";
 
 const MonthlyReservationsBarChart = () => {
   const [monthlyReservations, setMonthlyReservations] = useState([]);
@@ -69,23 +68,43 @@ const MonthlyReservationsBarChart = () => {
       {error && <p className="text-red-400">{error}</p>}
 
       {!loading && !error && monthlyReservations.length > 0 && (
-        <BarChart
-          xAxis={[
-            {
-              scaleType: "band",
-              data: monthlyReservations.map((item) => months[item.month - 1]),
-              label: "Months",
-            },
-          ]}
-          series={[
-            {
-              data: monthlyReservations.map((item) => item.count),
-              label: "Reservations",
-            },
-          ]}
-          width={600}
-          height={400}
-        />
+        <div className="chart-container">
+          <BarChart
+            xAxis={[
+              {
+                scaleType: "band",
+                data: monthlyReservations.map((item) => months[item.month - 1]),
+                label: "Months",
+                tickLabelStyle: {
+                  fill: "#FFFFFF",
+                },
+              },
+            ]}
+            yAxis={[
+              {
+                tickLabelStyle: {
+                  fill: "#FFFFFF",
+                },
+              },
+            ]}
+            series={[
+              {
+                data: monthlyReservations.map((item) => item.count),
+                label: "Reservations",
+              },
+            ]}
+            width={600}
+            height={400}
+            sx={{
+              "& .MuiChart-axis": {
+                stroke: "#FFFFFF",
+              },
+              "& .MuiChart-tick": {
+                stroke: "#FFFFFF",
+              },
+            }}
+          />
+        </div>
       )}
     </div>
   );

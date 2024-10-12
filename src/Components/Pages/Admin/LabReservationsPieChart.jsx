@@ -28,7 +28,7 @@ const LabReservationsPieChart = ({ analyticsData, totalCount }) => {
   }
 
   return (
-    <div className="text-white">
+    <div className="text-white w-[300px]">
       {analyticsData.length > 0 ? (
         <>
           <PieChart
