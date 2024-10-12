@@ -1,18 +1,20 @@
 import React from "react";
 import topImage from "../styles/images/page1.png";
-import leftIcon from "../styles/images/leftticon.png";
-import rightIcon from "../styles/images/righticon.png";
-import middleIcon from "../styles/images/middleicon.png";
+import appmethod from "../styles/images/appmethods.png";
 import page3 from "../styles/images/page3.png";
 import signinpic from "../styles/images/siginpicnew.png";
 import { Link } from "react-router-dom";
 import Footer from "./Footer";
+import HomePageCard from "./HomePageCard";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEnvelope } from "@fortawesome/free-regular-svg-icons";
+import { faChartSimple, faFileArrowDown, faLock, faQrcode, faSchoolLock } from "@fortawesome/free-solid-svg-icons";
 
 export const Home = () => {
   return (
     <div className="w-full h-[full] bg-[#202652] flex flex-col">
       <div className="grid grid-cols-2 w-full  h-svh gap-0 ">
-        <div className="h-[600px] flex flex-col items-center justify-center gap-10">
+        <div className="h-[600px] flex flex-col items-start justify-center gap-10 pl-[310px]">
           <p className="w-[498px] h-[64px]  text-left font-josefin-sans font-bold text-[40px] leading-[40px] text-white">
             THE PERFECT TOOL TO MANAGE YOUR LAB
           </p>
@@ -26,56 +28,48 @@ export const Home = () => {
             GET STARTED
           </Link>
         </div>
-        <div className="h-[700px] flex flex-col items-center justify-center">
+        <div className="h-[700px] flex flex-col items-center justify-center  pr-[130px]">
           <img src={topImage} alt="top-image" className=" w-[600px] h-[500px]  animate-[scaleAnimation_3s_infinite]" />
         </div>
       </div>
-      <div className="flex flex-row justify-center items-center w-ful relative gap-6 p-6 h-svh">
-        <div className="h-[450px] w-[450px] flex flex-col justify-center items-center bg-[#3C4D71] shadow-lg rounded-[20px] hover:scale-[1.05] transition duration-[200]">
-          <img src={leftIcon} alt="lefticon" className="w-[280px] h-[250px]" />
-          <div className="flex flex-col items-center justify-center mt-4 p-2">
-            <p className=" font-[josefin-sans] font-bold text-[28px] leading-[28px] tracking-[0.06em] text-white  text-center">
-              MOBILE APP
-            </p>
-            <p className=" text-[22px]  text-center text-white mt-2 tracking-[0.06em]">
-              Use LabTracker anywhere, anytime with the use of our mobile app.
-            </p>
-          </div>
-        </div>
-        <div className="h-[450px]  w-[450px] flex flex-col justify-center items-center bg-[#3C4D71] shadow-lg rounded-[20px] hover:scale-[1.05] transition duration-[200]">
-          <img src={middleIcon} alt="middleicon" className="" />
-          <div className="flex flex-col items-center justify-center mt-[-30px] p-2">
-            <p className="font-[josefin-sans] font-bold text-[28px] leading-[28px] tracking-[0.06em] text-white text-center">
-              SMART,SAFE & SECURE
-            </p>
-            <p className=" text-[22px]  text-center text-white mt-2 tracking-[0.06em]">
-              Improved security features to ensure all your records are safe.
-            </p>
-          </div>
-        </div>
-        <div className="h-[450px]  w-[450px] flex flex-col justify-center items-center bg-[#3C4D71] shadow-lg gap-2 rounded-[20px] hover:scale-[1.05] transition duration-[200]">
-          <img src={rightIcon} alt="rightticon" className=" mr-10" />
-          <div className="flex flex-col items-center justify-center mt-[-30px] p-2">
-            <p className="font-[josefin-sans] font-bold text-[28px] leading-[28px] tracking-[0.06em] text-white text-center">
-              NEVER MISS
-            </p>
-            <p className=" text-[22px] text-center text-white mt-2 tracking-[0.06em] ">
-              Never miss a slot with our reliable notification system.
-            </p>
-          </div>
+      <div className="flex flex-col justify-center items-center w-ful relative gap-6 p-6 h-svh">
+        <p className="text-[40px] font-bold tracking-[0.06em] text-white">KEY FEATURES & APPLICATIONS</p>
+        <div className="flex flex-row justify-center items-center w-ful relative gap-6 p-6 h-svh">
+          <HomePageCard
+            image={<FontAwesomeIcon icon={faChartSimple} />}
+            topic="QUICK ANALYTICS"
+            description="Get real time status of your inventory system, and check older records."
+          />
+          <HomePageCard
+            image={<FontAwesomeIcon icon={faSchoolLock} />}
+            topic="SECURITY"
+            description="With a tailor made authentication server and secure transactions with our efficient back-end."
+          />
+          <HomePageCard
+            image={<FontAwesomeIcon icon={faEnvelope} />}
+            topic="EMAIL NOTIFICATIONS"
+            description="Never miss a reservation with our Email-based reliable notification system"
+          />
+          <HomePageCard
+            image={<FontAwesomeIcon icon={faQrcode} />}
+            topic="QR CODE SCANNING"
+            description="Use our QR token system to ensure secure lending and returning of items."
+          />
         </div>
       </div>
-      <div className="flex w-full h-[929px] flex-col justify-center items-center relative">
-        <p className="w-[539px] h-[40px] font-josefin-sans font-bold text-[40px] leading-[40px] tracking-[0.06em] text-white absolute top-[30px]">
-          FLEXIBLE AND DIVERSE
-        </p>
-        <p className="w-[987px] h-[80px]  font-normal text-[28px] leading-[40px] tracking-[0.06em] text-[#E3EDF8] absolute top-[90px] text-center">
-          {" "}
-          From Lab administrators to students , role based profiling makes sure the user gets a simple, easy to use
-          experience.
-        </p>
-        <img src={page3} alt="page3pic" className="w-[790px] h-[509px] absolute top-[100px]" />
-        <img src={signinpic} alt="signinpic" className="w-[320px] h-[400px] absolute left-[150px] top-[300px] " />
+      <div className="flex w-full h-screen flex-col justify-center items-center relative">
+        <p className="  font-bold text-[40px] leading-[40px] tracking-[0.06em] text-white">FLEXIBLE USABILITY</p>
+        <div className="flex flex-row items-center justify-center p-10">
+          <img src={appmethod} alt="page3pic" className="w-[790px] h-[509px] " />
+          <div className="flex flex-col items-start">
+            <p className=" font-normal text-[25px] leading-[40px]  text-white text-left">
+              {" "}
+              Access our application through both our Web application ,and our mobile app interfaces.Seamlessly navigate
+              through the application in any device, at any time.
+            </p>
+            <FontAwesomeIcon icon={faFileArrowDown} className="text-[50px] py-2 text-[#00ABE4] cursor-pointer" />
+          </div>
+        </div>
       </div>
       <Footer />
     </div>
