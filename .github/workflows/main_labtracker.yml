@@ -6,7 +6,7 @@ name: Build and deploy container app to Azure Web App - labtracker
 on:
   push:
     branches:
-      - main
+    - main
   workflow_dispatch:
 
 jobs:
@@ -15,8 +15,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-
     - name: Set up Docker Buildx
+
       uses: docker/setup-buildx-action@v2
 
     - name: Log in to registry
@@ -30,7 +30,7 @@ jobs:
       uses: docker/build-push-action@v3
       with:
         push: true
-        tags: labtrackernew.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_2da0eecbd7364e6b88d567a3d0ef7168 }}/labtracker:${{ github.sha }}
+        tags: labtrackernew.azurecr.io/imsweb:latest
         file: ./Dockerfile
 
   deploy:
@@ -48,4 +48,4 @@ jobs:
         app-name: 'labtracker'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_0461cb8589f84cabafea00f9a5228185 }}
-        images: 'labtrackernew.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_2da0eecbd7364e6b88d567a3d0ef7168 }}/labtracker:${{ github.sha }}'
+        images: 'labtrackernew.azurecr.io/imsweb:latest'
