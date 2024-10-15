@@ -1,22 +1,23 @@
-# Stage 1: Build the React app
+# Use the official node image
 FROM node:20.10.0-alpine as build
 
+# Set the working directory
 WORKDIR /app
 
+# Copy the package.json file
 COPY package.json .
-COPY package-lock.json .
 
+# Install the dependencies
 RUN npm install
 
+# Copy the rest of the files
 COPY . .
 
+# Build the app
 RUN npm run build
 
-# Expose port 80
-EXPOSE 80
+# Expose the port
+EXPOSE 3000
 
-# Set environment variable to run on port 80
-ENV PORT 80
-
-# Start the React app
+# Run the app
 CMD ["npm", "start"]
