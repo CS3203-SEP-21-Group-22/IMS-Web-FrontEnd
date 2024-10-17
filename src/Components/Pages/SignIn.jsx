@@ -63,7 +63,7 @@ function SignIn() {
   useEffect(() => {
     handleLoginRedirect();
   }, []);
-  const redirectUri = "https://ims-api.azure-api.net";
+  const redirectUri = "https://ims-api.azure-api.net/callback";
   const loginUrl = `${AUTH_SERVER_URL}/login?redirectUri=${encodeURIComponent(redirectUri)}&clientId=${AUTH_CLIENT_ID}`;
 
   return (
