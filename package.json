@@ -33,7 +33,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "proxy": "https://auth-server-g6hmcdavbgayb3fe.eastus-01.azurewebsites.net",
+  "proxy": "https://ims-api.azure-api.net",
   "eslintConfig": {
     "extends": [
       "react-app",
