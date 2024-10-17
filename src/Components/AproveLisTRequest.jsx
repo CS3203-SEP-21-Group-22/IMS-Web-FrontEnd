@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import ApproveRequest from "./ApproveRequest";
 import router from "../styles/images/router.png";
 import mouse from "../styles/images/mouse.png";
-import Headers from "./TableHeaders";
 import TableHeaders from "./TableHeaders";
 
 /* Rectangle 12 */

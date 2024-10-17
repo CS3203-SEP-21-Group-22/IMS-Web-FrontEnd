@@ -36,7 +36,7 @@ const ClerkRequestCard = ({ requestData, onRemoveRequest }) => {
   // Fetch the items when the component mounts
   useEffect(() => {
     fetchAvailableItems();
-  }, []);
+  });
 
   // Function to handle item assignment
   const handleAssign = async () => {
@@ -113,7 +113,6 @@ const ClerkRequestCard = ({ requestData, onRemoveRequest }) => {
   const formattedStartDate = formatDate(requestData.startDate);
   const formattedEndDate = formatDate(requestData.endDate);
   const formattedReqDate = formatDate(requestData.createdAt);
-  const formattedAssignedDate = requestData.respondedAt ? formatDate(requestData.respondedAt) : "N/A";
 
   return (
     <div className="w-[487px] h-auto bg-[#3C4D71] rounded-[20px] flex flex-row p-4 items-center justify-center hover:scale-105 transition duration-200">

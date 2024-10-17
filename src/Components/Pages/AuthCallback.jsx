@@ -1,48 +1,47 @@
 import axios from "axios";
-import { jwtDecode } from "jwt-decode";
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const AuthCallback = () => {
   const navigate = useNavigate();
 
-  const getRoleFromServer = async (accessToken) => {
-    try {
-      console.log("Access Token Sent:", accessToken);
-      const { data } = await axios.get("http://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/user/role", {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-      });
-
-      const { role } = data;
-
-      const roleRoutes = {
-        SystemAdmin: "/admin",
-        Clerk: "/officeclerk",
-        Student: "/student",
-        AcademicStaff: "/staff",
-        Technician: "/labTechnician2",
-      };
-
-      if (roleRoutes[role]) {
-        navigate(roleRoutes[role]);
-      } else {
-        console.error("Unknown role");
-        navigate("/login");
-      }
-    } catch (error) {
-      console.error("Failed to fetch role from server", error);
-      navigate("/login");
-    }
-  };
-
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const accessToken = params.get("access_token");
     const refreshToken = params.get("refresh_token");
+
+    const getRoleFromServer = async (accessToken) => {
+      try {
+        console.log("Access Token Sent:", accessToken);
+        const { data } = await axios.get("http://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/user/role", {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+        });
+
+        const { role } = data;
+
+        const roleRoutes = {
+          SystemAdmin: "/admin",
+          Clerk: "/officeclerk",
+          Student: "/student",
+          AcademicStaff: "/staff",
+          Technician: "/labTechnician2",
+        };
+
+        if (roleRoutes[role]) {
+          navigate(roleRoutes[role]);
+        } else {
+          console.error("Unknown role");
+          navigate("/login");
+        }
+      } catch (error) {
+        console.error("Failed to fetch role from server", error);
+        navigate("/login");
+      }
+    };
 
     if (accessToken) {
       localStorage.setItem("access_token", accessToken);

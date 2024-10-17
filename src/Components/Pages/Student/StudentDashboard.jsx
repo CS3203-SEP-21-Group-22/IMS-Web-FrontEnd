@@ -1,11 +1,9 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import checklist from "../../../styles/images/checklist.png";
 import cardreserve from "../../../styles/images/cardreserve.png";
-import laptop from "../../../styles/images/laptop.png";
 import clock from "../../../styles/images/clockk.png";
 import Card from "../../Card";
-import TableBookings from "./TableBookings";
 import axios from "axios";
 
 const StudentDashboard = () => {
@@ -36,6 +34,9 @@ const StudentDashboard = () => {
       setError("Failed to load reservations");
     } finally {
       setLoading(false);
+      console.log("Loading:", loading);
+      console.log("BorrowedItems:", borrowedItems);
+      console.log("ReqItems:", reqItems);
     }
   };
   const fetchBorrowed = async () => {

@@ -34,7 +34,7 @@ const ClerkReserveCard = ({ reservationData }) => {
   // Fetch data when the component is mounted
   useEffect(() => {
     fetchReservedItems();
-  }, []);
+  });
 
   if (error) return <div className="text-red-500">{error}</div>;
 

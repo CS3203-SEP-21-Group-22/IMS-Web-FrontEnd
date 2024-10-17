@@ -117,6 +117,7 @@ const ItemRowUsers = ({ userID, firstName, lastName, contactNumber, email, role 
               SAVE
             </button>
           </td>
+          {error && <td>{error}</td>}
           <td>
             <button onClick={cancelEdit} className="bg-red-500 p-2 rounded text-white">
               CANCEL

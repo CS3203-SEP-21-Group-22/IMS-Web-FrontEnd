@@ -1,9 +1,7 @@
 import React, { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import axios from "axios";
-import LabCard from "../../LabCard";
 import labimage from "../../../styles/images/page3.png";
-import ClerkLabCard from "./ClerkLabCard";
 import ClerkEquipmentCard from "./ClerkEquipmentCard";
 
 export const ClerkEquipment = () => {

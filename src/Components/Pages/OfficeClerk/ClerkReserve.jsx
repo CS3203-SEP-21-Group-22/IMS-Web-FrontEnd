@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import checklist from "../../../styles/images/checklist.png";
 import cardreserve from "../../../styles/images/cardreserve.png";
 import repair from "../../../styles/images/repairstat.png";
@@ -8,17 +8,8 @@ import Card from "../../Card";
 import axios from "axios";
 
 const ClerkReserve = () => {
-  const [expandedBox1, setExpandedBox1] = useState(false);
-  const [expandedBox2, setExpandedBox2] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate();
-
-  const toggleBox1 = () => {
-    setExpandedBox1(!expandedBox1);
-    if (expandedBox2) setExpandedBox2(false); // Ensure only one box is expanded at a time
-  };
-
-  const columns = ["ITEM NAME", "SERIAL NO", "LAB", "DATE REQUESTED"];
 
   const fetchRequested = async () => {
     setError(null);

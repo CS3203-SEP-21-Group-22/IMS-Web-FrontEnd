@@ -33,6 +33,10 @@ const AdminDashboard = () => {
       setError("Failed to load analytics");
     } finally {
       setLoading(false);
+      console.log("Loading:", loading); // Log the loading state to the console
+      console.log("Error:", error); // Log the error state to the console
+      console.log("Labs:", labs); // Log the labs state to the console
+      console.log("Users:", users); // Log the users state to the console
     }
   };
 

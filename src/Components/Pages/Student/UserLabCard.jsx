@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 const UserLabCard = ({ imgsrc, altname, name, imgWidth = "200px", imgHeight = "200px", labId }) => {
   const [error, setError] = useState(null);
-  console.log(name);
+  console.log(error);
   const navigate = useNavigate();
 
   const fetchLabEquipment = async () => {
@@ -27,7 +27,6 @@ const UserLabCard = ({ imgsrc, altname, name, imgWidth = "200px", imgHeight = "2
     }
   };
 
-  const handleClick = () => {};
   return (
     <div
       className="w-[297px] h-[278px] bg-[#3C4D71] rounded-[60px] flex flex-col justify-center items-center relative cursor-pointer hover:scale-[1.1] transition duration-200 shadow-lg"

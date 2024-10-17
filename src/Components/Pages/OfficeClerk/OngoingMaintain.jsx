@@ -5,8 +5,7 @@ const OngoingMaintain = () => {
   const [ongoingMaintenance, setOngoingMaintenance] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [expandedItem, setExpandedItem] = useState(null);
-  const [additionalDetails, setAdditionalDetails] = useState(null);
+  const [expandedItem] = useState(null);
   const [showCreateForm, setShowCreateForm] = useState(false);
 
   // Form Input States
@@ -17,7 +16,7 @@ const OngoingMaintain = () => {
   const [items, setItems] = useState([]);
   const [itemId, setItemId] = useState("");
 
-  const [selectedItem, setSelectedItem] = useState("");
+  const [selectedItem] = useState("");
 
   const [selectedLab, setSelectedLab] = useState("");
 
@@ -146,12 +145,12 @@ const OngoingMaintain = () => {
   };
 
   const handleItemChange = (e) => {
-    const itemId = e.target.value;
-    setItemId(itemId);
-    const selectednewItem = items.find((item) => item.itemId === Number(itemId));
+    const itemid = e.target.value;
+    setItemId(itemid);
+    const selectednewItem = items.find((item) => item.itemId === Number(itemid));
     console.log("selected item:", selectednewItem);
-
-    fetchItem(itemId);
+    console.log("selected item id:", itemId);
+    fetchItem(itemid);
   };
 
   const handleTechnicianChange = (e) => {
@@ -199,7 +198,7 @@ const OngoingMaintain = () => {
 
     try {
       console.log("maintenance req:", newMaintenance);
-      const response = await axios.post(
+      await axios.post(
         "http://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/clerk/maintenance",
         newMaintenance,
         {

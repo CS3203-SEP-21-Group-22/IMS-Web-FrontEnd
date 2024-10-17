@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { BarChart } from "@mui/x-charts";
 import LabReservationsPieChart from "./LabReservationsPieChart";
 import MonthlyEquipmentBarChart from "./MonthlyEquipmentBarChart";
 import MonthlyReservationsBarChart from "./MonthlyReservationsBarChart";
@@ -24,6 +23,8 @@ const AdminAnalytics = () => {
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
   const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth() + 1);
   const [showDateSelection, setShowDateSelection] = useState(false);
+
+  console.log("Equipment Data:", equipmentData);
 
   // Fetch labs
   const fetchLabs = async () => {
@@ -88,32 +89,6 @@ const AdminAnalytics = () => {
     }
   };
 
-  const fetchEquipmentData = async (equipmentId) => {
-    setLoading(true);
-    try {
-      const response = await axios.get(
-        `http://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/admin/reservations/${equipmentId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-          },
-        },
-      );
-      setEquipmentData(response.data);
-
-      const formattedData = response.data.map((item) => ({
-        month: item.month,
-        count: item.count,
-      }));
-      setMonthlyCounts(formattedData);
-    } catch (error) {
-      console.error("Error fetching equipment data", error);
-      setError("Failed to load equipment data");
-    } finally {
-      setLoading(false);
-    }
-  };
-
   useEffect(() => {
     fetchLabs();
     fetchAnalytics(selectedYear, selectedMonth); // Automatically fetch analytics for the current month and year on component mount
@@ -130,6 +105,31 @@ const AdminAnalytics = () => {
 
   useEffect(() => {
     if (selectedEquipmentId) {
+      const fetchEquipmentData = async (equipmentId) => {
+        setLoading(true);
+        try {
+          const response = await axios.get(
+            `http://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/admin/reservations/${equipmentId}`,
+            {
+              headers: {
+                Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+              },
+            },
+          );
+          setEquipmentData(response.data);
+
+          const formattedData = response.data.map((item) => ({
+            month: item.month,
+            count: item.count,
+          }));
+          setMonthlyCounts(formattedData);
+        } catch (error) {
+          console.error("Error fetching equipment data", error);
+          setError("Failed to load equipment data");
+        } finally {
+          setLoading(false);
+        }
+      };
       fetchEquipmentData(selectedEquipmentId);
     } else {
       setMonthlyCounts([]);

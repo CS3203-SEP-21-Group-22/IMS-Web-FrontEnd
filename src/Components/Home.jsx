@@ -1,14 +1,12 @@
 import React from "react";
 import topImage from "../styles/images/page1.png";
 import appmethod from "../styles/images/appmethods.png";
-import page3 from "../styles/images/page3.png";
-import signinpic from "../styles/images/siginpicnew.png";
 import { Link } from "react-router-dom";
 import Footer from "./Footer";
 import HomePageCard from "./HomePageCard";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope } from "@fortawesome/free-regular-svg-icons";
-import { faChartSimple, faFileArrowDown, faLock, faQrcode, faSchoolLock } from "@fortawesome/free-solid-svg-icons";
+import { faChartSimple, faFileArrowDown, faQrcode, faSchoolLock } from "@fortawesome/free-solid-svg-icons";
 
 export const Home = () => {
   return (

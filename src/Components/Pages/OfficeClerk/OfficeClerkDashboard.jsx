@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import checklist from "../../../styles/images/checklist.png";
 import cardreserve from "../../../styles/images/cardreserve.png";
 import repair from "../../../styles/images/repairstat.png";
@@ -8,32 +8,11 @@ import Card from "../../Card";
 import axios from "axios";
 
 const OfficeClerkDashboard = () => {
-  const [expandedBox1, setExpandedBox1] = useState(false);
-  const [expandedBox2, setExpandedBox2] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const toggleBox1 = () => {
     navigate("/clerk-reserve");
-  };
-
-  const columns = ["ITEM NAME", "SERIAL NO", "LAB", "DATE REQUESTED"];
-
-  const fetchEquipment = async () => {
-    setError(null);
-    try {
-      const response = await axios.get("http://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/user/labs", {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-        },
-      });
-
-      // navigate("/view-labs", { state: { labs: response.data } });
-      console.log("Fetched labs:", response.data);
-    } catch (errror) {
-      console.error("Error when fetching res", error);
-      setError("Failed to load reservations");
-    }
   };
 
   const fetchLabs = async () => {

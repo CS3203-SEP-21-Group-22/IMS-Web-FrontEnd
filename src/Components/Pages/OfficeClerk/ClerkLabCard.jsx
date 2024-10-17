@@ -5,19 +5,8 @@ import { useNavigate } from "react-router-dom";
 
 const ClerkLabCard = ({ imgsrc, altname, labData, imgWidth = "200px", imgHeight = "200px", onLabDelete }) => {
   const [error, setError] = useState(null);
-  const [editMode, setEditMode] = useState(false);
-  const [editLabData, setEditLabData] = useState({
-    labName: labData.labName,
-    labCode: labData.labCode,
-    imageURL: labData.imageURL,
-  });
 
   const navigate = useNavigate();
-
-  const handleInput = (e) => {
-    const { name, value } = e.target;
-    setEditLabData((prev) => ({ ...prev, [name]: value }));
-  };
 
   const fetchEquipment = async () => {
     setError(null);
