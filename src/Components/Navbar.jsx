@@ -100,6 +100,97 @@ export const Navbar = () => {
               LOGIN
             </Link>
           )}
+
+          {location.pathname == "/admin" && (
+            <div className="flex flex-col justify-center items-center">
+              <button onClick={toggleBox}>
+                <img src={walrus} className="h-[40px] w-[40px] cursor-pointer" />
+              </button>
+
+              {box && (
+                <div className="top-14 absolute w-[100px] h-[60px] bg-[#202652] flex flex-col justify-center">
+                  <Link to="/user" className="text-white text-sm hover:bg-[#3C4D71] h-[30px]">
+                    VIEW PROFILE
+                  </Link>
+                  <p className="text-white text-sm cursor-pointer hover:bg-[#3C4D71] h-[30px]" onClick={handleLogOut}>
+                    LOG OUT
+                  </p>
+                </div>
+              )}
+            </div>
+          )}
+          {location.pathname == "/view-labs" && (
+            <div className="flex flex-col justify-center items-center">
+              <button onClick={toggleBox}>
+                <img src={walrus} className="h-[40px] w-[40px] cursor-pointer" />
+              </button>
+
+              {box && (
+                <div className="top-14 absolute w-[100px] h-[60px] bg-[#202652] flex flex-col justify-center">
+                  <Link to="/user" className="text-white text-sm hover:bg-[#3C4D71] h-[30px]">
+                    VIEW PROFILE
+                  </Link>
+                  <p className="text-white text-sm cursor-pointer hover:bg-[#3C4D71] h-[30px]" onClick={handleLogOut}>
+                    LOG OUT
+                  </p>
+                </div>
+              )}
+            </div>
+          )}
+          {location.pathname == "/admin-analytics" && (
+            <div className="flex flex-col justify-center items-center">
+              <button onClick={toggleBox}>
+                <img src={walrus} className="h-[40px] w-[40px] cursor-pointer" />
+              </button>
+
+              {box && (
+                <div className="top-14 absolute w-[100px] h-[60px] bg-[#202652] flex flex-col justify-center">
+                  <Link to="/user" className="text-white text-sm hover:bg-[#3C4D71] h-[30px]">
+                    VIEW PROFILE
+                  </Link>
+                  <p className="text-white text-sm cursor-pointer hover:bg-[#3C4D71] h-[30px]" onClick={handleLogOut}>
+                    LOG OUT
+                  </p>
+                </div>
+              )}
+            </div>
+          )}
+          {location.pathname == "/officeclerk" && (
+            <div className="flex flex-col justify-center items-center">
+              <button onClick={toggleBox}>
+                <img src={walrus} className="h-[40px] w-[40px] cursor-pointer" />
+              </button>
+
+              {box && (
+                <div className="top-14 absolute w-[100px] h-[60px] bg-[#202652] flex flex-col justify-center">
+                  <Link to="/user" className="text-white text-sm hover:bg-[#3C4D71] h-[30px]">
+                    VIEW PROFILE
+                  </Link>
+                  <p className="text-white text-sm cursor-pointer hover:bg-[#3C4D71] h-[30px]" onClick={handleLogOut}>
+                    LOG OUT
+                  </p>
+                </div>
+              )}
+            </div>
+          )}
+          {location.pathname == "/labTechnician2" && (
+            <div className="flex flex-col justify-center items-center">
+              <button onClick={toggleBox}>
+                <img src={walrus} className="h-[40px] w-[40px] cursor-pointer" />
+              </button>
+
+              {box && (
+                <div className="top-14 absolute w-[100px] h-[60px] bg-[#202652] flex flex-col justify-center">
+                  <Link to="/user" className="text-white text-sm hover:bg-[#3C4D71] h-[30px]">
+                    VIEW PROFILE
+                  </Link>
+                  <p className="text-white text-sm cursor-pointer hover:bg-[#3C4D71] h-[30px]" onClick={handleLogOut}>
+                    LOG OUT
+                  </p>
+                </div>
+              )}
+            </div>
+          )}
           {location.pathname == "/student" && (
             <div className="flex flex-col justify-center items-center">
               <button onClick={toggleBox}>
@@ -118,27 +209,84 @@ export const Navbar = () => {
               )}
             </div>
           )}
-          {location.pathname == "/Officeclerk" && (
-            <div className="flex flex-col justify-center items-center">
+          {location.pathname == "/student-borrowed" && (
+            <div className="flex flex-row justify-center items-center">
+              <Link
+                to="/student"
+                className="mr-14 tracking-[0.06em] text-[#FFFFFF] cursor-pointer font-[Josefin_Sans]  text-[13px]"
+              >
+                DASHBOARD
+              </Link>
               <button onClick={toggleBox}>
                 <img src={walrus} className="h-[40px] w-[40px] cursor-pointer" />
               </button>
 
               {box && (
                 <div className="top-14 absolute w-[100px] h-[60px] bg-[#202652] flex flex-col justify-center">
-                  <Link to="/officeclerk-profile" className="text-white text-sm hover:bg-[#3C4D71] h-[30px]">
+                  <Link to="/user" className="text-white text-sm hover:bg-[#3C4D71] h-[30px]">
                     VIEW PROFILE
                   </Link>
-                  <p className="text-white text-sm cursor-pointer hover:bg-[#3C4D71] h-[30px]">LOG OUT</p>
+                  <p className="text-white text-sm cursor-pointer hover:bg-[#3C4D71] h-[30px]" onClick={handleLogOut}>
+                    LOG OUT
+                  </p>
                 </div>
               )}
             </div>
           )}
+          {location.pathname == "/student-equipment" && (
+            <div className="flex flex-row justify-center items-center">
+              <Link
+                to="/student"
+                className="mr-14 tracking-[0.06em] text-[#FFFFFF] cursor-pointer font-[Josefin_Sans]  text-[13px]"
+              >
+                DASHBOARD
+              </Link>
+              <button onClick={toggleBox}>
+                <img src={walrus} className="h-[40px] w-[40px] cursor-pointer" />
+              </button>
+
+              {box && (
+                <div className="top-14 absolute w-[100px] h-[60px] bg-[#202652] flex flex-col justify-center">
+                  <Link to="/user" className="text-white text-sm hover:bg-[#3C4D71] h-[30px]">
+                    VIEW PROFILE
+                  </Link>
+                  <p className="text-white text-sm cursor-pointer hover:bg-[#3C4D71] h-[30px]" onClick={handleLogOut}>
+                    LOG OUT
+                  </p>
+                </div>
+              )}
+            </div>
+          )}
+          {location.pathname == "/student-reservation" && (
+            <div className="flex flex-row justify-center items-center">
+              <Link
+                to="/student"
+                className="mr-14 tracking-[0.06em] text-[#FFFFFF] cursor-pointer font-[Josefin_Sans]  text-[13px]"
+              >
+                DASHBOARD
+              </Link>
+              <button onClick={toggleBox}>
+                <img src={walrus} className="h-[40px] w-[40px] cursor-pointer" />
+              </button>
+
+              {box && (
+                <div className="top-14 absolute w-[100px] h-[60px] bg-[#202652] flex flex-col justify-center">
+                  <Link to="/user" className="text-white text-sm hover:bg-[#3C4D71] h-[30px]">
+                    VIEW PROFILE
+                  </Link>
+                  <p className="text-white text-sm cursor-pointer hover:bg-[#3C4D71] h-[30px]" onClick={handleLogOut}>
+                    LOG OUT
+                  </p>
+                </div>
+              )}
+            </div>
+          )}
+
           {location.pathname == "/student-select" && (
             <div className="flex flex-row justify-center items-center">
               <Link
                 to="/student"
-                className="mr-14 tracking-[0.06em] text-[#FFFFFF] cursor-pointer font-[Josefin_Sans]  text-[10px]"
+                className="mr-14 tracking-[0.06em] text-[#FFFFFF] cursor-pointer font-[Josefin_Sans]  text-[13px]"
               >
                 DASHBOARD
               </Link>
@@ -206,23 +354,6 @@ export const Navbar = () => {
               {box && (
                 <div className="top-14 absolute w-[100px] h-[60px] bg-[#202652] flex flex-col justify-center">
                   <Link to="/staff-profile" className="text-white text-sm hover:bg-[#3C4D71] h-[30px]">
-                    VIEW PROFILE
-                  </Link>
-                  <p className="text-white text-sm cursor-pointer hover:bg-[#3C4D71] h-[30px]">LOG OUT</p>
-                </div>
-              )}
-            </div>
-          )}
-
-          {location.pathname == "/admin" && (
-            <div className="flex flex-col justify-center items-center">
-              <button onClick={toggleBox}>
-                <img src={walrus} className="h-[40px] w-[40px] cursor-pointer" />
-              </button>
-
-              {box && (
-                <div className="top-14 absolute w-[100px] h-[60px] bg-[#202652] flex flex-col justify-center">
-                  <Link to="/admin-profile" className="text-white text-sm hover:bg-[#3C4D71] h-[30px]">
                     VIEW PROFILE
                   </Link>
                   <p className="text-white text-sm cursor-pointer hover:bg-[#3C4D71] h-[30px]">LOG OUT</p>

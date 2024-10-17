@@ -19,7 +19,7 @@ import { OfficeClerkProfile } from './Components/Pages/OfficeClerk/OfficeClerkPr
 import { StaffRequest } from './Components/Pages/AcaStaff/StaffRequest';
 import  TechAssign  from './Components/Pages/TechAssign';
 import {UserProfiles} from './Components/Pages/UserProfileView';
-import {ViewLabs} from './Components/Pages/ViewLabs';
+import {ViewLabs} from './Components/Pages/Admin/ViewLabs';
 import SendRequest from './Components/Pages/SendRequest';
 import Testpage from './Components/Pages/Testpage';
 import TechnicianReq from './Components/Pages/LabTechnician/TechnicianReq';
@@ -67,7 +67,6 @@ function App() {
             <Route path='/admin' element={<AdminDashboard/>}/>
             <Route path='/admin-profile' element={<AdminProfile/>}/>
             <Route path='/admin-analytics' element={<AdminAnalytics/>}/>
-
             <Route path='/officeclerk-profile' element={<OfficeClerkProfile/>}/>
             <Route path='/staff-request' element={<StaffRequest/>}/>
             <Route path='/user-profiles' element={<UserProfiles/>}/>

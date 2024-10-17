@@ -104,7 +104,12 @@ const LabCard = ({ imgsrc, altname, labData, imgWidth = "200px", imgHeight = "20
         </>
       ) : (
         <>
-          <img className="object-contain" src={imgsrc} alt={altname} style={{ width: imgWidth, height: imgHeight }} />
+          <img
+            className="object-contain"
+            src={labData.imageUrl}
+            alt={altname}
+            style={{ width: imgWidth, height: imgHeight }}
+          />
           <p className="font-josefin-sans font-normal text-[20px] text-white leading-[20px] tracking-[0.06em] ">
             {labData.labName}
           </p>
