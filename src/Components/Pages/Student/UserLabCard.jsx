@@ -12,7 +12,7 @@ const UserLabCard = ({ imgsrc, altname, name, imgWidth = "200px", imgHeight = "2
     try {
       console.log("Lab id:", labId);
       const response = await axios.get(
-        `http://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/user/equipments?labId=${labId}`,
+        `https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/user/equipments?labId=${labId}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("access_token")}`,

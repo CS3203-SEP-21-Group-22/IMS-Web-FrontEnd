@@ -20,7 +20,7 @@ const EquipmentCard = ({ imgsrc, altname, labData, imgWidth = "200px", imgHeight
     setError(null);
     try {
       const response = await axios.delete(
-        `http://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/admin/labs/${labData.labId}`,
+        `https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/admin/labs/${labData.labId}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("access_token")}`,
@@ -42,7 +42,7 @@ const EquipmentCard = ({ imgsrc, altname, labData, imgWidth = "200px", imgHeight
     setError(null);
     try {
       const response = await axios.patch(
-        `http://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/admin/labs/${labData.labId}`,
+        `https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/admin/labs/${labData.labId}`,
         {
           labName: editLabData.labName,
           labCode: editLabData.labCode,

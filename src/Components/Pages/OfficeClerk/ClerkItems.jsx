@@ -19,7 +19,7 @@ export const ClerkItems = () => {
       setError(null);
       try {
         const response = await axios.get(
-          `http://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/user/items?equipmentId=${equipmentId}`,
+          `https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/user/items?equipmentId=${equipmentId}`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("access_token")}`,
@@ -50,7 +50,7 @@ export const ClerkItems = () => {
 
     try {
       const response = await axios.post(
-        "http://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/clerk/items",
+        "https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/clerk/items",
         newItemData,
         {
           headers: {

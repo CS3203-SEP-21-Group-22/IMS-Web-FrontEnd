@@ -29,7 +29,7 @@ const AdminAnalytics = () => {
   // Fetch labs
   const fetchLabs = async () => {
     try {
-      const response = await axios.get("http://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/user/labs", {
+      const response = await axios.get("https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/user/labs", {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("access_token")}`,
         },
@@ -46,7 +46,7 @@ const AdminAnalytics = () => {
     setLoading(true);
     try {
       const response = await axios.get(
-        `http://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/user/equipments?labId=${labId}`,
+        `https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/user/equipments?labId=${labId}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("access_token")}`,
@@ -66,7 +66,7 @@ const AdminAnalytics = () => {
     setLoading(true);
     try {
       const response = await axios.get(
-        `http://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/admin/reservations?year=${year}&month=${month}`,
+        `https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/admin/reservations?year=${year}&month=${month}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("access_token")}`,
@@ -109,7 +109,7 @@ const AdminAnalytics = () => {
         setLoading(true);
         try {
           const response = await axios.get(
-            `http://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/admin/reservations/${equipmentId}`,
+            `https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/admin/reservations/${equipmentId}`,
             {
               headers: {
                 Authorization: `Bearer ${localStorage.getItem("access_token")}`,

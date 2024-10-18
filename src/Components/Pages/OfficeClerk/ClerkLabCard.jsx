@@ -13,7 +13,7 @@ const ClerkLabCard = ({ imgsrc, altname, labData, imgWidth = "200px", imgHeight 
     try {
       console.log(labData.labId);
       const response = await axios.get(
-        `http://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/user/equipments?labId=${labData.labId}`,
+        `https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/user/equipments?labId=${labData.labId}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("access_token")}`,

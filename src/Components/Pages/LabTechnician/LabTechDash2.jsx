@@ -20,7 +20,7 @@ const LabTechDash2 = () => {
     setError(null);
     try {
       const response = await axios.get(
-        "http://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/technician/maintenance?completed=false",
+        "https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/technician/maintenance?completed=false",
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("access_token")}`,

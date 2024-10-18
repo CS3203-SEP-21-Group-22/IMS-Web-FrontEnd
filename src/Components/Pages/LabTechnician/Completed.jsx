@@ -13,7 +13,7 @@ export const Completed = () => {
     setError(null);
     try {
       const response = await axios.get(
-        "http://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/technician/maintenance?completed=true",
+        "https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/technician/maintenance?completed=true",
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("access_token")}`,
@@ -35,7 +35,7 @@ export const Completed = () => {
   const fetchExtraDetails = async (newmaintenanceId) => {
     try {
       const response = await axios.get(
-        `http://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/technician/maintenance/${newmaintenanceId}`,
+        `https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/technician/maintenance/${newmaintenanceId}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("access_token")}`,

@@ -19,7 +19,7 @@ const StudentDashboard = () => {
     setError(null);
     try {
       const response = await axios.get(
-        "http://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/student/reservations?borrowed=false",
+        "https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/student/reservations?borrowed=false",
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("access_token")}`,
@@ -44,7 +44,7 @@ const StudentDashboard = () => {
     setError(null);
     try {
       const response = await axios.get(
-        "http://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/student/reservations?borrowed=true",
+        "https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/student/reservations?borrowed=true",
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("access_token")}`,
@@ -64,7 +64,7 @@ const StudentDashboard = () => {
   const fetchLabs = async () => {
     setError(null);
     try {
-      const response = await axios.get(`http://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/user/labs`, {
+      const response = await axios.get(`https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/user/labs`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("access_token")}`,
         },

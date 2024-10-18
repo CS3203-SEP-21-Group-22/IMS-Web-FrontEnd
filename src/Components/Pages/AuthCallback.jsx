@@ -13,13 +13,16 @@ const AuthCallback = () => {
     const getRoleFromServer = async (accessToken) => {
       try {
         console.log("Access Token Sent:", accessToken);
-        const { data } = await axios.get("http://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/user/role", {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-            Accept: "application/json",
-            "Content-Type": "application/json",
+        const { data } = await axios.get(
+          "https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/user/role",
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
           },
-        });
+        );
 
         const { role } = data;
 

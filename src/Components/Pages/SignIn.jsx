@@ -9,7 +9,7 @@ function SignIn() {
   const getRoleFromServer = async (access_token, refresh_token, token) => {
     try {
       const { data } = await axios.get("/api/user/role", {
-        baseURL: "http://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net",
+        baseURL: "https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net",
         headers: {
           Authorization: `Bearer ${token}`,
           Accept: "application/json",

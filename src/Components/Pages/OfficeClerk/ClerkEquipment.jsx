@@ -35,7 +35,7 @@ export const ClerkEquipment = () => {
     try {
       console.log(equipmentData);
       const response = await axios.post(
-        "http://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/clerk/equipments",
+        "https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/clerk/equipments",
         equipmentData,
         {
           headers: {
