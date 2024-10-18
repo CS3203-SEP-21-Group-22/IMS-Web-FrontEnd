@@ -47,7 +47,7 @@ function SignIn() {
     handleLoginRedirect();
   });
 
-  const redirectUri = "https://ims-api.azure-api.net";
+  const redirectUri = "https://lemon-desert-0071c661e.5.azurestaticapps.net";
   const loginUrl = `${AUTH_SERVER_URL}/login?redirectUri=${encodeURIComponent(redirectUri)}&clientId=${AUTH_CLIENT_ID}`;
 
   return (
