@@ -18,7 +18,7 @@ const ClerkRequestCard = ({ requestData, onRemoveRequest }) => {
     setError(null);
     try {
       const response = await axios.get(
-        `http://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/user/items?equipmentId=${requestData.equipmentId}`,
+        `https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/user/items?equipmentId=${requestData.equipmentId}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("access_token")}`,
@@ -36,7 +36,7 @@ const ClerkRequestCard = ({ requestData, onRemoveRequest }) => {
   // Fetch the items when the component mounts
   useEffect(() => {
     fetchAvailableItems();
-  }, []);
+  });
 
   // Function to handle item assignment
   const handleAssign = async () => {
@@ -57,7 +57,7 @@ const ClerkRequestCard = ({ requestData, onRemoveRequest }) => {
 
     try {
       const response = await axios.patch(
-        `http://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/clerk/reservations/${requestData.reservationId}`,
+        `https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/clerk/reservations/${requestData.reservationId}`,
         payload,
         {
           headers: {
@@ -92,7 +92,7 @@ const ClerkRequestCard = ({ requestData, onRemoveRequest }) => {
 
     try {
       const response = await axios.patch(
-        `http://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/clerk/reservations/${requestData.reservationId}`,
+        `https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/clerk/reservations/${requestData.reservationId}`,
         payload,
         {
           headers: {
@@ -113,7 +113,6 @@ const ClerkRequestCard = ({ requestData, onRemoveRequest }) => {
   const formattedStartDate = formatDate(requestData.startDate);
   const formattedEndDate = formatDate(requestData.endDate);
   const formattedReqDate = formatDate(requestData.createdAt);
-  const formattedAssignedDate = requestData.respondedAt ? formatDate(requestData.respondedAt) : "N/A";
 
   return (
     <div className="w-[487px] h-auto bg-[#3C4D71] rounded-[20px] flex flex-row p-4 items-center justify-center hover:scale-105 transition duration-200">

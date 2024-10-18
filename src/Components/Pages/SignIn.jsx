@@ -3,14 +3,13 @@ import signindesign from "../../styles/images/signindesign.png";
 import { AUTH_CLIENT_ID, AUTH_SERVER_URL } from "../../config";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { jwtDecode } from "jwt-decode";
 
 function SignIn() {
   const navigate = useNavigate();
   const getRoleFromServer = async (access_token, refresh_token, token) => {
     try {
       const { data } = await axios.get("/api/user/role", {
-        baseURL: "http://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net",
+        baseURL: "https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net",
         headers: {
           Authorization: `Bearer ${token}`,
           Accept: "application/json",
@@ -27,22 +26,6 @@ function SignIn() {
       };
 
       if (roleRoutes[role]) {
-        const decodedToken = jwtDecode(access_token);
-        const userProfile = {
-          id: 0,
-
-          firstName: decodedToken.firstName,
-
-          lastName: decodedToken.lastName,
-
-          email: decodedToken.email,
-          role: role,
-
-          contactNumber: decodedToken.contactNumber,
-        };
-        // await storeUserProfile(userProfile);
-        // await storeTokens(access_token, refresh_token, token);
-        // await setLoginStatusLoggedIn();
         navigate(roleRoutes[role]);
       } else {
         console.error("Unknown role");
@@ -62,8 +45,9 @@ function SignIn() {
 
   useEffect(() => {
     handleLoginRedirect();
-  }, []);
-  const redirectUri = "http://localhost:3000/callback";
+  });
+
+  const redirectUri = "https://ims-api.azure-api.net";
   const loginUrl = `${AUTH_SERVER_URL}/login?redirectUri=${encodeURIComponent(redirectUri)}&clientId=${AUTH_CLIENT_ID}`;
 
   return (

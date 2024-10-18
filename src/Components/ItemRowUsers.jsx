@@ -31,7 +31,7 @@ const ItemRowUsers = ({ userID, firstName, lastName, contactNumber, email, role 
       console.log(userID);
 
       const response = await axios.patch(
-        `http://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/admin/users/${userID}`,
+        `https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/admin/users/${userID}`,
         {
           userId: userID,
           firstName: userData.firstName,
@@ -117,6 +117,7 @@ const ItemRowUsers = ({ userID, firstName, lastName, contactNumber, email, role 
               SAVE
             </button>
           </td>
+          {error && <td>{error}</td>}
           <td>
             <button onClick={cancelEdit} className="bg-red-500 p-2 rounded text-white">
               CANCEL

@@ -15,7 +15,7 @@ const MonthlyReservationsBarChart = () => {
     try {
       for (let month = 1; month <= 12; month++) {
         const response = await axios.get(
-          `http://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/admin/reservations?year=${currentYear}&month=${month}`,
+          `https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/admin/reservations?year=${currentYear}&month=${month}`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("access_token")}`,

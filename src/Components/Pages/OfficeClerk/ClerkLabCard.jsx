@@ -5,26 +5,15 @@ import { useNavigate } from "react-router-dom";
 
 const ClerkLabCard = ({ imgsrc, altname, labData, imgWidth = "200px", imgHeight = "200px", onLabDelete }) => {
   const [error, setError] = useState(null);
-  const [editMode, setEditMode] = useState(false);
-  const [editLabData, setEditLabData] = useState({
-    labName: labData.labName,
-    labCode: labData.labCode,
-    imageURL: labData.imageURL,
-  });
 
   const navigate = useNavigate();
-
-  const handleInput = (e) => {
-    const { name, value } = e.target;
-    setEditLabData((prev) => ({ ...prev, [name]: value }));
-  };
 
   const fetchEquipment = async () => {
     setError(null);
     try {
       console.log(labData.labId);
       const response = await axios.get(
-        `http://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/user/equipments?labId=${labData.labId}`,
+        `https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/user/equipments?labId=${labData.labId}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("access_token")}`,

@@ -1,11 +1,9 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import checklist from "../../../styles/images/checklist.png";
 import cardreserve from "../../../styles/images/cardreserve.png";
-import laptop from "../../../styles/images/laptop.png";
 import clock from "../../../styles/images/clockk.png";
 import Card from "../../Card";
-import TableBookings from "./TableBookings";
 import axios from "axios";
 
 const StudentDashboard = () => {
@@ -21,7 +19,7 @@ const StudentDashboard = () => {
     setError(null);
     try {
       const response = await axios.get(
-        "http://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/student/reservations?borrowed=false",
+        "https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/student/reservations?borrowed=false",
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("access_token")}`,
@@ -36,6 +34,9 @@ const StudentDashboard = () => {
       setError("Failed to load reservations");
     } finally {
       setLoading(false);
+      console.log("Loading:", loading);
+      console.log("BorrowedItems:", borrowedItems);
+      console.log("ReqItems:", reqItems);
     }
   };
   const fetchBorrowed = async () => {
@@ -43,7 +44,7 @@ const StudentDashboard = () => {
     setError(null);
     try {
       const response = await axios.get(
-        "http://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/student/reservations?borrowed=true",
+        "https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/student/reservations?borrowed=true",
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("access_token")}`,
@@ -63,7 +64,7 @@ const StudentDashboard = () => {
   const fetchLabs = async () => {
     setError(null);
     try {
-      const response = await axios.get(`http://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/user/labs`, {
+      const response = await axios.get(`https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/user/labs`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("access_token")}`,
         },

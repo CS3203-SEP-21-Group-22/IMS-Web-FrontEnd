@@ -1,28 +1,7 @@
 import React from "react";
-import laptop from "../styles/images/laptop.png";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import DatePicker from "react-datepicker";
-import ItemRow from "./ItemRow";
 import ItemLab from "./ItemLab";
 
 const TableTppLab = ({ reqimg, itmname, serial, lab, onClick, items }) => {
-  const [returnDate, setReturnDate] = useState("");
-  const navigate = useNavigate();
-  const handleRequest = () => {
-    const currentDate = new Date().toISOString().split("T")[0];
-    navigate("/request", {
-      state: {
-        reqimg,
-        itmname,
-        serial,
-        lab,
-
-        datereq: currentDate,
-        returnDate,
-      },
-    });
-  };
   return (
     <div className="w-[999px] h-[496px] bg-[#3C4D71] flex-row flex items-center justify-center gap-4 mt-10 text-white relative rounded-[60px]">
       <p></p>

@@ -12,28 +12,27 @@ export const ClerkItems = () => {
   }); // Store new item data
   const [error, setError] = useState(null); // Error state
 
-  // Fetch items belonging to the equipmentId
-  const fetchItems = async () => {
-    setError(null);
-    try {
-      const response = await axios.get(
-        `http://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/user/items?equipmentId=${equipmentId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-          },
-        },
-      );
-      setItems(response.data); // Set the fetched items
-      console.log("Fetched items:", response.data);
-    } catch (error) {
-      console.error("Error fetching items:", error);
-      setError("Failed to load items.");
-    }
-  };
-
   // Fetch items when the component mounts
   useEffect(() => {
+    // Fetch items belonging to the equipmentId
+    const fetchItems = async () => {
+      setError(null);
+      try {
+        const response = await axios.get(
+          `https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/user/items?equipmentId=${equipmentId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+            },
+          },
+        );
+        setItems(response.data); // Set the fetched items
+        console.log("Fetched items:", response.data);
+      } catch (error) {
+        console.error("Error fetching items:", error);
+        setError("Failed to load items.");
+      }
+    };
     fetchItems();
   }, [equipmentId]);
 
@@ -51,7 +50,7 @@ export const ClerkItems = () => {
 
     try {
       const response = await axios.post(
-        "http://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/clerk/items",
+        "https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/clerk/items",
         newItemData,
         {
           headers: {

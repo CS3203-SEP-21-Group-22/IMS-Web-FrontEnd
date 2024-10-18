@@ -9,7 +9,7 @@ const ClerkItemRow = ({ itemData }) => {
   //   setError(null);
   //   try {
   //     const response = await axios.delete(
-  //       `http://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/student/reservations/${resId}`,
+  //       `https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/student/reservations/${resId}`,
   //       {
   //         headers: {
   //           Authorization: `Bearer ${localStorage.getItem("access_token")}`,

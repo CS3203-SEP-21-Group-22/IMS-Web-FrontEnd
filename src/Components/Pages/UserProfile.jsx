@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope } from "@fortawesome/free-regular-svg-icons";
 import { faPenToSquare } from "@fortawesome/free-regular-svg-icons";
@@ -35,9 +35,3 @@ export const UserProfile = () => {
     </div>
   );
 };
-
-{
-  /* <div className=" font-josefin-sans bg-slate-400 ">JOHN DOE</div>
-          <div className=" font-josefin-sans bg-slate-500 ">johndoesolutions@gmail.com</div>
-          <div className=" font-josefin-sans bg-slate-400  ">STATUS : Student</div> */
-}

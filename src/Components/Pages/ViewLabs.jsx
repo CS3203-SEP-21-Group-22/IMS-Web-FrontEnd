@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import checklist from "../../styles/images/checklist.png";
 import axios from "axios";
 
@@ -32,7 +32,7 @@ export const ViewLabs = () => {
     try {
       console.log(labData);
       const response = await axios.post(
-        "http://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/admin/labs",
+        "https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/admin/labs",
         labData,
         {
           headers: {

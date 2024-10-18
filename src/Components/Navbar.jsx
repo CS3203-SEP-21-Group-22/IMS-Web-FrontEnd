@@ -5,13 +5,9 @@ import logo from "../styles/images/logo.png";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import walrus from "../styles/images/walrus.png";
 import { useState } from "react";
-import { AUTH_CLIENT_ID, AUTH_SERVER_URL } from "../config";
 
 export const Navbar = () => {
   const location = useLocation();
-
-  const redirectUri = "http://localhost:3000/profile";
-  const loginUrl = `${AUTH_SERVER_URL}/login?redirectUri=${encodeURIComponent(redirectUri)}&clientId=${AUTH_CLIENT_ID}`;
 
   const navigate = useNavigate();
   const [box, setBox] = useState(false);
@@ -92,7 +88,7 @@ export const Navbar = () => {
         </div>
 
         <div className="bg-transparent flex flex-row justify-end items-center z-[1] px-4">
-          {location.pathname == "/" && (
+          {location.pathname === "/" && (
             <Link
               to="/sign-in"
               className="flex flex-row justify-center items-center gap-[10px] text-white w-[80px] h-[35px] bg-[#00ABE4] rounded-[10px] border-transparent cursor-pointer font-[Josefin_Sans]  text-[10px] leading-[20px] tracking-[0.06em]"
@@ -100,10 +96,10 @@ export const Navbar = () => {
               LOGIN
             </Link>
           )}
-          {location.pathname == "/student" && (
+          {location.pathname === "/student" && (
             <div className="flex flex-col justify-center items-center">
               <button onClick={toggleBox}>
-                <img src={walrus} className="h-[40px] w-[40px] cursor-pointer" />
+                <img src={walrus} className="h-[40px] w-[40px] cursor-pointer" alt="walrus" />
               </button>
 
               {box && (
@@ -118,10 +114,10 @@ export const Navbar = () => {
               )}
             </div>
           )}
-          {location.pathname == "/Officeclerk" && (
+          {location.pathname === "/Officeclerk" && (
             <div className="flex flex-col justify-center items-center">
               <button onClick={toggleBox}>
-                <img src={walrus} className="h-[40px] w-[40px] cursor-pointer" />
+                <img src={walrus} className="h-[40px] w-[40px] cursor-pointer" alt="walrus" />
               </button>
 
               {box && (
@@ -134,7 +130,7 @@ export const Navbar = () => {
               )}
             </div>
           )}
-          {location.pathname == "/student-select" && (
+          {location.pathname === "/student-select" && (
             <div className="flex flex-row justify-center items-center">
               <Link
                 to="/student"
@@ -144,7 +140,7 @@ export const Navbar = () => {
               </Link>
               <div className="flex flex-col justify-center items-center">
                 <button onClick={toggleBox}>
-                  <img src={walrus} className="h-[40px] w-[40px] cursor-pointer" />
+                  <img src={walrus} className="h-[40px] w-[40px] cursor-pointer" alt="walrus" />
                 </button>
 
                 {box && (
@@ -163,10 +159,10 @@ export const Navbar = () => {
               </div>
             </div>
           )}
-          {location.pathname == "/staff" && (
+          {location.pathname === "/staff" && (
             <div className="flex flex-col justify-center items-center">
               <button onClick={toggleBox}>
-                <img src={walrus} className="h-[40px] w-[40px] cursor-pointer" />
+                <img src={walrus} className="h-[40px] w-[40px] cursor-pointer" alt="walrus" />
               </button>
 
               {box && (
@@ -180,10 +176,10 @@ export const Navbar = () => {
             </div>
           )}
 
-          {location.pathname == "/labTechnician" && (
+          {location.pathname === "/labTechnician" && (
             <div className="flex flex-col justify-center items-center">
               <button onClick={toggleBox}>
-                <img src={walrus} className="h-[40px] w-[40px] cursor-pointer" />
+                <img src={walrus} className="h-[40px] w-[40px] cursor-pointer" alt="walrus" />
               </button>
 
               {box && (
@@ -197,10 +193,10 @@ export const Navbar = () => {
             </div>
           )}
 
-          {location.pathname == "/aprove-list-request" && (
+          {location.pathname === "/aprove-list-request" && (
             <div className="flex flex-col justify-center items-center">
               <button onClick={toggleBox}>
-                <img src={walrus} className="h-[40px] w-[40px] cursor-pointer" />
+                <img src={walrus} className="h-[40px] w-[40px] cursor-pointer" alt="walrus" />
               </button>
 
               {box && (
@@ -214,10 +210,10 @@ export const Navbar = () => {
             </div>
           )}
 
-          {location.pathname == "/admin" && (
+          {location.pathname === "/admin" && (
             <div className="flex flex-col justify-center items-center">
               <button onClick={toggleBox}>
-                <img src={walrus} className="h-[40px] w-[40px] cursor-pointer" />
+                <img src={walrus} className="h-[40px] w-[40px] cursor-pointer" alt="walrus" />
               </button>
 
               {box && (

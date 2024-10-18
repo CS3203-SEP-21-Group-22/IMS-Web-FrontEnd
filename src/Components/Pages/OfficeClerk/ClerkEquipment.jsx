@@ -1,9 +1,7 @@
 import React, { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import axios from "axios";
-import LabCard from "../../LabCard";
 import labimage from "../../../styles/images/page3.png";
-import ClerkLabCard from "./ClerkLabCard";
 import ClerkEquipmentCard from "./ClerkEquipmentCard";
 
 export const ClerkEquipment = () => {
@@ -37,7 +35,7 @@ export const ClerkEquipment = () => {
     try {
       console.log(equipmentData);
       const response = await axios.post(
-        "http://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/clerk/equipments",
+        "https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/clerk/equipments",
         equipmentData,
         {
           headers: {

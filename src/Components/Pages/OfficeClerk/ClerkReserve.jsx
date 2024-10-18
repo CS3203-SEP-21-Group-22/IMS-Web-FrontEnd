@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import checklist from "../../../styles/images/checklist.png";
 import cardreserve from "../../../styles/images/cardreserve.png";
 import repair from "../../../styles/images/repairstat.png";
@@ -8,23 +8,14 @@ import Card from "../../Card";
 import axios from "axios";
 
 const ClerkReserve = () => {
-  const [expandedBox1, setExpandedBox1] = useState(false);
-  const [expandedBox2, setExpandedBox2] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate();
-
-  const toggleBox1 = () => {
-    setExpandedBox1(!expandedBox1);
-    if (expandedBox2) setExpandedBox2(false); // Ensure only one box is expanded at a time
-  };
-
-  const columns = ["ITEM NAME", "SERIAL NO", "LAB", "DATE REQUESTED"];
 
   const fetchRequested = async () => {
     setError(null);
     try {
       const response = await axios.get(
-        "http://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/clerk/reservations?requested=true",
+        "https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/clerk/reservations?requested=true",
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("access_token")}`,
@@ -44,7 +35,7 @@ const ClerkReserve = () => {
     setError(null);
     try {
       const response = await axios.get(
-        "http://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/clerk/reservations?reserved=true",
+        "https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/clerk/reservations?reserved=true",
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("access_token")}`,
@@ -64,7 +55,7 @@ const ClerkReserve = () => {
     setError(null);
     try {
       const response = await axios.get(
-        "http://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/clerk/reservations?borrowed=true",
+        "https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/clerk/reservations?borrowed=true",
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("access_token")}`,
