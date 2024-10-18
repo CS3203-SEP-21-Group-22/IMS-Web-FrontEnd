@@ -5,7 +5,7 @@
       "methods": [
         "get"
       ],
-      "rewrite": "/callback",
+      "rewrite": "/index.html",
       "redirect": "/callback"
     }
   ]
