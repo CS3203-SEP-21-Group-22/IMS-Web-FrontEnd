@@ -1,8 +1,8 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
-import ReservationMiniCard from "./ReservationMiniCard";
+import ReservationMiniCard from "../Student/ReservationMiniCard";
 
-const StudentReservations = () => {
+const StaffReservations = () => {
   const location = useLocation();
   const reservations = location.state?.reservations || []; // Ensure we have an array in case reservations is undefined
   console.log(reservations);
@@ -23,4 +23,4 @@ const StudentReservations = () => {
   );
 };
 
-export default StudentReservations;
+export default StaffReservations;

@@ -42,6 +42,10 @@ import ClerkViewReserved from "./Components/Pages/OfficeClerk/ClerkViewReserved"
 import ClerkRequest from "./Components/Pages/OfficeClerk/ClerkRequest";
 import AdminAnalytics from "./Components/Pages/Admin/AdminAnalytics";
 import ClerkBorrowed from "./Components/Pages/OfficeClerk/ClerkBorrowed";
+import StaffBorrowed from "./Components/Pages/AcaStaff/StaffBorrowed";
+import StaffReservations from "./Components/Pages/AcaStaff/StaffReservation";
+import { StaffSelect } from "./Components/Pages/AcaStaff/StaffSelect";
+import StaffEquipment from "./Components/Pages/AcaStaff/StaffEquipment";
 
 function App() {
   return (
@@ -51,13 +55,23 @@ function App() {
           <Route index element={<Home />} />
           <Route path="/sign-in" element={<SignIn />} />
           <Route path="/sign-out" element={<SignUp />} />
+
           <Route path="/student" element={<StudentDashboard />} />
           <Route path="/student-select" element={<StudentSelect />} />
+          <Route path="/student-equipment" element={<StudentEquipment />} />
+          <Route path="/student-reservation" element={<StudentReservations />} />
+          <Route path="/student-borrowed" element={<StudentBorrowed />} />
+
           <Route path="/assign-technicians" element={<TechAssign />} />
 
           <Route path="/labTechnician2" element={<LabTechDash2 />} />
           <Route path="/user" element={<UserProfile />} />
+
           <Route path="/staff" element={<StaffDashboard />} />
+          <Route path="/staff-borrowed" element={<StaffBorrowed />} />
+          <Route path="/staff-select" element={<StaffSelect />} />
+          <Route path="/staff-equipment" element={<StaffEquipment />} />
+          <Route path="/staff-reservation" element={<StaffReservations />} />
 
           <Route path="/officeclerk" element={<OfficeClerkDashboard />} />
           <Route path="/aprove-list-request" element={<AproveLisTRequest />} />
@@ -89,9 +103,7 @@ function App() {
             <Route path='/clerk-request' element={<ClerkRequest/>}/>
             <Route path='/clerk-borrowed' element={<ClerkBorrowed/>}/>
 
-          <Route path="/student-equipment" element={<StudentEquipment />} />
-          <Route path="/student-reservation" element={<StudentReservations />} />
-          <Route path="/student-borrowed" element={<StudentBorrowed />} />
+          
 
           <Route path="/tech" element={<Assigned />} />
           <Route path="/tech/completed" element={<Completed />} />
