@@ -44,6 +44,7 @@ import StaffBorrowed from "./Components/Pages/AcaStaff/StaffBorrowed";
 import StaffReservations from "./Components/Pages/AcaStaff/StaffReservation";
 import { StaffSelect } from "./Components/Pages/AcaStaff/StaffSelect";
 import StaffEquipment from "./Components/Pages/AcaStaff/StaffEquipment";
+import Ongoing from "./Components/Pages/LabTechnician/Ongoing";
 
 function App() {
   return (
@@ -63,6 +64,7 @@ function App() {
         
 
           <Route path="/labTechnician2" element={<LabTechDash2 />} />
+          <Route path="/tech/ongoing" element={<Ongoing />} />
          
 
           <Route path="/staff" element={<StaffDashboard />} />

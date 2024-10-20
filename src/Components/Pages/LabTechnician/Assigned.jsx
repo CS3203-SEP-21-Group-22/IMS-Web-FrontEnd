@@ -22,7 +22,9 @@ const Assigned = () => {
         },
       );
 
-      setAssigned(response.data);
+      // Filter the response to only include items with status "Scheduled"
+      const scheduledItems = response.data.filter((item) => item.status === "Scheduled");
+      setAssigned(scheduledItems);
     } catch (error) {
       console.error("Error when fetching maintenance data:", error);
       setError("Failed to load assigned items.");
@@ -42,7 +44,7 @@ const Assigned = () => {
       ) : error ? (
         <p className="text-white text-[24px] font-semibold">{error}</p>
       ) : assigned.length === 0 ? (
-        <p className="text-white text-[24px] font-semibold">No items have been assigned.</p>
+        <p className="text-white text-[24px] font-semibold">No scheduled items have been assigned.</p>
       ) : (
         <div className="flex flex-col items-center justify-center">
           <div className="text-white text-[25px] font-semibold tracking-[0.06rem]">ASSIGNED EQUIPMENT</div>

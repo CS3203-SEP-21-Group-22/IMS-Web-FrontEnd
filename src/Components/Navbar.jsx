@@ -85,6 +85,14 @@ export const Navbar = () => {
               >
                 COMPLETED
               </Link>
+              <Link
+                to="/tech/ongoing"
+                className={`flex flex-col justify-center items-center tracking-[0.06em] cursor-pointer ${
+                  location.pathname === "/tech/completed" ? "text-[#color]" : "text-[#default-color]"
+                }`}
+              >
+                ONGOING
+              </Link>
             </>
           )}
         </div>
@@ -214,6 +222,8 @@ export const Navbar = () => {
 
           <NavBarMenu pathname="/labTechnician2" firstLinkTo="/labTechnician2" />
           <NavBarMenu pathname="/tech" firstLinkTo="/labTechnician2" />
+          <NavBarMenu pathname="/tech/ongoing" firstLinkTo="/labTechnician2" />
+          <NavBarMenu pathname="/tech/completed" firstLinkTo="/labTechnician2" />
           <NavBarMenu pathname="/labTechnician2" firstLinkTo="/labTechnician2" />
 
           <NavBarMenu pathname="/admin" firstLinkTo="/admin" />
