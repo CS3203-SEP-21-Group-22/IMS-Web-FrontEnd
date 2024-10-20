@@ -15,37 +15,18 @@ const LabTechDash2 = () => {
 
   const navigate = useNavigate();
 
-  const fetchMaintainenceReq = async () => {
-    setLoading(true);
-    setError(null);
-    try {
-      const response = await axios.get(
-        "https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/technician/maintenance?completed=false",
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-        },
-      );
-
-      console.log("Fetched labs:", response.data);
-      navigate("/tech", { state: { assigned: response.data } });
-    } catch (errror) {
-      console.error("Error when fetching res", error);
-      setError("Failed to load reservations");
-    } finally {
-      setLoading(false);
-      console.log("Loading ", loading);
-    }
+  const redirectToEquipments = () => {
+    navigate("/labs-tech");
+  };
+  const redirectToMaintenances = () => {
+    navigate("/tech");
   };
 
   return (
     <div className="h-svh w-full  bg-[#202652]  flex justify-center items-center relative">
       <div className="flex flex-row gap-10 items-center justify-center ">
-        <Card imgsrc={repairstatImg} altname="status" Children="MAINTENANCES" onClick={fetchMaintainenceReq} />
-        <Card imgsrc={repaireqImg} altname="request" Children="EQUIPMENTS" onClick={fetchMaintainenceReq} />
+        <Card imgsrc={repairstatImg} altname="status" Children="MAINTENANCES" onClick={redirectToMaintenances} />
+        <Card imgsrc={repaireqImg} altname="request" Children="EQUIPMENTS" onClick={redirectToEquipments} />
       </div>
     </div>
   );

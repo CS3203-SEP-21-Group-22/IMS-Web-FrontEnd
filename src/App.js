@@ -45,6 +45,8 @@ import StaffReservations from "./Components/Pages/AcaStaff/StaffReservation";
 import { StaffSelect } from "./Components/Pages/AcaStaff/StaffSelect";
 import StaffEquipment from "./Components/Pages/AcaStaff/StaffEquipment";
 import Ongoing from "./Components/Pages/LabTechnician/Ongoing";
+import { TechnicianLabs } from "./Components/Pages/LabTechnician/TechnicianLabs";
+import LabTechEquipment from "./Components/Pages/LabTechnician/LabTechEquipment";
 
 function App() {
   return (
@@ -64,6 +66,8 @@ function App() {
         
 
           <Route path="/labTechnician2" element={<LabTechDash2 />} />
+          <Route path="/labs-tech" element={<TechnicianLabs />} />
+          <Route path="/labtech-equipment" element={<LabTechEquipment/>} />
           <Route path="/tech/ongoing" element={<Ongoing />} />
          
 
