@@ -63,7 +63,7 @@ const ClerkReserve = () => {
         },
       );
 
-      //   navigate("/clerk-borrowed", { state: { labs: response.data } });
+      navigate("/clerk-borrowed", { state: { borrowings: response.data } });
       console.log("Fetched Borrowed:", response.data);
     } catch (errror) {
       console.error("Error when fetching res", error);

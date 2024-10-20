@@ -41,6 +41,7 @@ import ClerkReserve from "./Components/Pages/OfficeClerk/ClerkReserve";
 import ClerkViewReserved from "./Components/Pages/OfficeClerk/ClerkViewReserved";
 import ClerkRequest from "./Components/Pages/OfficeClerk/ClerkRequest";
 import AdminAnalytics from "./Components/Pages/Admin/AdminAnalytics";
+import ClerkBorrowed from "./Components/Pages/OfficeClerk/ClerkBorrowed";
 
 function App() {
   return (
@@ -86,6 +87,7 @@ function App() {
             <Route path='/clerk-reserve' element={<ClerkReserve/>}/>
             <Route path='/clerk-reserve-view' element={<ClerkViewReserved/>}/>
             <Route path='/clerk-request' element={<ClerkRequest/>}/>
+            <Route path='/clerk-borrowed' element={<ClerkBorrowed/>}/>
 
           <Route path="/student-equipment" element={<StudentEquipment />} />
           <Route path="/student-reservation" element={<StudentReservations />} />
