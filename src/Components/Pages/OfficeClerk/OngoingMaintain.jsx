@@ -8,19 +8,20 @@ const OngoingMaintain = () => {
   const [expandedItem, setExpandedItem] = useState(null);
   const [showCreateForm, setShowCreateForm] = useState(false);
 
+  // Success message state
+  const [successMessage, setSuccessMessage] = useState("");
+  const [showSuccessPopup, setShowSuccessPopup] = useState(false);
+
   // Form Input States
   const [labName, setLabName] = useState("");
   const [labs, setLabs] = useState([]);
   const [equipment, setEquipment] = useState([]);
   const [selectedEquipment, setSelectedEquipment] = useState("");
   const [items, setItems] = useState([]);
-  const [itemId, setItemId] = useState("");
-
-  const [selectedItem, setSelectedItem] = useState("");
-
+  const [selectedItem, setSelectedItem] = useState(null);
   const [selectedLab, setSelectedLab] = useState("");
   const [technicians, setTechnicians] = useState([]);
-  const [selectedTechnician, setSelectedTechnician] = useState(null); // Track selected technician
+  const [selectedTechnician, setSelectedTechnician] = useState(null);
 
   const [taskDescription, setTaskDescription] = useState("");
   const [startDate, setStartDate] = useState("");
@@ -28,7 +29,7 @@ const OngoingMaintain = () => {
 
   const fetchLabs = async () => {
     try {
-      const response = await axios.get("https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/user/labs", {
+      const response = await axios.get("http://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/user/labs", {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("access_token")}`,
         },
@@ -44,7 +45,7 @@ const OngoingMaintain = () => {
     setError(null);
     try {
       const response = await axios.get(
-        `https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/user/equipments?labId=${labId}`,
+        `http://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/user/equipments?labId=${labId}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("access_token")}`,
@@ -61,30 +62,13 @@ const OngoingMaintain = () => {
   const fetchItems = async (equipmentId) => {
     try {
       const response = await axios.get(
-        `https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/user/items?equipmentId=${equipmentId}`,
+        `http://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/user/items?equipmentId=${equipmentId}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("access_token")}`,
           },
         },
       );
-      setItems(response.data);
-    } catch (error) {
-      console.error("Error fetching items", error);
-      setError("Failed to fetch items.");
-    }
-  };
-  const fetchItem = async (itemId) => {
-    try {
-      const response = await axios.get(
-        `http://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/user/equipments?itemId=${itemId}`, // Ensure proper usage of itemId
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-          },
-        },
-      );
-
       setItems(response.data);
     } catch (error) {
       console.error("Error fetching items", error);
@@ -95,7 +79,7 @@ const OngoingMaintain = () => {
   const fetchTechnicians = async () => {
     try {
       const response = await axios.get(
-        "https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/clerk/technicians",
+        "http://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/clerk/technicians",
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("access_token")}`,
@@ -114,7 +98,7 @@ const OngoingMaintain = () => {
     setLoading(true);
     try {
       const response = await axios.get(
-        "https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/clerk/maintenance?completed=false",
+        "http://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/clerk/maintenance?completed=false",
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("access_token")}`,
@@ -144,17 +128,14 @@ const OngoingMaintain = () => {
 
   const handleItemChange = (e) => {
     const itemId = e.target.value;
-    setItemId(itemId);
-    const selectednewItem = items.find((item) => item.itemId === Number(itemId));
-    console.log("selected item:", selectednewItem);
-
-    fetchItem(itemId);
+    const selectedItem = items.find((item) => item.itemId === Number(itemId));
+    setSelectedItem(selectedItem);
   };
 
   const handleTechnicianChange = (e) => {
     const userId = e.target.value;
     const selectedTech = technicians.find((technician) => technician.userId === Number(userId));
-    setSelectedTechnician(selectedTech); // Set selected technician properly
+    setSelectedTechnician(selectedTech);
   };
 
   const handleLabChange = (e) => {
@@ -168,7 +149,7 @@ const OngoingMaintain = () => {
   const handleCreateNewMaintenance = async (e) => {
     e.preventDefault();
 
-    const formatDate = (date) => new Date(date).toISOString().split("T")[0]; // Formats to 'YYYY-MM-DD'
+    const formatDate = (date) => new Date(date).toISOString().split("T")[0];
 
     const newMaintenance = {
       itemId: selectedItem.itemId,
@@ -180,7 +161,7 @@ const OngoingMaintain = () => {
 
     try {
       console.log("maintenance req:", newMaintenance);
-      const response = await axios.post(
+      await axios.post(
         "http://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/clerk/maintenance",
         newMaintenance,
         {
@@ -192,20 +173,23 @@ const OngoingMaintain = () => {
       );
       setShowCreateForm(false);
       fetchOngoingMaintain();
+
+      // Set success message and show popup
+      setSuccessMessage("Maintenance added successfully!");
+      setShowSuccessPopup(true);
+
+      // Hide popup after 3 seconds
+      setTimeout(() => {
+        setShowSuccessPopup(false);
+      }, 3000);
     } catch (error) {
-      if (error.response) {
-        console.error("Server responded with error:", error.response.data);
-        console.error("Validation errors:", error.response.data.errors);
-        setError(error.response.data.message || "Failed to create new maintenance.");
-      } else {
-        console.error("Error creating new maintenance", error);
-        setError("Failed to create new maintenance.");
-      }
+      console.error("Error creating new maintenance", error.response.data);
+      setError("Failed to create new maintenance.");
     }
   };
 
   return (
-    <div className="h-svh w-full bg-[#202652] flex flex-col items-center justify-center p-10">
+    <div className="min-h-screen w-full bg-[#202652] flex flex-col items-center justify-center p-10">
       {loading && (
         <div className="flex flex-col justify-center items-center">
           <span className="loading loading-spinner text-info w-12 h-12"></span>
@@ -213,6 +197,9 @@ const OngoingMaintain = () => {
         </div>
       )}
       {error && <p className="text-red-500">{error}</p>}
+      {showSuccessPopup && (
+        <div className="fixed top-20 right-5 bg-green-500 text-white p-4 rounded-md shadow-lg">{successMessage}</div>
+      )}
 
       <button
         className="mb-4 px-4 py-2 bg-green-500 text-white rounded"
@@ -236,7 +223,7 @@ const OngoingMaintain = () => {
           </div>
 
           <div className="mb-4">
-            <label className="block text-white">Equipment</label>
+            <label className="block text-gray-700">Equipment</label>
             <select
               className="w-full border p-2"
               value={selectedEquipment}
@@ -247,7 +234,6 @@ const OngoingMaintain = () => {
               {equipment.map((equip) => (
                 <option key={equip.equipmentId} value={equip.equipmentId}>
                   {equip.name}
-                  {console.log("equipment", equip)}
                 </option>
               ))}
             </select>

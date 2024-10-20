@@ -228,6 +228,18 @@ export const Navbar = () => {
               )}
             </div>
           )}
+
+          <NavBarMenu pathname="/officeclerk" firstLinkTo="/officeclerk" />
+          <NavBarMenu pathname="/clerk-reserve" firstLinkTo="/officeclerk" />
+          <NavBarMenu pathname="/clerk-request" firstLinkTo="/officeclerk" />
+          <NavBarMenu pathname="/clerk-reserve-view" firstLinkTo="/officeclerk" />
+          <NavBarMenu pathname="/clerk-borrowed" firstLinkTo="/officeclerk" />
+          <NavBarMenu pathname="/clerk-reserve-view" firstLinkTo="/officeclerk" />
+          <NavBarMenu pathname="/clerk-labs" firstLinkTo="/officeclerk" />
+          <NavBarMenu pathname="/clerk-equipment" firstLinkTo="/officeclerk" />
+          <NavBarMenu pathname="/clerk-maintenance/pending" firstLinkTo="/officeclerk" />
+          <NavBarMenu pathname="/clerk-maintenance/ongoing" firstLinkTo="/officeclerk" />
+          <NavBarMenu pathname="/clerk-maintenance/completed" firstLinkTo="/officeclerk" />
         </div>
       </div>
     </div>
