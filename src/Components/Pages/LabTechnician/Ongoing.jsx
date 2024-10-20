@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import AssignedMiniCard from "./AssignedMiniCard";
 
-const Assigned = () => {
+const Ongoing = () => {
   const [assigned, setAssigned] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -57,4 +57,4 @@ const Assigned = () => {
   );
 };
 
-export default Assigned;
+export default Ongoing;

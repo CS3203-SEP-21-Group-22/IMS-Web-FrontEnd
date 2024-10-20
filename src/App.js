@@ -31,7 +31,7 @@ import PendingMaintain from "./Components/Pages/OfficeClerk/PendingMaintain";
 import OngoingMaintain from "./Components/Pages/OfficeClerk/OngoingMaintain";
 import CompletedMaintain from "./Components/Pages/OfficeClerk/CompletedMaintain";
 import StudentEquipment from "./Components/Pages/Student/StudentEquipment";
-import { Assigned } from "./Components/Pages/LabTechnician/Assigned";
+import  Assigned  from "./Components/Pages/LabTechnician/Assigned";
 import { Completed } from "./Components/Pages/LabTechnician/Completed";
 import StudentReservations from "./Components/Pages/Student/StudentReservations";
 import StudentBorrowed from "./Components/Pages/Student/StudentBorrowed";
