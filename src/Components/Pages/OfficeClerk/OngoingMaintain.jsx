@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import OngoingCard from "./OngoingCard";
 
 const OngoingMaintain = () => {
   const [ongoingMaintenance, setOngoingMaintenance] = useState([]);
@@ -198,21 +199,25 @@ const OngoingMaintain = () => {
       )}
       {error && <p className="text-red-500">{error}</p>}
       {showSuccessPopup && (
-        <div className="fixed top-20 right-5 bg-green-500 text-white p-4 rounded-md shadow-lg">{successMessage}</div>
+        <div className="fixed top-20 right-5 bg-[#00ABE4] text-white p-4 rounded-md shadow-lg">{successMessage}</div>
       )}
 
       <button
-        className="mb-4 px-4 py-2 bg-green-500 text-white rounded"
+        className="mb-4 px-4 py-2 bg-[#00ABE4] text-white rounded"
         onClick={() => setShowCreateForm(!showCreateForm)}
       >
         {showCreateForm ? "Cancel New Maintenance" : "Create New Maintenance"}
       </button>
 
       {showCreateForm && (
-        <form className="bg-white p-6 rounded-md w-full max-w-lg" onSubmit={handleCreateNewMaintenance}>
+        <form className="bg-[#3C4D71] p-6 rounded-md w-full max-w-lg" onSubmit={handleCreateNewMaintenance}>
           <div className="mb-4">
-            <label className="block text-gray-700">Lab Name</label>
-            <select className="w-full border p-2" value={labName} onChange={handleLabChange}>
+            <label className="block text-white">Lab Name</label>
+            <select
+              className="w-full p-2 bg-[#3C4D71] shadow-lg shadow-[#28334a] border-none "
+              value={labName}
+              onChange={handleLabChange}
+            >
               <option value="">Select Lab</option>
               {labs.map((lab) => (
                 <option key={lab.labId} value={lab.labId}>
@@ -223,9 +228,9 @@ const OngoingMaintain = () => {
           </div>
 
           <div className="mb-4">
-            <label className="block text-gray-700">Equipment</label>
+            <label className="block text-white">Equipment</label>
             <select
-              className="w-full border p-2"
+              className="w-full  p-2 shadow-lg bg-[#3C4D71] shadow-[#28334a] border-none"
               value={selectedEquipment}
               onChange={handleEquipmentChange}
               disabled={!labName}
@@ -240,9 +245,9 @@ const OngoingMaintain = () => {
           </div>
 
           <div className="mb-4">
-            <label className="block text-gray-700">Serial Number</label>
+            <label className="block text-white">Serial Number</label>
             <select
-              className="w-full border p-2"
+              className="w-full p-2 shadow-lg bg-[#3C4D71] shadow-[#28334a] border-none"
               value={selectedItem?.itemId || ""}
               onChange={handleItemChange}
               disabled={!selectedEquipment}
@@ -257,9 +262,9 @@ const OngoingMaintain = () => {
           </div>
 
           <div className="mb-4">
-            <label className="block text-gray-700">Technician</label>
+            <label className="block text-white">Technician</label>
             <select
-              className="w-full border p-2"
+              className="w-full p-2 shadow-lg bg-[#3C4D71] shadow-[#28334a] border-none"
               value={selectedTechnician?.userId || ""}
               onChange={handleTechnicianChange}
             >
@@ -273,39 +278,51 @@ const OngoingMaintain = () => {
           </div>
 
           <div className="mb-4">
-            <label className="block text-gray-700">Task Description</label>
+            <label className="block text-white">Task Description</label>
             <textarea
-              className="w-full border p-2"
+              className="w-full p-2 shadow-lg bg-[#3C4D71] shadow-[#28334a] border-none"
               value={taskDescription}
               onChange={(e) => setTaskDescription(e.target.value)}
             />
           </div>
 
           <div className="mb-4">
-            <label className="block text-gray-700">Start Date</label>
+            <label className="block text-white">Start Date</label>
             <input
               type="date"
-              className="w-full border p-2"
+              className="w-full p-2 shadow-lg bg-[#3C4D71] shadow-[#28334a] border-none"
               value={startDate}
               onChange={(e) => setStartDate(e.target.value)}
             />
           </div>
 
           <div className="mb-4">
-            <label className="block text-gray-700">End Date</label>
+            <label className="block text-white">End Date</label>
             <input
               type="date"
-              className="w-full border p-2"
+              className="w-full p-2 shadow-lg bg-[#3C4D71] shadow-[#28334a] border-none"
               value={endDate}
               onChange={(e) => setEndDate(e.target.value)}
             />
           </div>
 
-          <button className="bg-blue-500 text-white px-4 py-2 rounded" type="submit">
+          <button className="bg-[#00ABE4] text-white px-4 py-2 rounded" type="submit">
             Submit
           </button>
         </form>
       )}
+      <div className="w-full min-h-screen flex flex-col items-center">
+        <h2 className="text-2xl font-bold mb-4 text-white">Ongoing Maintenance</h2>
+        {ongoingMaintenance.length === 0 ? (
+          <p className="text-white">No ongoing maintenance tasks at the moment.</p>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[80px] w-full">
+            {ongoingMaintenance.map((maintenance) => (
+              <OngoingCard key={maintenance.maintenanceId} ongoingData={maintenance} />
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 };
