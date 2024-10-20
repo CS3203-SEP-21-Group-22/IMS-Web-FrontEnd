@@ -2,7 +2,7 @@ import repairstatImg from "../../../styles/images/repairstat.png";
 import repaireqImg from "../../../styles/images/repaireq.png";
 import Card from "../../Card.jsx";
 import React, { useState } from "react";
-import TableTppLab from "../../TableTppLab.jsx";
+
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -43,19 +43,10 @@ const LabTechDash2 = () => {
 
   return (
     <div className="h-svh w-full  bg-[#202652]  flex justify-center items-center relative">
-      {selectedCard ? (
-        <TableTppLab
-          onClick={() => {
-            setSelectedCard(null);
-          }}
-          items={selectedItems}
-        />
-      ) : (
-        <div className="flex flex-row gap-10 items-center justify-center ">
-          <Card imgsrc={repairstatImg} altname="status" Children="MAINTENANCES" onClick={fetchMaintainenceReq} />
-          <Card imgsrc={repaireqImg} altname="request" Children="EQUIPMENTS" onClick={fetchMaintainenceReq} />
-        </div>
-      )}
+      <div className="flex flex-row gap-10 items-center justify-center ">
+        <Card imgsrc={repairstatImg} altname="status" Children="MAINTENANCES" onClick={fetchMaintainenceReq} />
+        <Card imgsrc={repaireqImg} altname="request" Children="EQUIPMENTS" onClick={fetchMaintainenceReq} />
+      </div>
     </div>
   );
 };
