@@ -28,7 +28,7 @@ const ClerkEquipmentCard = ({
     setError(null);
     try {
       const response = await axios.patch(
-        `http://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/clerk/equipments/${equipmentData.equipmentId}`,
+        `https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/clerk/equipments/${equipmentData.equipmentId}`,
         {
           name: editEquipmentData.name,
           model: editEquipmentData.model,
@@ -55,7 +55,7 @@ const ClerkEquipmentCard = ({
     try {
       console.log("equipment id:", equipmentData.equipmentId);
       const response = await axios.get(
-        `http://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/user/items?equipmentId=${equipmentData.equipmentId}`,
+        `https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/user/items?equipmentId=${equipmentData.equipmentId}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("access_token")}`,
@@ -80,7 +80,7 @@ const ClerkEquipmentCard = ({
     setError(null);
     try {
       const response = await axios.delete(
-        `http://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/clerk/equipments/${equipmentData.equipmentId}`,
+        `https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/clerk/equipments/${equipmentData.equipmentId}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("access_token")}`,

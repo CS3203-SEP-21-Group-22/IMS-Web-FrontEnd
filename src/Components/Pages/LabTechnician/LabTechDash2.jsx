@@ -2,15 +2,13 @@ import repairstatImg from "../../../styles/images/repairstat.png";
 import repaireqImg from "../../../styles/images/repaireq.png";
 import Card from "../../Card.jsx";
 import React, { useState } from "react";
-import laptopImg from "../../../styles/images/laptop.png";
-import TableTop from "../../TableTop.jsx";
 import TableTppLab from "../../TableTppLab.jsx";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const LabTechDash2 = () => {
   const [selectedCard, setSelectedCard] = useState(null);
-  const [selectedItems, setSelectedItems] = useState(null);
+  const [selectedItems] = useState(null);
 
   const [loading, setLoading] = useState("");
   const [error, setError] = useState("");
@@ -22,7 +20,7 @@ const LabTechDash2 = () => {
     setError(null);
     try {
       const response = await axios.get(
-        "http://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/technician/maintenance?completed=false",
+        "https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/technician/maintenance?completed=false",
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("access_token")}`,
@@ -39,6 +37,7 @@ const LabTechDash2 = () => {
       setError("Failed to load reservations");
     } finally {
       setLoading(false);
+      console.log("Loading ", loading);
     }
   };
 

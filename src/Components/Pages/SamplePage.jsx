@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import SampleLoading from "./SampleLoading";
+import React from "react";
 
 export const SamplePage = () => {
   return (

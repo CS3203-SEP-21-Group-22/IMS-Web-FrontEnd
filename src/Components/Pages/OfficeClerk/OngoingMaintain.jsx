@@ -14,7 +14,10 @@ const OngoingMaintain = () => {
   const [equipment, setEquipment] = useState([]);
   const [selectedEquipment, setSelectedEquipment] = useState("");
   const [items, setItems] = useState([]);
-  const [selectedItem, setSelectedItem] = useState(null); // Track selected item
+  const [itemId, setItemId] = useState("");
+
+  const [selectedItem, setSelectedItem] = useState("");
+
   const [selectedLab, setSelectedLab] = useState("");
   const [technicians, setTechnicians] = useState([]);
   const [selectedTechnician, setSelectedTechnician] = useState(null); // Track selected technician
@@ -25,7 +28,7 @@ const OngoingMaintain = () => {
 
   const fetchLabs = async () => {
     try {
-      const response = await axios.get("http://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/user/labs", {
+      const response = await axios.get("https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/user/labs", {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("access_token")}`,
         },
@@ -41,7 +44,7 @@ const OngoingMaintain = () => {
     setError(null);
     try {
       const response = await axios.get(
-        `http://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/user/equipments?labId=${labId}`,
+        `https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/user/equipments?labId=${labId}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("access_token")}`,
@@ -58,7 +61,7 @@ const OngoingMaintain = () => {
   const fetchItems = async (equipmentId) => {
     try {
       const response = await axios.get(
-        `http://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/user/items?equipmentId=${equipmentId}`,
+        `https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/user/items?equipmentId=${equipmentId}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("access_token")}`,
@@ -71,11 +74,28 @@ const OngoingMaintain = () => {
       setError("Failed to fetch items.");
     }
   };
+  const fetchItem = async (itemId) => {
+    try {
+      const response = await axios.get(
+        `http://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/user/equipments?itemId=${itemId}`, // Ensure proper usage of itemId
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+          },
+        },
+      );
+
+      setItems(response.data);
+    } catch (error) {
+      console.error("Error fetching items", error);
+      setError("Failed to fetch items.");
+    }
+  };
 
   const fetchTechnicians = async () => {
     try {
       const response = await axios.get(
-        "http://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/clerk/technicians",
+        "https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/clerk/technicians",
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("access_token")}`,
@@ -94,7 +114,7 @@ const OngoingMaintain = () => {
     setLoading(true);
     try {
       const response = await axios.get(
-        "http://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/clerk/maintenance?completed=false",
+        "https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/clerk/maintenance?completed=false",
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("access_token")}`,
@@ -124,8 +144,11 @@ const OngoingMaintain = () => {
 
   const handleItemChange = (e) => {
     const itemId = e.target.value;
-    const selectedItem = items.find((item) => item.itemId === Number(itemId));
-    setSelectedItem(selectedItem); // Set selected item properly
+    setItemId(itemId);
+    const selectednewItem = items.find((item) => item.itemId === Number(itemId));
+    console.log("selected item:", selectednewItem);
+
+    fetchItem(itemId);
   };
 
   const handleTechnicianChange = (e) => {
@@ -157,7 +180,7 @@ const OngoingMaintain = () => {
 
     try {
       console.log("maintenance req:", newMaintenance);
-      await axios.post(
+      const response = await axios.post(
         "http://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/clerk/maintenance",
         newMaintenance,
         {

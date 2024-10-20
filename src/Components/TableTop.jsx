@@ -2,7 +2,6 @@ import React from "react";
 import laptop from "../styles/images/laptop.png";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import DatePicker from "react-datepicker";
 import ItemRow from "./ItemRow";
 
 const TableTop = ({ reqimg, itmname, serial, lab, onClick, items }) => {

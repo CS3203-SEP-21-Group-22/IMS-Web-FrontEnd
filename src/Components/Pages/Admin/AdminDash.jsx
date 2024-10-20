@@ -19,7 +19,7 @@ const AdminDashboard = () => {
     setError(null);
     try {
       const response = await axios.get(
-        "http://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/admin/reservations?year=2024&month=11",
+        "https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/admin/reservations?year=2024&month=11",
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("access_token")}`,
@@ -33,6 +33,10 @@ const AdminDashboard = () => {
       setError("Failed to load analytics");
     } finally {
       setLoading(false);
+      console.log("Loading:", loading); // Log the loading state to the console
+      console.log("Error:", error); // Log the error state to the console
+      console.log("Labs:", labs); // Log the labs state to the console
+      console.log("Users:", users); // Log the users state to the console
     }
   };
 
@@ -40,7 +44,7 @@ const AdminDashboard = () => {
     setLoading(true);
     setError(null);
     try {
-      const response = await axios.get("http://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/user/labs", {
+      const response = await axios.get("https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/user/labs", {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("access_token")}`,
         },
@@ -59,11 +63,14 @@ const AdminDashboard = () => {
     setLoading(true);
     setError(null);
     try {
-      const response = await axios.get("http://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/admin/users", {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+      const response = await axios.get(
+        "https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/admin/users",
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+          },
         },
-      });
+      );
       setUsers(response.data);
       navigate("/user-profiles", { state: { users: response.data } });
     } catch (errror) {

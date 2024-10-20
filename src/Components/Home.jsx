@@ -1,16 +1,27 @@
 import React from "react";
 import topImage from "../styles/images/page1.png";
 import appmethod from "../styles/images/appmethods.png";
-import page3 from "../styles/images/page3.png";
-import signinpic from "../styles/images/siginpicnew.png";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams, Navigate } from "react-router-dom";
 import Footer from "./Footer";
 import HomePageCard from "./HomePageCard";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope } from "@fortawesome/free-regular-svg-icons";
-import { faChartSimple, faFileArrowDown, faLock, faQrcode, faSchoolLock } from "@fortawesome/free-solid-svg-icons";
+import { faChartSimple, faFileArrowDown, faQrcode, faSchoolLock } from "@fortawesome/free-solid-svg-icons";
 
 export const Home = () => {
+  // Get the current query parameters
+  const [searchParams] = useSearchParams();
+
+  // Check if the 'id_token' query parameter is present
+  if (searchParams.has("id_token")) {
+    const id_token = searchParams.get("id_token");
+    const access_token = searchParams.get("access_token");
+    const refresh_token = searchParams.get("refresh_token");
+    // Redirect to the callback page
+    const callbackUrl = `/callback?id_token=${id_token}&access_token=${access_token}&refresh_token=${refresh_token}`;
+    return <Navigate to={callbackUrl} />;
+  }
+
   return (
     <div className="w-full h-[full] bg-[#202652] flex flex-col">
       <div className="grid grid-cols-2 w-full  h-svh gap-0 ">

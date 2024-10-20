@@ -1,4 +1,4 @@
-import React, { Children, useState } from "react";
+import React from "react";
 import TableHeaders from "./TableHeaders";
 
 function Card({ onClick, Children, columns }) {

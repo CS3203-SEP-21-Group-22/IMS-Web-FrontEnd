@@ -11,7 +11,7 @@ const PendingMaintain = () => {
     setLoading(true);
     try {
       const response = await axios.get(
-        "http://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/clerk/maintenance/pending",
+        "https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/clerk/maintenance/pending",
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("access_token")}`,

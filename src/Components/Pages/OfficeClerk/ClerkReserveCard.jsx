@@ -16,7 +16,7 @@ const ClerkReserveCard = ({ reservationData }) => {
     console.log("reserve id:", reservationData.reservationId);
     try {
       const response = await axios.get(
-        `http://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/user/reservations/${reservationData.reservationId}`,
+        `https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/user/reservations/${reservationData.reservationId}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("access_token")}`,
@@ -34,7 +34,7 @@ const ClerkReserveCard = ({ reservationData }) => {
   // Fetch data when the component is mounted
   useEffect(() => {
     fetchReservedItems();
-  }, []);
+  });
 
   if (error) return <div className="text-red-500">{error}</div>;
 

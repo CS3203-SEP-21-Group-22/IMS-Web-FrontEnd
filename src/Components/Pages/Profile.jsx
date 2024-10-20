@@ -1,4 +1,4 @@
-import { useLocation, useSearchParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 
 function Profile() {
