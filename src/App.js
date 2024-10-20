@@ -78,6 +78,7 @@ function App() {
             <Route path='/profile' element={<Profile/>}/>
             <Route path='/callback' element={<AuthCallback/>}/>
             <Route path='/loading' element={<SamplePage/>}/>
+            
             <Route path='/clerk-equipment' element={<ClerkEquipment/>}/>
             <Route path='/clerk-labs' element={<ViewClerkLabs/>}/>
             <Route path='/clerk-items' element={<ClerkItems/>}/>

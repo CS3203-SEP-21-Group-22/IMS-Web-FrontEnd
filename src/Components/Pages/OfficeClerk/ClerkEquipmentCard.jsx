@@ -100,7 +100,7 @@ const ClerkEquipmentCard = ({
   };
 
   return (
-    <div className="w-[307px] h-[288px] bg-[#3C4D71] rounded-[60px] pb-4 flex flex-col justify-center items-center relative cursor-pointer hover:scale-[1.1] transition duration-200 shadow-lg gap-3 ">
+    <div className="w-[307px] h-[298px] bg-[#3C4D71] rounded-[60px]  flex flex-col justify-center items-center relative cursor-pointer hover:scale-[1.1] transition duration-200 shadow-lg gap-3  p-4">
       {editMode ? (
         <>
           <input
@@ -150,7 +150,12 @@ const ClerkEquipmentCard = ({
         </>
       ) : (
         <div className="flex flex-col justify-center items-center">
-          <img className="object-contain" src={imgsrc} alt={altname} style={{ width: imgWidth, height: imgHeight }} />
+          <img
+            className="object-contain"
+            src={equipmentData.imageUrl}
+            alt={altname}
+            style={{ width: imgWidth, height: imgHeight }}
+          />
           <p
             className="font-josefin-sans font-normal text-[20px] text-white leading-[20px] tracking-[0.06em]  "
             onClick={handleClick}

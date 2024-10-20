@@ -6,6 +6,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import walrus from "../styles/images/walrus.png";
 import { useState } from "react";
 import { AUTH_CLIENT_ID, AUTH_SERVER_URL } from "../config";
+import NavBarMenu from "./NavBarMenu";
 
 export const Navbar = () => {
   const location = useLocation();
@@ -163,6 +164,15 @@ export const Navbar = () => {
               </div>
             </div>
           )}
+
+          <NavBarMenu pathname="/officeclerk" firstLinkTo="/officeclerk" />
+          <NavBarMenu pathname="/clerk-labs" firstLinkTo="/officeclerk" />
+          <NavBarMenu pathname="/clerk-equipment" firstLinkTo="/officeclerk" />
+          <NavBarMenu pathname="/clerk-reserve" firstLinkTo="/officeclerk" />
+          <NavBarMenu pathname="/clerk-request" firstLinkTo="/officeclerk" />
+          <NavBarMenu pathname="/clerk-reserve-view" firstLinkTo="/officeclerk" />
+          <NavBarMenu pathname="/clerk-maintenance/ongoing" firstLinkTo="/officeclerk" />
+
           {location.pathname == "/staff" && (
             <div className="flex flex-col justify-center items-center">
               <button onClick={toggleBox}>

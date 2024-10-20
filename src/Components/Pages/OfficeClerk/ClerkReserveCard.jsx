@@ -49,7 +49,7 @@ const ClerkReserveCard = ({ reservationData }) => {
     <div className="w-[437px] h-[400px] bg-[#3C4D71] rounded-[20px] flex p-2 flex-row items-center justify-center hover:scale-105 transition duration-200">
       {/* Left side: Image and Name */}
       <div className="w-[170px] h-[350px] flex flex-col items-center justify-center bg-[#3C4D71] shadow-lg shadow-[#2e3a56] rounded-[20px] p-2 ">
-        <img src={mouse} alt="mouse" className="mb-4" />
+        <img src={reservedItem.imageUrl} alt="mouse" className="mb-4" />
         <p className="text-white text-center text-[20px] font-semibold">{reservedItem.itemName}</p>
         <p className="text-white text-center text-[16px]  font-medium">MODEL: {reservedItem.itemModel}</p>
         <p className="text-white text-center text-[16px]  font-medium">LAB: {reservedItem.labName}</p>
