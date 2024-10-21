@@ -204,6 +204,8 @@ export const Navbar = () => {
           )}
 
           <NavBarMenu pathname="/labTechnician2" firstLinkTo="/labTechnician2" />
+          <NavBarMenu pathname="/labs-tech" firstLinkTo="/labTechnician2" />
+          <NavBarMenu pathname="/labtech-equipment" firstLinkTo="/labTechnician2" />
           <NavBarMenu pathname="/tech" firstLinkTo="/labTechnician2" />
           <NavBarMenu pathname="/tech/ongoing" firstLinkTo="/labTechnician2" />
           <NavBarMenu pathname="/tech/completed" firstLinkTo="/labTechnician2" />

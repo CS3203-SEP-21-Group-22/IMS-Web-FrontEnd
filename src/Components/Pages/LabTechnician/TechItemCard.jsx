@@ -1,21 +1,18 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useLocation, useNavigate } from "react-router-dom";
 
-const LabTechMiniCard = ({ equipmentData }) => {
+const TechItemCard = ({ itemData }) => {
   const [error, setError] = useState(null);
   const [boxExpanded, setBoxExpanded] = useState(false);
   const [newData, setNewData] = useState({}); // Initialize as an object instead of an array
   const [loading, setLoading] = useState(false); // Track loading state
-
-  const navigate = useNavigate();
 
   const fetchEquipment = async () => {
     setError(null); // Clear any previous errors
     setLoading(true); // Set loading to true while data is being fetched
     try {
       const response = await axios.get(
-        `https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/user/equipments/${equipmentData.equipmentId}`,
+        `https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/user/equipments/${itemData.equipmentId}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("access_token")}`,
@@ -49,12 +46,12 @@ const LabTechMiniCard = ({ equipmentData }) => {
         >
           <div className="flex-row flex items-center cursor-pointer text-white ">
             <div className="w-[150px]">
-              <img src={equipmentData.imageUrl} alt="mouse" />
+              <img src={itemData.imageUrl} alt={itemData.name} />
             </div>
             <div className="flex flex-col justify-center text-[20px] text-left pl-4">
-              <p className="font-semibold">{equipmentData.name}</p>
-              <p>Model: {equipmentData.model}</p>
-              <p>Lab: {equipmentData.labName}</p>
+              <p className="font-semibold">{itemData.name}</p>
+              <p>SERIAL NO: {itemData.serialNumber}</p>
+              <p>STATUS: {itemData.status}</p>
             </div>
           </div>
 
@@ -69,7 +66,7 @@ const LabTechMiniCard = ({ equipmentData }) => {
                   <p>Available Items: {newData.availableCount}</p>
                   <button
                     onClick={(e) => {
-                      navigate("/items-tech", { state: { equipmentId: equipmentData.equipmentId } });
+                      e.stopPropagation(); // Prevent card collapsing on button click
                     }}
                     className="mt-4 p-2 bg-blue-500 text-white rounded"
                   >
@@ -85,4 +82,4 @@ const LabTechMiniCard = ({ equipmentData }) => {
   );
 };
 
-export default LabTechMiniCard;
+export default TechItemCard;
