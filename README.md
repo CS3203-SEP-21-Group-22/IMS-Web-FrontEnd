@@ -25,10 +25,10 @@
 3. Run the following command to install the dependencies.
 
    ```
-    npm install
+   npm install
    ```
 
 4. Run the following command to run the application locally. The application will be available at `http://localhost:3000`.
    ```
-    npm start
+   npm start
    ```
