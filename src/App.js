@@ -4,6 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import { Layout } from "./Components/Layout";
 import SignIn from "./Components/Pages/SignIn";
 
+
 import StudentDashboard from "./Components/Pages/Student/StudentDashboard";
 import { StudentSelect } from "./Components/Pages/Student/StudentSelect";
 import StaffDashboard from "./Components/Pages/AcaStaff/StaffDash";
@@ -31,7 +32,7 @@ import PendingMaintain from "./Components/Pages/OfficeClerk/PendingMaintain";
 import OngoingMaintain from "./Components/Pages/OfficeClerk/OngoingMaintain";
 import CompletedMaintain from "./Components/Pages/OfficeClerk/CompletedMaintain";
 import StudentEquipment from "./Components/Pages/Student/StudentEquipment";
-import  Assigned  from "./Components/Pages/LabTechnician/Assigned";
+import Assigned from "./Components/Pages/LabTechnician/Assigned";
 import { Completed } from "./Components/Pages/LabTechnician/Completed";
 import StudentReservations from "./Components/Pages/Student/StudentReservations";
 import StudentBorrowed from "./Components/Pages/Student/StudentBorrowed";
@@ -49,72 +50,68 @@ import { TechnicianLabs } from "./Components/Pages/LabTechnician/TechnicianLabs"
 import LabTechEquipment from "./Components/Pages/LabTechnician/LabTechEquipment";
 import LabTechItems from "./Components/Pages/LabTechnician/LabTechItems";
 
+import {ProtectedRoute} from "./Components/ProtectedRoute"
+import { AuthProvider } from "./Components/AuthContext";
+
 function App() {
   return (
     <div className="App">
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
-          <Route path="/sign-in" element={<SignIn />} />
-          
+      <AuthProvider>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Home />} />
+            <Route path="/sign-in" element={<SignIn />} />
 
-          <Route path="/student" element={<StudentDashboard />} />
-          <Route path="/student-select" element={<StudentSelect />} />
-          <Route path="/student-equipment" element={<StudentEquipment />} />
-          <Route path="/student-reservation" element={<StudentReservations />} />
-          <Route path="/student-borrowed" element={<StudentBorrowed />} />
+            {/* Protected Routes */}
+            <Route path="/student" element={<ProtectedRoute><StudentDashboard /></ProtectedRoute>} />
+            <Route path="/student-select" element={<ProtectedRoute><StudentSelect /></ProtectedRoute>} />
+            <Route path="/student-equipment" element={<ProtectedRoute><StudentEquipment /></ProtectedRoute>} />
+            <Route path="/student-reservation" element={<ProtectedRoute><StudentReservations /></ProtectedRoute>} />
+            <Route path="/student-borrowed" element={<ProtectedRoute><StudentBorrowed /></ProtectedRoute>} />
+            <Route path="/labTechnician2" element={<ProtectedRoute><LabTechDash2 /></ProtectedRoute>} />
+            <Route path="/labs-tech" element={<ProtectedRoute><TechnicianLabs /></ProtectedRoute>} />
+            <Route path="/items-tech" element={<ProtectedRoute><LabTechItems /></ProtectedRoute>} />
+            <Route path="/labtech-equipment" element={<ProtectedRoute><LabTechEquipment /></ProtectedRoute>} />
+            <Route path="/tech/ongoing" element={<ProtectedRoute><Ongoing /></ProtectedRoute>} />
 
-        
+            <Route path="/staff" element={<ProtectedRoute><StaffDashboard /></ProtectedRoute>} />
+            <Route path="/staff-borrowed" element={<ProtectedRoute><StaffBorrowed /></ProtectedRoute>} />
+            <Route path="/staff-select" element={<ProtectedRoute><StaffSelect /></ProtectedRoute>} />
+            <Route path="/staff-equipment" element={<ProtectedRoute><StaffEquipment /></ProtectedRoute>} />
+            <Route path="/staff-reservation" element={<ProtectedRoute><StaffReservations /></ProtectedRoute>} />
 
-          <Route path="/labTechnician2" element={<LabTechDash2 />} />
-          <Route path="/labs-tech" element={<TechnicianLabs />} />
-          <Route path="/items-tech" element={<LabTechItems />} />
-          <Route path="/labtech-equipment" element={<LabTechEquipment/>} />
-          <Route path="/tech/ongoing" element={<Ongoing />} />
-         
+            <Route path="/officeclerk" element={<ProtectedRoute><OfficeClerkDashboard /></ProtectedRoute>} />
+            <Route path="/staff-profile" element={<ProtectedRoute><StaffProfile /></ProtectedRoute>} />
+            <Route path="/admin" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
+            <Route path="/admin-profile" element={<ProtectedRoute><AdminProfile /></ProtectedRoute>} />
+            <Route path="/admin-analytics" element={<ProtectedRoute><AdminAnalytics /></ProtectedRoute>} />
+            <Route path="/officeclerk-profile" element={<ProtectedRoute><OfficeClerkProfile /></ProtectedRoute>} />
+            <Route path="/user-profiles" element={<ProtectedRoute><UserProfiles /></ProtectedRoute>} />
+            <Route path="/view-labs" element={<ProtectedRoute><ViewLabs /></ProtectedRoute>} />
+            <Route path="/request" element={<ProtectedRoute><SendRequest /></ProtectedRoute>} />
+            <Route path="/techreq" element={<ProtectedRoute><TechnicianReq /></ProtectedRoute>} />
+            <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+            <Route path="/callback" element={<AuthCallback />} />
+            <Route path="/loading" element={<SamplePage />} />
 
-          <Route path="/staff" element={<StaffDashboard />} />
-          <Route path="/staff-borrowed" element={<StaffBorrowed />} />
-          <Route path="/staff-select" element={<StaffSelect />} />
-          <Route path="/staff-equipment" element={<StaffEquipment />} />
-          <Route path="/staff-reservation" element={<StaffReservations />} />
+            {/* Office Clerk Routes */}
+            <Route path="/clerk-equipment" element={<ProtectedRoute><ClerkEquipment /></ProtectedRoute>} />
+            <Route path="/clerk-labs" element={<ProtectedRoute><ViewClerkLabs /></ProtectedRoute>} />
+            <Route path="/clerk-items" element={<ProtectedRoute><ClerkItems /></ProtectedRoute>} />
+            <Route path="/clerk-maintenance" element={<ProtectedRoute><PendingMaintain /></ProtectedRoute>} />
+            <Route path="/clerk-maintenance/ongoing" element={<ProtectedRoute><OngoingMaintain /></ProtectedRoute>} />
+            <Route path="/clerk-maintenance/completed" element={<ProtectedRoute><CompletedMaintain /></ProtectedRoute>} />
+            <Route path="/clerk-reserve" element={<ProtectedRoute><ClerkReserve /></ProtectedRoute>} />
+            <Route path="/clerk-reserve-view" element={<ProtectedRoute><ClerkViewReserved /></ProtectedRoute>} />
+            <Route path="/clerk-request" element={<ProtectedRoute><ClerkRequest /></ProtectedRoute>} />
+            <Route path="/clerk-borrowed" element={<ProtectedRoute><ClerkBorrowed /></ProtectedRoute>} />
 
-          <Route path="/officeclerk" element={<OfficeClerkDashboard />} />
-         
-          <Route path="/staff-profile" element={<StaffProfile />} />
-
-          <Route path="/admin" element={<AdminDashboard />} />
-          <Route path="/admin-profile" element={<AdminProfile />} />
-          <Route path="/admin-analytics" element={<AdminAnalytics />} />
-
-            <Route path='/officeclerk-profile' element={<OfficeClerkProfile/>}/>
-            
-            <Route path='/user-profiles' element={<UserProfiles/>}/>
-            <Route path='/view-labs' element={<ViewLabs/>}/>
-            <Route path='/request' element={<SendRequest/>}/>
-            
-            <Route path='/techreq' element={<TechnicianReq/>}/>
-            <Route path='/profile' element={<Profile/>}/>
-            <Route path='/callback' element={<AuthCallback/>}/>
-            <Route path='/loading' element={<SamplePage/>}/>
-            
-            <Route path='/clerk-equipment' element={<ClerkEquipment/>}/>
-            <Route path='/clerk-labs' element={<ViewClerkLabs/>}/>
-            <Route path='/clerk-items' element={<ClerkItems/>}/>
-            <Route path='/clerk-maintenance' element={<PendingMaintain/>}/>
-            <Route path='/clerk-maintenance/ongoing' element={<OngoingMaintain/>}/>
-            <Route path='/clerk-maintenance/completed' element={<CompletedMaintain/>}/>
-            <Route path='/clerk-reserve' element={<ClerkReserve/>}/>
-            <Route path='/clerk-reserve-view' element={<ClerkViewReserved/>}/>
-            <Route path='/clerk-request' element={<ClerkRequest/>}/>
-            <Route path='/clerk-borrowed' element={<ClerkBorrowed/>}/>
-
-          
-
-          <Route path="/tech" element={<Assigned />} />
-          <Route path="/tech/completed" element={<Completed />} />
-        </Route>
-      </Routes>
+            {/* Lab Technician Routes */}
+            <Route path="/tech" element={<ProtectedRoute><Assigned /></ProtectedRoute>} />
+            <Route path="/tech/completed" element={<ProtectedRoute><Completed /></ProtectedRoute>} />
+          </Route>
+        </Routes>
+        </AuthProvider>
     </div>
   );
 }
