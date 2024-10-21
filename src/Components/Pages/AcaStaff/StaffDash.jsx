@@ -79,7 +79,8 @@ const StaffDash = () => {
     }
   };
   return (
-    <div className="h-svh w-full  bg-[#202652]  flex relative justify-center">
+    <div className="h-svh w-full  bg-[#202652]  flex flex-col relative justify-center">
+      <div className="text-white text-[25px] font-semibold tracking-[0.06rem] pt-4">STAFF DASHBOARD</div>
       <div className="h-full w-[1000px] grid grid-cols-3 gap-5">
         <>
           <div className="flex justify-center items-center">

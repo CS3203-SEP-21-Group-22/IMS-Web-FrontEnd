@@ -79,7 +79,8 @@ const StudentDashboard = () => {
     }
   };
   return (
-    <div className="h-svh w-full  bg-[#202652]  flex relative justify-center">
+    <div className="h-svh w-full  bg-[#202652]  flex relative flex-col items-center ">
+      <div className="text-white text-[25px] font-semibold tracking-[0.06rem] pt-4">STUDENT DASHBOARD</div>
       <div className="h-full w-[1000px] grid grid-cols-3 gap-5">
         <>
           <div className="flex justify-center items-center">

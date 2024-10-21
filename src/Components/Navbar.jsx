@@ -123,35 +123,6 @@ export const Navbar = () => {
               )}
             </div>
           )}
-          {location.pathname === "/student-select" && (
-            <div className="flex flex-row justify-center items-center">
-              <Link
-                to="/student"
-                className="mr-14 tracking-[0.06em] text-[#FFFFFF] cursor-pointer font-[Josefin_Sans]  text-[10px]"
-              >
-                DASHBOARD
-              </Link>
-              <div className="flex flex-col justify-center items-center">
-                <button onClick={toggleBox}>
-                  <img src={walrus} className="h-[40px] w-[40px] cursor-pointer" alt="walrus" />
-                </button>
-
-                {box && (
-                  <div className="top-14 absolute w-[100px] h-[60px] bg-[#202652] flex flex-col justify-center">
-                    <Link to="/user" className="text-white text-sm hover:bg-[#3C4D71] h-[30px]">
-                      VIEW PROFILE
-                    </Link>
-                    <p
-                      className="text-white text-sm cursor-pointer hover:bg-[#3C4D71] h-[30px] "
-                      onClick={handleLogOut}
-                    >
-                      LOG OUT
-                    </p>
-                  </div>
-                )}
-              </div>
-            </div>
-          )}
           {location.pathname == "/staff" && (
             <div className="flex flex-col justify-center items-center">
               <button onClick={toggleBox}>
@@ -187,6 +158,10 @@ export const Navbar = () => {
           )}
 
           <NavBarMenu pathname="/student" firstLinkTo="/student" />
+          <NavBarMenu pathname="/student-reservation" firstLinkTo="/student" />
+          <NavBarMenu pathname="/student-select" firstLinkTo="/student" />
+          <NavBarMenu pathname="/student-equipment" firstLinkTo="/student" />
+          <NavBarMenu pathname="/student-borrowed" firstLinkTo="/student" />
 
           <NavBarMenu pathname="/labTechnician2" firstLinkTo="/labTechnician2" />
           <NavBarMenu pathname="/labs-tech" firstLinkTo="/labTechnician2" />
