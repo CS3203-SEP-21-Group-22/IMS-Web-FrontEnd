@@ -207,10 +207,12 @@ export const Navbar = () => {
           <NavBarMenu pathname="/labs-tech" firstLinkTo="/labTechnician2" />
           <NavBarMenu pathname="/labtech-equipment" firstLinkTo="/labTechnician2" />
           <NavBarMenu pathname="/tech" firstLinkTo="/labTechnician2" />
+          <NavBarMenu pathname="/items-tech" firstLinkTo="/labTechnician2" />
           <NavBarMenu pathname="/tech/ongoing" firstLinkTo="/labTechnician2" />
           <NavBarMenu pathname="/tech/completed" firstLinkTo="/labTechnician2" />
 
           <NavBarMenu pathname="/admin" firstLinkTo="/admin" />
+          <NavBarMenu pathname="/admin-analytics" firstLinkTo="/admin" />
 
           <NavBarMenu pathname="/officeclerk" firstLinkTo="/officeclerk" />
           <NavBarMenu pathname="/clerk-reserve" firstLinkTo="/officeclerk" />

@@ -4,22 +4,23 @@ import axios from "axios";
 const TechItemCard = ({ itemData }) => {
   const [error, setError] = useState(null);
   const [boxExpanded, setBoxExpanded] = useState(false);
-  const [newData, setNewData] = useState({}); // Initialize as an object instead of an array
+  const [newData, setNewData] = useState([]); // Initialize as an object
   const [loading, setLoading] = useState(false); // Track loading state
 
-  const fetchEquipment = async () => {
+  const fetchItem = async () => {
     setError(null); // Clear any previous errors
     setLoading(true); // Set loading to true while data is being fetched
     try {
       const response = await axios.get(
-        `https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/user/equipments/${itemData.equipmentId}`,
+        `https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/user/items/${itemData.itemId}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("access_token")}`,
           },
         },
       );
-      setNewData(response.data);
+      setNewData(response.data); // Update newData with response data
+      console.log("itemdata", response.data);
     } catch (error) {
       console.error("Error when fetching equipment data", error);
       setError("Failed to load equipment information");
@@ -31,7 +32,7 @@ const TechItemCard = ({ itemData }) => {
   const handleClick = () => {
     setBoxExpanded(!boxExpanded);
     if (!boxExpanded && !newData.totalCount) {
-      fetchEquipment(); // Fetch data only when expanding the card for the first time
+      fetchItem(); // Fetch data only when expanding the card for the first time
     }
   };
 
@@ -56,14 +57,13 @@ const TechItemCard = ({ itemData }) => {
           </div>
 
           {boxExpanded && (
-            <div className="flex flex-col items-center justify-center mt-4">
+            <div className="flex flex-col items-center justify-center mt-4 text-white">
               {loading ? (
                 <p>Loading...</p>
               ) : (
                 <>
-                  <p>Total Items: {newData.totalCount}</p>
-                  <p>Reservations Count: {newData.reservedCount}</p>
-                  <p>Available Items: {newData.availableCount}</p>
+                  <p>LAST MAINTENANCE: {newData.lastMaintenanceOn || "N/A"}</p>
+                  <p>LAST MAINTENANCE BY: {newData.lastMaintenanceBy || "Unknown"}</p>
                   <button
                     onClick={(e) => {
                       e.stopPropagation(); // Prevent card collapsing on button click

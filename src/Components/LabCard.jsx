@@ -95,24 +95,32 @@ const LabCard = ({ imgsrc, altname, labData, imgWidth = "200px", imgHeight = "20
             placeholder="Enter Lab Image URL"
             className="bg-[#3C4D71] text-center text-[20px] shadow-lg shadow-[#32405e] rounded-[30px] text-white"
           />
-          <div className="px-4 bg-blue-300 rounded-[30px] cursor-pointer" onClick={editLab}>
+          <div className="px-4 bg-[#00ABE4] rounded-[30px] cursor-pointer text-white" onClick={editLab}>
             SAVE
           </div>
-          <div className="px-4 bg-gray-300 rounded-[30px] cursor-pointer" onClick={() => setEditMode(false)}>
+          <div className="px-4 bg-red-500 rounded-[30px] cursor-pointer text-white" onClick={() => setEditMode(false)}>
             CANCEL
           </div>
         </>
       ) : (
         <>
-          <img className="object-contain" src={imgsrc} alt={altname} style={{ width: imgWidth, height: imgHeight }} />
+          <img
+            className="object-contain rounded-[20px]"
+            src={labData.imageUrl}
+            alt={altname}
+            style={{ width: imgWidth, height: imgHeight }}
+          />
           <p className="font-josefin-sans font-normal text-[20px] text-white leading-[20px] tracking-[0.06em] ">
             {labData.labName}
           </p>
 
-          <div className="px-4 bg-blue-300 rounded-[30px] cursor-pointer " onClick={() => setEditMode(true)}>
+          <div
+            className="px-4 bg-[#00ABE4] rounded-[30px] cursor-pointer text-white "
+            onClick={() => setEditMode(true)}
+          >
             EDIT
           </div>
-          <div className="px-4 bg-blue-300 rounded-[30px] cursor-pointer" onClick={deleteLab}>
+          <div className="px-4 bg-[#00ABE4] rounded-[30px] cursor-pointer text-white" onClick={deleteLab}>
             DELETE
           </div>
         </>
