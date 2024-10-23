@@ -75,9 +75,9 @@ const EquipmentMiniCard = ({ equipmentData }) => {
         >
           <div className="flex-row flex items-center cursor-pointer text-white ">
             <div className="w-[150px]">
-              <img src={mouse} alt="mouse" />
+              <img src={equipmentData.imageUrl} alt="mouse" />
             </div>
-            <div className="flex flex-col justify-center text-[20px] text-left">
+            <div className="flex flex-col justify-center text-[20px] text-left ml-2">
               <p className="font-semibold">{equipmentData.name}</p>
               <p>Model: {equipmentData.model}</p>
               <p>Lab: {equipmentData.labName}</p>

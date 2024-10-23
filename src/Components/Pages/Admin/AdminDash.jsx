@@ -82,9 +82,9 @@ const AdminDashboard = () => {
   };
 
   return (
-    <div className="min-h-screen w-full bg-[#202652] flex relative flex-col items-center justify-center">
+    <div className="min-h-screen w-full bg-[#202652] flex relative flex-col items-center ">
       <div className="text-white text-[25px] font-semibold tracking-[0.06rem] pt-4">ADMIN DASHBOARD</div>
-      <div className="h-full w-full flex justify-center items-center">
+      <div className="h-full w-full flex justify-center items-center mt-[180px]">
         <div className="h-full w-[1000px] grid grid-cols-3 gap-3">
           <div className="flex justify-center items-center">
             <Link to="/user-profiles">

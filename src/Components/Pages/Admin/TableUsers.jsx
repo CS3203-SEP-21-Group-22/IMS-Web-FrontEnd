@@ -1,11 +1,11 @@
 import React from "react";
 
-import ItemRowUsers from "./ItemRowUsers";
+import ItemRowUsers from "../../ItemRowUsers";
 
 const TableUsers = ({ userData }) => {
   console.log(userData);
   return (
-    <div className="w-[1300px] h-[696px] bg-[#3C4D71] flex-row flex items-center justify-center gap-4 mt-10 text-white relative rounded-[60px]">
+    <div className="w-[1300px] h-[696px]  flex-row flex items-center justify-center gap-4 mt-10 text-white relative ">
       <div className="w-full h-full overflow-y-auto flex-col flex items-center justify-center p-4">
         <table className="table-auto w-[744px]  border-collapse ">
           <thead className="sticky top-0">

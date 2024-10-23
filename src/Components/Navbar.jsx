@@ -173,6 +173,7 @@ export const Navbar = () => {
 
           <NavBarMenu pathname="/admin" firstLinkTo="/admin" />
           <NavBarMenu pathname="/admin-analytics" firstLinkTo="/admin" />
+          <NavBarMenu pathname="/user-profiles" firstLinkTo="/admin" />
 
           <NavBarMenu pathname="/officeclerk" firstLinkTo="/officeclerk" />
           <NavBarMenu pathname="/clerk-reserve" firstLinkTo="/officeclerk" />
