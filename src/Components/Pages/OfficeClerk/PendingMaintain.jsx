@@ -33,7 +33,8 @@ const PendingMaintain = () => {
   }, []);
 
   return (
-    <div className="h-svh w-full bg-[#202652] flex flex-col items-center justify-center p-10">
+    <div className="h-svh w-full bg-[#202652] flex flex-col items-center  p-10">
+      <div className="text-white text-[25px] font-semibold tracking-[0.06rem] pt-4">PENDING MAINTENNANCES</div>
       {loading && (
         <div>
           <span className="loading loading-spinner text-info w-12 h-12"></span>
@@ -45,7 +46,7 @@ const PendingMaintain = () => {
         <p className="text-white text-[20px]">No pending maintenance items.</p>
       )}
       {!loading && pendingMaintenance.length > 0 && (
-        <div className="w-full max-w-4xl">
+        <div className="w-full max-w-4xl pt-20">
           {pendingMaintenance.map((item) => (
             <div key={item.itemId} className="bg-[#3C4D71] p-4 mb-4 rounded-lg shadow-md">
               <p className="text-white">

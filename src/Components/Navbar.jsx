@@ -40,8 +40,8 @@ export const Navbar = () => {
             <>
               <Link
                 to="/clerk-maintenance"
-                className={`flex flex-col justify-center items-center tracking-[0.06em] cursor-pointer ${
-                  location.pathname === "/clerk-maintenance" ? "text-[#color]" : "text-[#default-color]"
+                className={`flex flex-col justify-center items-center tracking-[0.06em] cursor-pointer text-white ${
+                  location.pathname === "/clerk-maintenance" ? "text-[20px]" : "text-[16px]"
                 }`}
               >
                 PENDING
@@ -49,8 +49,8 @@ export const Navbar = () => {
 
               <Link
                 to="/clerk-maintenance/ongoing"
-                className={`flex flex-col justify-center items-center tracking-[0.06em] cursor-pointer ${
-                  location.pathname === "/clerk-maintenance/ongoing" ? "text-[#color]" : "text-[#default-color]"
+                className={`flex flex-col justify-center items-center tracking-[0.06em] cursor-pointer text-white ${
+                  location.pathname === "/clerk-maintenance/ongoing" ? "text-[20px]" : "text-[16px]"
                 }`}
               >
                 ONGOING
@@ -58,8 +58,8 @@ export const Navbar = () => {
 
               <Link
                 to="/clerk-maintenance/completed"
-                className={`flex flex-col justify-center items-center tracking-[0.06em] cursor-pointer ${
-                  location.pathname === "/clerk-maintenance/completed" ? "text-[#color]" : "text-[#default-color]"
+                className={`flex flex-col justify-center items-center tracking-[0.06em] cursor-pointer text-white ${
+                  location.pathname === "/clerk-maintenance/completed" ? "text-[20px]" : "text-[16px]"
                 }`}
               >
                 COMPLETED
@@ -178,11 +178,11 @@ export const Navbar = () => {
           <NavBarMenu pathname="/officeclerk" firstLinkTo="/officeclerk" />
           <NavBarMenu pathname="/clerk-reserve" firstLinkTo="/officeclerk" />
           <NavBarMenu pathname="/clerk-request" firstLinkTo="/officeclerk" />
-          <NavBarMenu pathname="/clerk-reserve-view" firstLinkTo="/officeclerk" />
           <NavBarMenu pathname="/clerk-borrowed" firstLinkTo="/officeclerk" />
           <NavBarMenu pathname="/clerk-reserve-view" firstLinkTo="/officeclerk" />
           <NavBarMenu pathname="/clerk-labs" firstLinkTo="/officeclerk" />
           <NavBarMenu pathname="/clerk-equipment" firstLinkTo="/officeclerk" />
+          <NavBarMenu pathname="/clerk-maintenance" firstLinkTo="/officeclerk" />
           <NavBarMenu pathname="/clerk-maintenance/pending" firstLinkTo="/officeclerk" />
           <NavBarMenu pathname="/clerk-maintenance/ongoing" firstLinkTo="/officeclerk" />
           <NavBarMenu pathname="/clerk-maintenance/completed" firstLinkTo="/officeclerk" />

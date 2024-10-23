@@ -135,11 +135,11 @@ const ClerkEquipmentCard = ({
             placeholder="Enter Image URL"
             className="bg-[#3C4D71] text-center text-[20px] shadow-lg shadow-[#32405e] rounded-[30px] text-white"
           />
-          <div className="px-4 bg-blue-300 rounded-[30px] cursor-pointer " onClick={editLab}>
+          <div className="px-4 bg-[#00ABE4] rounded-[30px] cursor-pointer " onClick={editLab}>
             SAVE
           </div>
           <div
-            className="px-4 bg-gray-300 rounded-[30px] cursor-pointer"
+            className="px-4 bg-red-500 rounded-[30px] cursor-pointer"
             onClick={(e) => {
               e.stopPropagation();
               setEditMode(false);
@@ -166,7 +166,7 @@ const ClerkEquipmentCard = ({
             {equipmentData.model}
           </p>
           <div
-            className="px-4 bg-blue-300 rounded-[30px] cursor-pointer m-2 text-white"
+            className="px-4 bg-[#00ABE4] rounded-[30px] cursor-pointer m-2 text-white"
             onClick={(e) => {
               e.stopPropagation();
               setEditMode(true);
@@ -174,7 +174,7 @@ const ClerkEquipmentCard = ({
           >
             EDIT
           </div>
-          <div className="px-4 bg-blue-300 rounded-[30px] cursor-pointer mb-4 text-white" onClick={deleteLab}>
+          <div className="px-4 bg-red-500 rounded-[30px] cursor-pointer mb-4 text-white" onClick={deleteLab}>
             DELETE
           </div>
         </div>

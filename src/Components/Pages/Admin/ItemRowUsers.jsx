@@ -62,7 +62,7 @@ const ItemRowUsers = ({ userID, firstName, lastName, contactNumber, email, role 
   };
 
   return (
-    <tr className="bg-[#6D7AA4] border-[#3C4D71] border-[2px] text-center">
+    <tr className="bg-[#6D7AA4] text-center hover:scale-[1.05] duration-200 transition">
       {editMode ? (
         // Edit mode: Show input fields
         <>

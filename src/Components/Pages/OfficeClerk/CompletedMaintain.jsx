@@ -63,7 +63,8 @@ const CompletedMaintain = () => {
   }, []);
 
   return (
-    <div className="h-svh w-full bg-[#202652] flex flex-col items-center justify-center p-10">
+    <div className="h-svh w-full bg-[#202652] flex flex-col items-center  p-10">
+      <div className="text-white text-[25px] font-semibold tracking-[0.06rem] pt-4">COMPLETED MAINTENANCES</div>
       {loading && (
         <div className="flex flex-col justify-center items-center">
           <span className="loading loading-spinner text-info w-12 h-12"></span>
@@ -75,11 +76,11 @@ const CompletedMaintain = () => {
         <p className="text-white text-[20px]">No completed maintenance items.</p>
       )}
       {!loading && completedMaintenance.length > 0 && (
-        <div className="w-full flex flex-col items-center cursor-pointer">
+        <div className="w-full flex flex-row items-center cursor-pointer pt-20">
           {completedMaintenance.map((item) => (
             <div
               key={item.maintenanceId}
-              className={`w-[450px] bg-[#3C4D71] rounded-[40px] mb-4 transition-all duration-500 flex-col flex items-center justify-center p-4 ${
+              className={`w-[450px] bg-[#3C4D71] rounded-[40px] mb-4 mx-2 transition-all duration-500 flex-col flex items-center justify-center p-4 ${
                 expandedItem && expandedItem.maintenanceId === item.maintenanceId ? "h-auto" : "h-[170px] "
               }`}
               onClick={() => handleBoxClick(item)}

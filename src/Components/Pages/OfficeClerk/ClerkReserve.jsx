@@ -72,7 +72,8 @@ const ClerkReserve = () => {
   };
 
   return (
-    <div className="h-lvh w-full bg-[#202652]  flex relative justify-center">
+    <div className="h-lvh w-full bg-[#202652]  flex flex-col relative items-center">
+      <div className="text-white text-[25px] font-semibold tracking-[0.06rem] pt-4">CHOOSE RESERVATION TYPE</div>
       <div className="h-full w-[1000px] grid grid-cols-3 gap-x-10 gap-y-0  justify-center p-10 items-center">
         <Card imgsrc={checklist} altname="checklist" Children="REQUESTED" onClick={fetchRequested} />
 
