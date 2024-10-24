@@ -16,7 +16,7 @@ const ClerkReserveCard = ({ reservationData }) => {
     console.log("reserve id:", reservationData.reservationId);
     try {
       const response = await axios.get(
-        `https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/user/reservations/${reservationData.reservationId}`,
+        `${process.env.REACT_APP_BACKEND_API_URL}api/user/reservations/${reservationData.reservationId}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("access_token")}`,

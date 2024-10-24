@@ -15,7 +15,7 @@ const ClerkReserve = () => {
     setError(null);
     try {
       const response = await axios.get(
-        "https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/clerk/reservations?requested=true",
+        `${process.env.REACT_APP_BACKEND_API_URL}api/clerk/reservations?requested=true`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("access_token")}`,
@@ -34,14 +34,11 @@ const ClerkReserve = () => {
   const fetchReserved = async () => {
     setError(null);
     try {
-      const response = await axios.get(
-        "https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/clerk/reservations?reserved=true",
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-          },
+      const response = await axios.get(`${process.env.REACT_APP_BACKEND_API_URL}api/clerk/reservations?reserved=true`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
         },
-      );
+      });
 
       navigate("/clerk-reserve-view", { state: { reservations: response.data } });
       console.log("Fetched Reserved:", response.data);
@@ -54,14 +51,11 @@ const ClerkReserve = () => {
   const fetchBorrowed = async () => {
     setError(null);
     try {
-      const response = await axios.get(
-        "https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/clerk/reservations?borrowed=true",
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-          },
+      const response = await axios.get(`${process.env.REACT_APP_BACKEND_API_URL}api/clerk/reservations?borrowed=true`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
         },
-      );
+      });
 
       navigate("/clerk-borrowed", { state: { borrowings: response.data } });
       console.log("Fetched Borrowed:", response.data);

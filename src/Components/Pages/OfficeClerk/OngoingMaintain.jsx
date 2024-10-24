@@ -30,7 +30,7 @@ const OngoingMaintain = () => {
 
   const fetchLabs = async () => {
     try {
-      const response = await axios.get("http://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/user/labs", {
+      const response = await axios.get(`${process.env.REACT_APP_BACKEND_API_URL}api/user/labs`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("access_token")}`,
         },
@@ -63,7 +63,7 @@ const OngoingMaintain = () => {
   const fetchItems = async (equipmentId) => {
     try {
       const response = await axios.get(
-        `http://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/user/items?equipmentId=${equipmentId}`,
+        `${process.env.REACT_APP_BACKEND_API_URL}api/user/items?equipmentId=${equipmentId}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("access_token")}`,
@@ -79,14 +79,11 @@ const OngoingMaintain = () => {
 
   const fetchTechnicians = async () => {
     try {
-      const response = await axios.get(
-        "http://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/clerk/technicians",
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-          },
+      const response = await axios.get(`${process.env.REACT_APP_BACKEND_API_URL}api/clerk/technicians`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
         },
-      );
+      });
       setTechnicians(response.data);
     } catch (error) {
       console.error("Error fetching technicians", error);
@@ -99,7 +96,7 @@ const OngoingMaintain = () => {
     setLoading(true);
     try {
       const response = await axios.get(
-        "http://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/clerk/maintenance?completed=false",
+        `${process.env.REACT_APP_BACKEND_API_URL}api/clerk/maintenance?completed=false`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("access_token")}`,
@@ -162,16 +159,12 @@ const OngoingMaintain = () => {
 
     try {
       console.log("maintenance req:", newMaintenance);
-      await axios.post(
-        "http://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/clerk/maintenance",
-        newMaintenance,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-            "Content-Type": "application/json",
-          },
+      await axios.post(`${process.env.REACT_APP_BACKEND_API_URL}api/clerk/maintenance`, newMaintenance, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+          "Content-Type": "application/json",
         },
-      );
+      });
       setShowCreateForm(false);
       fetchOngoingMaintain();
 

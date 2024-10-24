@@ -34,16 +34,12 @@ export const ClerkEquipment = () => {
 
     try {
       console.log(equipmentData);
-      const response = await axios.post(
-        "https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/clerk/equipments",
-        equipmentData,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-            "Content-Type": "application/json",
-          },
+      const response = await axios.post(`${process.env.REACT_APP_BACKEND_API_URL}api/clerk/equipments`, equipmentData, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+          "Content-Type": "application/json",
         },
-      );
+      });
       console.log("New Equipment added:", response.data);
       setEquipment((prevEquipment) => [...prevEquipment, response.data]);
       setNewEquipment({

@@ -13,14 +13,11 @@ const CompletedMaintain = () => {
     setError(null);
     setLoading(true);
     try {
-      const response = await axios.get(
-        "https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/clerk/maintenance?completed=true",
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-          },
+      const response = await axios.get(`${process.env.REACT_APP_BACKEND_API_URL}api/clerk/maintenance?completed=true`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
         },
-      );
+      });
       console.log("Fetched completed maintenance:", response.data);
       setCompletedMaintenance(response.data);
     } catch (error) {
@@ -34,7 +31,7 @@ const CompletedMaintain = () => {
   const fetchAdditionalDetails = async (maintenanceId) => {
     try {
       const response = await axios.get(
-        `https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/user/maintenance/${maintenanceId}`,
+        `${process.env.REACT_APP_BACKEND_API_URL}api/user/maintenance/${maintenanceId}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("access_token")}`,

@@ -10,14 +10,11 @@ const PendingMaintain = () => {
     setError(null);
     setLoading(true);
     try {
-      const response = await axios.get(
-        "https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/clerk/maintenance/pending",
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-          },
+      const response = await axios.get(`${process.env.REACT_APP_BACKEND_API_URL}api/clerk/maintenance/pending`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
         },
-      );
+      });
       console.log("Fetched pending maintenance:", response.data);
       setPendingMaintenance(response.data);
     } catch (error) {
