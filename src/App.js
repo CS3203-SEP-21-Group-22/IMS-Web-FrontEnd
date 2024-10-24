@@ -18,7 +18,7 @@ import { AdminProfile } from "./Components/Pages/Admin/AdminProfile";
 import { OfficeClerkProfile } from "./Components/Pages/OfficeClerk/OfficeClerkProfile";
 
 import { UserProfiles } from "./Components/Pages/UserProfileView";
-import { ViewLabs } from "./Components/Pages/ViewLabs";
+import { ViewLabs } from "./Components/Pages/Admin/ViewLabs";
 import SendRequest from "./Components/Pages/SendRequest";
 
 import TechnicianReq from "./Components/Pages/LabTechnician/TechnicianReq";

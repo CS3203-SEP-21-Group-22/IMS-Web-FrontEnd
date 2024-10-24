@@ -26,7 +26,7 @@ const OngoingMiniCard = ({ assignedData }) => {
     setError(null);
     try {
       const response = await axios.get(
-        `https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/user/maintenance/${assignedData.maintenanceId}`,
+        `${process.env.REACT_APP_BACKEND_API_URL}api/user/maintenance/${assignedData.maintenanceId}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("access_token")}`,
@@ -56,7 +56,7 @@ const OngoingMiniCard = ({ assignedData }) => {
       setError(null);
 
       await axios.patch(
-        `https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/technician/maintenance/${assignedData.maintenanceId}`,
+        `${process.env.REACT_APP_BACKEND_API_URL}api/technician/maintenance/${assignedData.maintenanceId}`,
         {
           submitNote,
           cost: parseFloat(cost),

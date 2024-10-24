@@ -15,7 +15,7 @@ const LabTechMiniCard = ({ equipmentData }) => {
     setLoading(true); // Set loading to true while data is being fetched
     try {
       const response = await axios.get(
-        `https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/user/equipments/${equipmentData.equipmentId}`,
+        `${process.env.REACT_APP_BACKEND_API_URL}api/user/equipments/${equipmentData.equipmentId}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("access_token")}`,

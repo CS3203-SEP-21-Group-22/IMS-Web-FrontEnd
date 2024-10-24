@@ -18,7 +18,7 @@ const LabTechItems = () => {
     setLoading(true); // Set loading to true while data is being fetched
     try {
       const response = await axios.get(
-        `https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/user/items?equipmentId=${equipmentId}`,
+        `${process.env.REACT_APP_BACKEND_API_URL}api/user/items?equipmentId=${equipmentId}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("access_token")}`,
@@ -40,8 +40,8 @@ const LabTechItems = () => {
   }, [equipmentId]);
 
   return (
-    <div className="min-h-screen w-full bg-[#202652] flex flex-col justify-center items-center p-10">
-      <div className="text-white text-[25px] font-semibold tracking-[0.06rem]">AVAILABLE EQUIPMENT</div>
+    <div className="min-h-screen w-full bg-[#202652] flex flex-col  items-center p-10">
+      <div className="text-white text-[25px] font-semibold tracking-[0.06rem]">AVAILABLE ITEMS</div>
 
       {/* Loading state */}
       {loading && <p className="text-white">Loading...</p>}

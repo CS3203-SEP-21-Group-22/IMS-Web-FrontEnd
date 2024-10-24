@@ -11,7 +11,7 @@ export const TechnicianLabs = () => {
   const fetchLabs = async () => {
     setError(null);
     try {
-      const response = await axios.get(`https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/user/labs`, {
+      const response = await axios.get(`${process.env.REACT_APP_BACKEND_API_URL}api/user/labs`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("access_token")}`,
         },

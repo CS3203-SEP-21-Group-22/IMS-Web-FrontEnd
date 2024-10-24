@@ -29,7 +29,7 @@ const AdminAnalytics = () => {
   // Fetch labs
   const fetchLabs = async () => {
     try {
-      const response = await axios.get("https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/user/labs", {
+      const response = await axios.get(`${process.env.REACT_APP_BACKEND_API_URL}api/user/labs`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("access_token")}`,
         },
@@ -45,14 +45,11 @@ const AdminAnalytics = () => {
   const fetchEquipments = async (labId) => {
     setLoading(true);
     try {
-      const response = await axios.get(
-        `https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/user/equipments?labId=${labId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-          },
+      const response = await axios.get(`${process.env.REACT_APP_BACKEND_API_URL}api/user/equipments?labId=${labId}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
         },
-      );
+      });
       setEquipments(response.data);
     } catch (error) {
       console.error("Error fetching equipments", error);
@@ -66,7 +63,7 @@ const AdminAnalytics = () => {
     setLoading(true);
     try {
       const response = await axios.get(
-        `https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/admin/reservations?year=${year}&month=${month}`,
+        `${process.env.REACT_APP_BACKEND_API_URL}api/admin/reservations?year=${year}&month=${month}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("access_token")}`,
@@ -109,7 +106,7 @@ const AdminAnalytics = () => {
         setLoading(true);
         try {
           const response = await axios.get(
-            `https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/admin/reservations/${equipmentId}`,
+            `${process.env.REACT_APP_BACKEND_API_URL}api/admin/reservations/${equipmentId}`,
             {
               headers: {
                 Authorization: `Bearer ${localStorage.getItem("access_token")}`,

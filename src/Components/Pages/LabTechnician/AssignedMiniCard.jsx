@@ -24,7 +24,7 @@ const AssignedMiniCard = ({ assignedData }) => {
     setError(null);
     try {
       const response = await axios.get(
-        `https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/user/maintenance/${assignedData.maintenanceId}`,
+        `${process.env.REACT_APP_BACKEND_API_URL}api/user/maintenance/${assignedData.maintenanceId}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("access_token")}`,
@@ -33,8 +33,8 @@ const AssignedMiniCard = ({ assignedData }) => {
           },
         },
       );
-      setAdditionalInfo(response.data); // Store the fetched additional information
-      setIsExpanded(true); // Expand the card to show additional information
+      setAdditionalInfo(response.data);
+      setIsExpanded(true);
     } catch (error) {
       console.error("Error when fetching maintenance", error);
       setError("Failed to load maintenance information");

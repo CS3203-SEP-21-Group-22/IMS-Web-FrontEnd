@@ -11,14 +11,11 @@ const TechItemCard = ({ itemData }) => {
     setError(null); // Clear any previous errors
     setLoading(true); // Set loading to true while data is being fetched
     try {
-      const response = await axios.get(
-        `https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/user/items/${itemData.itemId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-          },
+      const response = await axios.get(`${process.env.REACT_APP_BACKEND_API_URL}api/user/items/${itemData.itemId}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
         },
-      );
+      });
       setNewData(response.data); // Update newData with response data
       console.log("itemdata", response.data);
     } catch (error) {

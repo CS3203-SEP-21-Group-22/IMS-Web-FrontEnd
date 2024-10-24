@@ -14,7 +14,7 @@ const Ongoing = () => {
     setError(null);
     try {
       const response = await axios.get(
-        "https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/technician/maintenance?completed=false",
+        `${process.env.REACT_APP_BACKEND_API_URL}api/technician/maintenance?completed=false`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("access_token")}`,
@@ -50,7 +50,7 @@ const Ongoing = () => {
       ) : assigned.length === 0 ? (
         <p className="text-white text-[24px] font-semibold">No ongoing items have been assigned.</p>
       ) : (
-        <div className="flex flex-col items-center justify-center">
+        <div className="flex flex-col items-center ">
           <div className="text-white text-[25px] font-semibold tracking-[0.06rem]">ONGOING MAINTENANCE</div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
             {assigned.map((assign, index) => (

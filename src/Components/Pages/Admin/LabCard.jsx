@@ -19,14 +19,11 @@ const LabCard = ({ imgsrc, altname, labData, imgWidth = "200px", imgHeight = "20
   const deleteLab = async () => {
     setError(null);
     try {
-      const response = await axios.delete(
-        `https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/admin/labs/${labData.labId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-          },
+      const response = await axios.delete(`${process.env.REACT_APP_BACKEND_API_URL}api/admin/labs/${labData.labId}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
         },
-      );
+      });
 
       console.log("deleted lab:", response.data);
 
@@ -42,7 +39,7 @@ const LabCard = ({ imgsrc, altname, labData, imgWidth = "200px", imgHeight = "20
     setError(null);
     try {
       const response = await axios.patch(
-        `https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/admin/labs/${labData.labId}`,
+        `${process.env.REACT_APP_BACKEND_API_URL}api/admin/labs/${labData.labId}`,
         {
           labName: editLabData.labName,
           labCode: editLabData.labCode,
