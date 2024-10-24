@@ -19,7 +19,7 @@ const EquipmentMiniCard = ({ equipmentData }) => {
 
     try {
       const response = await axios.post(
-        "https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/student/reservations",
+        `${process.env.REACT_APP_BACKEND_API_URL}api/student/reservations`,
         {
           equipmentId: equipmentData.equipmentId,
           startDate,

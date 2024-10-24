@@ -19,7 +19,7 @@ const AdminDashboard = () => {
     setError(null);
     try {
       const response = await axios.get(
-        "https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/admin/reservations?year=2024&month=11",
+        `${process.env.REACT_APP_BACKEND_API_URL}api/admin/reservations?year=2024&month=11`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("access_token")}`,
@@ -44,7 +44,7 @@ const AdminDashboard = () => {
     setLoading(true);
     setError(null);
     try {
-      const response = await axios.get("https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/user/labs", {
+      const response = await axios.get(`${process.env.REACT_APP_BACKEND_API_URL}api/user/labs`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("access_token")}`,
         },
@@ -63,14 +63,11 @@ const AdminDashboard = () => {
     setLoading(true);
     setError(null);
     try {
-      const response = await axios.get(
-        "https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/admin/users",
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-          },
+      const response = await axios.get(`${process.env.REACT_APP_BACKEND_API_URL}api/admin/users`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
         },
-      );
+      });
       setUsers(response.data);
       navigate("/user-profiles", { state: { users: response.data } });
     } catch (errror) {

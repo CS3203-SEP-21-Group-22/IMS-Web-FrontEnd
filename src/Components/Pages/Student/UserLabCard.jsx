@@ -11,14 +11,11 @@ const UserLabCard = ({ imgsrc, altname, name, imgWidth = "200px", imgHeight = "2
     setError(null);
     try {
       console.log("Lab id:", labId);
-      const response = await axios.get(
-        `https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/user/equipments?labId=${labId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-          },
+      const response = await axios.get(`${process.env.REACT_APP_BACKEND_API_URL}api/user/equipments?labId=${labId}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
         },
-      );
+      });
       console.log("Fetched equipment:", response.data);
       navigate("/student-equipment", { state: { equipment: response.data } });
     } catch (error) {
