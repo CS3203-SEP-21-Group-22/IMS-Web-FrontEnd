@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { BarChart } from "@mui/x-charts";
+import { colors } from "@mui/material";
+import { blue } from "@mui/material/colors";
 
 const MonthlyReservationsBarChart = () => {
   const [monthlyReservations, setMonthlyReservations] = useState([]);
@@ -78,6 +80,14 @@ const MonthlyReservationsBarChart = () => {
                 tickLabelStyle: {
                   fill: "#FFFFFF",
                 },
+
+                labelStyle: {
+                  fill: "#FFFFFF",
+                },
+
+                lineStyle: {
+                  colors: blue,
+                },
               },
             ]}
             yAxis={[
@@ -85,22 +95,42 @@ const MonthlyReservationsBarChart = () => {
                 tickLabelStyle: {
                   fill: "#FFFFFF",
                 },
+                axisLineStyle: {
+                  stroke: "#FFFFFF",
+                },
               },
             ]}
             series={[
               {
                 data: monthlyReservations.map((item) => item.count),
                 label: "Reservations",
+                labelStyle: {
+                  fill: "#FFFFFF", // Green color for the series label
+                },
               },
             ]}
+            slotProps={{
+              legend: {
+                labelStyle: {
+                  fontSize: 20,
+                  fill: "#FFFFFF",
+                },
+              },
+            }}
             width={600}
             height={400}
             sx={{
-              "& .MuiChart-axis": {
-                stroke: "#FFFFFF",
+              "& .MuiChartsAxis-root .MuiChartsAxis-tick": {
+                stroke: "#FFFFFF", // Sets tick mark color to green
               },
-              "& .MuiChart-tick": {
-                stroke: "#FFFFFF",
+              "& .MuiChartsSeries-label": {
+                fill: "#FFFFFF", // Sets the series label color to green
+              },
+              "& .MuiChartsAxis-root .MuiChartsAxis-line": {
+                stroke: "#FFFFFF", // Sets axis line color to green
+              },
+              "& .MuiChartsAxis-tickLabel": {
+                fill: "#FFFFFF", // Sets tick label color to green
               },
             }}
           />
