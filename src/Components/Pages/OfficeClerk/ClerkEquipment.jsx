@@ -34,16 +34,12 @@ export const ClerkEquipment = () => {
 
     try {
       console.log(equipmentData);
-      const response = await axios.post(
-        "https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/clerk/equipments",
-        equipmentData,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-            "Content-Type": "application/json",
-          },
+      const response = await axios.post(`${process.env.REACT_APP_BACKEND_API_URL}api/clerk/equipments`, equipmentData, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+          "Content-Type": "application/json",
         },
-      );
+      });
       console.log("New Equipment added:", response.data);
       setEquipment((prevEquipment) => [...prevEquipment, response.data]);
       setNewEquipment({
@@ -63,15 +59,15 @@ export const ClerkEquipment = () => {
   };
 
   return (
-    <div className="h-svh w-full bg-[#202652] flex relative flex-col items-center p-10">
-      <div className="flex flex-row items-center justify-center bg-[#3C4D71] rounded-[40px] p-4 m-6">
+    <div className="h-svh w-full bg-[#202652] flex relative flex-col items-center p-10 text-white">
+      <div className="flex flex-row items-center justify-center bg-[#3C4D71] rounded-[40px] p-4 m-6 text-white">
         <input
           type="text"
           name="name"
           value={newEquipment.name}
           onChange={handleInput}
           placeholder="Enter Equipment Name"
-          className="bg-[#3C4D71] rounded-l-[30px] text-center text-[20px] shadow-lg shadow-[#32405e]"
+          className="bg-[#3C4D71] rounded-l-[30px] text-center text-[20px] shadow-lg shadow-[#32405e] text-white"
         />
         <input
           type="text"
@@ -79,7 +75,7 @@ export const ClerkEquipment = () => {
           value={newEquipment.model}
           onChange={handleInput}
           placeholder="Enter Equipment Model"
-          className="bg-[#3C4D71] text-center text-[20px] shadow-lg shadow-[#32405e]"
+          className="bg-[#3C4D71] text-center text-[20px] shadow-lg shadow-[#32405e] text-white"
         />
         <input
           type="text"
@@ -87,11 +83,11 @@ export const ClerkEquipment = () => {
           value={newEquipment.imageUrl}
           onChange={handleInput}
           placeholder="Enter Image URL"
-          className="bg-[#3C4D71] text-center text-[20px] shadow-lg shadow-[#32405e]"
+          className="bg-[#3C4D71] text-center text-[20px] shadow-lg shadow-[#32405e] text-white"
         />
 
         <div
-          className="px-4 text-center text-[20px] bg-blue-300 rounded-r-[30px] cursor-pointer shadow-[#32405e] shadow-lg"
+          className="px-4 text-center text-[20px] bg-[#00ABE4] rounded-r-[30px] cursor-pointer shadow-[#32405e] shadow-lg text-white"
           onClick={addEquipment}
         >
           +

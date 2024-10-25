@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
-import checklist from "../../styles/images/checklist.png";
+import checklist from "../../../styles/images/checklist.png";
 import axios from "axios";
 
-import LabCard from "../LabCard";
+import LabCard from "./LabCard";
 
 export const ViewLabs = () => {
   const [error, setError] = useState(null);
@@ -31,16 +31,12 @@ export const ViewLabs = () => {
 
     try {
       console.log(labData);
-      const response = await axios.post(
-        "https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/admin/labs",
-        labData,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-            "Content-Type": "application/json",
-          },
+      const response = await axios.post(`${process.env.REACT_APP_BACKEND_API_URL}api/admin/labs`, labData, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+          "Content-Type": "application/json",
         },
-      );
+      });
       console.log("i am here");
       console.log("New Lab Added:", response.data);
       setLabs((prevLabs) => [...prevLabs, response.data]);

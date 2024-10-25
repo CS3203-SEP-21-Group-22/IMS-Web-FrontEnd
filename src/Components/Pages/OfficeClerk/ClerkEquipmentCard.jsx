@@ -28,7 +28,7 @@ const ClerkEquipmentCard = ({
     setError(null);
     try {
       const response = await axios.patch(
-        `https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/clerk/equipments/${equipmentData.equipmentId}`,
+        `${process.env.REACT_APP_BACKEND_API_URL}api/clerk/equipments/${equipmentData.equipmentId}`,
         {
           name: editEquipmentData.name,
           model: editEquipmentData.model,
@@ -55,7 +55,7 @@ const ClerkEquipmentCard = ({
     try {
       console.log("equipment id:", equipmentData.equipmentId);
       const response = await axios.get(
-        `https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/user/items?equipmentId=${equipmentData.equipmentId}`,
+        `${process.env.REACT_APP_BACKEND_API_URL}api/user/items?equipmentId=${equipmentData.equipmentId}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("access_token")}`,
@@ -80,7 +80,7 @@ const ClerkEquipmentCard = ({
     setError(null);
     try {
       const response = await axios.delete(
-        `https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/clerk/equipments/${equipmentData.equipmentId}`,
+        `${process.env.REACT_APP_BACKEND_API_URL}api/clerk/equipments/${equipmentData.equipmentId}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("access_token")}`,
@@ -100,7 +100,7 @@ const ClerkEquipmentCard = ({
   };
 
   return (
-    <div className="w-[307px] h-[288px] bg-[#3C4D71] rounded-[60px] pb-4 flex flex-col justify-center items-center relative cursor-pointer hover:scale-[1.1] transition duration-200 shadow-lg gap-3 ">
+    <div className="w-[307px] h-[298px] bg-[#3C4D71] rounded-[60px]  flex flex-col justify-center items-center relative cursor-pointer hover:scale-[1.1] transition duration-200 shadow-lg gap-3  p-4">
       {editMode ? (
         <>
           <input
@@ -135,11 +135,11 @@ const ClerkEquipmentCard = ({
             placeholder="Enter Image URL"
             className="bg-[#3C4D71] text-center text-[20px] shadow-lg shadow-[#32405e] rounded-[30px] text-white"
           />
-          <div className="px-4 bg-blue-300 rounded-[30px] cursor-pointer " onClick={editLab}>
+          <div className="px-4 bg-[#00ABE4] rounded-[30px] cursor-pointer " onClick={editLab}>
             SAVE
           </div>
           <div
-            className="px-4 bg-gray-300 rounded-[30px] cursor-pointer"
+            className="px-4 bg-red-500 rounded-[30px] cursor-pointer"
             onClick={(e) => {
               e.stopPropagation();
               setEditMode(false);
@@ -150,7 +150,12 @@ const ClerkEquipmentCard = ({
         </>
       ) : (
         <div className="flex flex-col justify-center items-center">
-          <img className="object-contain" src={imgsrc} alt={altname} style={{ width: imgWidth, height: imgHeight }} />
+          <img
+            className="object-contain"
+            src={equipmentData.imageUrl}
+            alt={altname}
+            style={{ width: imgWidth, height: imgHeight }}
+          />
           <p
             className="font-josefin-sans font-normal text-[20px] text-white leading-[20px] tracking-[0.06em]  "
             onClick={handleClick}
@@ -161,7 +166,7 @@ const ClerkEquipmentCard = ({
             {equipmentData.model}
           </p>
           <div
-            className="px-4 bg-blue-300 rounded-[30px] cursor-pointer m-2 text-white"
+            className="px-4 bg-[#00ABE4] rounded-[30px] cursor-pointer m-2 text-white"
             onClick={(e) => {
               e.stopPropagation();
               setEditMode(true);
@@ -169,7 +174,7 @@ const ClerkEquipmentCard = ({
           >
             EDIT
           </div>
-          <div className="px-4 bg-blue-300 rounded-[30px] cursor-pointer mb-4 text-white" onClick={deleteLab}>
+          <div className="px-4 bg-red-500 rounded-[30px] cursor-pointer mb-4 text-white" onClick={deleteLab}>
             DELETE
           </div>
         </div>

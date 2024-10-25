@@ -3,17 +3,18 @@ import axios from "axios";
 import router from "../../../styles/images/router.png";
 
 export const Completed = () => {
-  const [completedMaintenances, setCompletedMaintenances] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [expandedCard, setExpandedCard] = useState(null);
+  const [completedMaintenances, setCompletedMaintenances] = useState([]); // Store completed maintenance data
+  const [loading, setLoading] = useState(false); // Loading state
+  const [error, setError] = useState(null); // Error state
+  const [expandedCard, setExpandedCard] = useState(null); // Track which card is expanded
 
+  // Fetch the initial list of completed maintenances
   const fetchCompleted = async () => {
     setLoading(true);
     setError(null);
     try {
       const response = await axios.get(
-        "https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/technician/maintenance?completed=true",
+        `${process.env.REACT_APP_BACKEND_API_URL}api/technician/maintenance?completed=true`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("access_token")}`,
@@ -32,10 +33,11 @@ export const Completed = () => {
     }
   };
 
-  const fetchExtraDetails = async (newmaintenanceId) => {
+  // Fetch additional details for a specific maintenance when a card is expanded
+  const fetchExtraDetails = async (maintenanceId) => {
     try {
       const response = await axios.get(
-        `https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/technician/maintenance/${newmaintenanceId}`,
+        `${process.env.REACT_APP_BACKEND_API_URL}api/technician/maintenance/${maintenanceId}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("access_token")}`,
@@ -44,34 +46,37 @@ export const Completed = () => {
           },
         },
       );
+
       // Update the specific maintenance item with the extra details
       setCompletedMaintenances((prevMaintenances) =>
         prevMaintenances.map((item) =>
-          item.maintenanceId === newmaintenanceId ? { ...item, extraDetails: response.data } : item,
+          item.maintenanceId === maintenanceId ? { ...item, extraDetails: response.data } : item,
         ),
       );
-
-      console.log(completedMaintenances);
     } catch (error) {
       console.error("Error fetching extra details:", error);
     }
   };
 
-  useEffect(() => {
-    fetchCompleted();
-  }, []);
-
-  const toggleCard = (newId) => {
-    if (expandedCard === newId) {
-      setExpandedCard(null);
+  // Handle card expansion/collapse and fetch extra details if not already fetched
+  const toggleCard = (maintenanceId) => {
+    if (expandedCard === maintenanceId) {
+      setExpandedCard(null); // Collapse the card if it's already expanded
     } else {
-      setExpandedCard(newId);
-      const maintenance = completedMaintenances.find((item) => item.maintenanceId === newId);
+      setExpandedCard(maintenanceId); // Expand the card
+      const maintenance = completedMaintenances.find((item) => item.maintenanceId === maintenanceId);
+
+      // Fetch extra details only if they haven't been fetched before
       if (!maintenance.extraDetails) {
-        fetchExtraDetails(newId);
+        fetchExtraDetails(maintenanceId);
       }
     }
   };
+
+  // Fetch completed maintenances when the component mounts
+  useEffect(() => {
+    fetchCompleted();
+  }, []);
 
   return (
     <div className="h-svh w-full bg-[#202652] flex relative flex-col items-center justify-center p-10">
@@ -107,7 +112,7 @@ export const Completed = () => {
                   <p>Status: {maintenance.status}</p>
                 </div>
               </div>
-              {/* Expand to show more information */}
+              {/* Expanded details */}
               {expandedCard === maintenance.maintenanceId && maintenance.extraDetails && (
                 <div className="mt-4">
                   <p>Serial No: {maintenance.extraDetails.itemSerialNumber}</p>

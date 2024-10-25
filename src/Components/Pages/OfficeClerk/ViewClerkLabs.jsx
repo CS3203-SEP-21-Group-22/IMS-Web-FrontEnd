@@ -8,8 +8,8 @@ export const ViewClerkLabs = () => {
   const [labs, setLabs] = useState(Array.isArray(location.state?.labs) ? location.state.labs : []);
 
   return (
-    <div className="h-svh w-full bg-[#202652]  flex relative flex-col items-center justify-center p-10">
-      <div className="h-svh w-[1000px]  grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 justify-items-center">
+    <div className="min-h-screen w-full bg-[#202652]  flex relative flex-col items-center justify-center p-10">
+      <div className="min-h-screen w-[1000px]  grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 justify-items-center">
         {labs.map((lab, index) => {
           return (
             <div key={index} className="flex justify-center items-center ">

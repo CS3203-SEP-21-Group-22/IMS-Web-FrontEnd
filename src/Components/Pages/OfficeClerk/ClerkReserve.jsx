@@ -15,7 +15,7 @@ const ClerkReserve = () => {
     setError(null);
     try {
       const response = await axios.get(
-        "https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/clerk/reservations?requested=true",
+        `${process.env.REACT_APP_BACKEND_API_URL}api/clerk/reservations?requested=true`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("access_token")}`,
@@ -34,14 +34,11 @@ const ClerkReserve = () => {
   const fetchReserved = async () => {
     setError(null);
     try {
-      const response = await axios.get(
-        "https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/clerk/reservations?reserved=true",
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-          },
+      const response = await axios.get(`${process.env.REACT_APP_BACKEND_API_URL}api/clerk/reservations?reserved=true`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
         },
-      );
+      });
 
       navigate("/clerk-reserve-view", { state: { reservations: response.data } });
       console.log("Fetched Reserved:", response.data);
@@ -54,16 +51,13 @@ const ClerkReserve = () => {
   const fetchBorrowed = async () => {
     setError(null);
     try {
-      const response = await axios.get(
-        "https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/clerk/reservations?borrowed=true",
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-          },
+      const response = await axios.get(`${process.env.REACT_APP_BACKEND_API_URL}api/clerk/reservations?borrowed=true`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
         },
-      );
+      });
 
-      //   navigate("/clerk-borrowed", { state: { labs: response.data } });
+      navigate("/clerk-borrowed", { state: { borrowings: response.data } });
       console.log("Fetched Borrowed:", response.data);
     } catch (errror) {
       console.error("Error when fetching res", error);
@@ -72,7 +66,8 @@ const ClerkReserve = () => {
   };
 
   return (
-    <div className="h-lvh w-full bg-[#202652]  flex relative justify-center">
+    <div className="h-lvh w-full bg-[#202652]  flex flex-col relative items-center">
+      <div className="text-white text-[25px] font-semibold tracking-[0.06rem] pt-4">CHOOSE RESERVATION TYPE</div>
       <div className="h-full w-[1000px] grid grid-cols-3 gap-x-10 gap-y-0  justify-center p-10 items-center">
         <Card imgsrc={checklist} altname="checklist" Children="REQUESTED" onClick={fetchRequested} />
 

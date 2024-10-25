@@ -1,6 +1,6 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
-import TableUsers from "../TableUsers";
+import TableUsers from "./Admin/TableUsers";
 
 export const UserProfiles = () => {
   const location = useLocation();

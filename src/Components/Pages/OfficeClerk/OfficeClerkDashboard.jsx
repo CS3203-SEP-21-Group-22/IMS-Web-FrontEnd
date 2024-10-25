@@ -18,7 +18,7 @@ const OfficeClerkDashboard = () => {
   const fetchLabs = async () => {
     setError(null);
     try {
-      const response = await axios.get("https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/user/labs", {
+      const response = await axios.get(`${process.env.REACT_APP_BACKEND_API_URL}api/user/labs`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("access_token")}`,
         },
@@ -37,7 +37,8 @@ const OfficeClerkDashboard = () => {
   };
 
   return (
-    <div className="h-lvh w-full bg-[#202652]  flex relative justify-center">
+    <div className="h-lvh w-full bg-[#202652]  flex flex-col relative items-center">
+      <div className="text-white text-[25px] font-semibold tracking-[0.06rem] pt-4">CLERK DASHBOARD</div>
       <div className="h-full w-[1000px] grid grid-cols-3 gap-x-10 gap-y-0  justify-center p-10 items-center">
         <Card imgsrc={checklist} altname="checklist" Children="RESERVATIONS" onClick={toggleBox1} />
 

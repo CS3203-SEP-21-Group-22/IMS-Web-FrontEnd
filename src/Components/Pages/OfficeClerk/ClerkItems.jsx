@@ -19,7 +19,7 @@ export const ClerkItems = () => {
       setError(null);
       try {
         const response = await axios.get(
-          `https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/user/items?equipmentId=${equipmentId}`,
+          `${process.env.REACT_APP_BACKEND_API_URL}api/user/items?equipmentId=${equipmentId}`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("access_token")}`,

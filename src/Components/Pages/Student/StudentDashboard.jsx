@@ -19,7 +19,7 @@ const StudentDashboard = () => {
     setError(null);
     try {
       const response = await axios.get(
-        "https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/student/reservations?borrowed=false",
+        `${process.env.REACT_APP_BACKEND_API_URL}api/student/reservations?borrowed=false`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("access_token")}`,
@@ -44,7 +44,7 @@ const StudentDashboard = () => {
     setError(null);
     try {
       const response = await axios.get(
-        "https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/student/reservations?borrowed=true",
+        `${process.env.REACT_APP_BACKEND_API_URL}api/student/reservations?borrowed=true`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("access_token")}`,
@@ -64,7 +64,7 @@ const StudentDashboard = () => {
   const fetchLabs = async () => {
     setError(null);
     try {
-      const response = await axios.get(`https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/user/labs`, {
+      const response = await axios.get(`${process.env.REACT_APP_BACKEND_API_URL}api/user/labs`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("access_token")}`,
         },
@@ -79,7 +79,8 @@ const StudentDashboard = () => {
     }
   };
   return (
-    <div className="h-svh w-full  bg-[#202652]  flex relative justify-center">
+    <div className="h-svh w-full  bg-[#202652]  flex relative flex-col items-center ">
+      <div className="text-white text-[25px] font-semibold tracking-[0.06rem] pt-4">STUDENT DASHBOARD</div>
       <div className="h-full w-[1000px] grid grid-cols-3 gap-5">
         <>
           <div className="flex justify-center items-center">

@@ -5,11 +5,11 @@ import ItemRowUsers from "./ItemRowUsers";
 const TableUsers = ({ userData }) => {
   console.log(userData);
   return (
-    <div className="w-[1300px] h-[696px] bg-[#3C4D71] flex-row flex items-center justify-center gap-4 mt-10 text-white relative rounded-[60px]">
+    <div className="w-[1300px] h-[696px]  flex-row flex items-center justify-center gap-4 mt-10 text-white relative ">
       <div className="w-full h-full overflow-y-auto flex-col flex items-center justify-center p-4">
         <table className="table-auto w-[744px]  border-collapse ">
           <thead className="sticky top-0">
-            <tr className="bg-[#6D7AA4] shadow-lg border-[#3C4D71] border-[1px] text-center h-[50px]">
+            <tr className="bg-[#6D7AA4] shadow-lg border-none text-center h-[50px]">
               <th className="px-4">USER ID</th>
               <th className="px-4">FIRST NAME</th>
               <th className="px-4">LAST NAME</th>

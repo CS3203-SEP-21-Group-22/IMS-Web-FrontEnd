@@ -5,6 +5,7 @@ import MonthlyEquipmentBarChart from "./MonthlyEquipmentBarChart";
 import MonthlyReservationsBarChart from "./MonthlyReservationsBarChart";
 import MostReservedEquipment from "./MostReservedEquipment";
 import LoadingSpinner from "../../LoadingSpinner";
+import YearMonthSelector from "./YearMonthSelector";
 
 const AdminAnalytics = () => {
   const [loading, setLoading] = useState(false);
@@ -29,7 +30,7 @@ const AdminAnalytics = () => {
   // Fetch labs
   const fetchLabs = async () => {
     try {
-      const response = await axios.get("https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/user/labs", {
+      const response = await axios.get(`${process.env.REACT_APP_BACKEND_API_URL}api/user/labs`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("access_token")}`,
         },
@@ -45,14 +46,11 @@ const AdminAnalytics = () => {
   const fetchEquipments = async (labId) => {
     setLoading(true);
     try {
-      const response = await axios.get(
-        `https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/user/equipments?labId=${labId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-          },
+      const response = await axios.get(`${process.env.REACT_APP_BACKEND_API_URL}api/user/equipments?labId=${labId}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
         },
-      );
+      });
       setEquipments(response.data);
     } catch (error) {
       console.error("Error fetching equipments", error);
@@ -66,7 +64,7 @@ const AdminAnalytics = () => {
     setLoading(true);
     try {
       const response = await axios.get(
-        `https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/admin/reservations?year=${year}&month=${month}`,
+        `${process.env.REACT_APP_BACKEND_API_URL}api/admin/reservations?year=${year}&month=${month}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("access_token")}`,
@@ -109,7 +107,7 @@ const AdminAnalytics = () => {
         setLoading(true);
         try {
           const response = await axios.get(
-            `https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/admin/reservations/${equipmentId}`,
+            `${process.env.REACT_APP_BACKEND_API_URL}api/admin/reservations/${equipmentId}`,
             {
               headers: {
                 Authorization: `Bearer ${localStorage.getItem("access_token")}`,
@@ -144,63 +142,21 @@ const AdminAnalytics = () => {
 
   return (
     <div className="min-h-screen w-full bg-[#202652] flex flex-col items-center justify-center">
-      <div className="flex flex-col items-center justify-center h-screen">
+      <div className="flex flex-col items-center  h-screen">
         <p className="text-white text-[25px] font-semibold p-4">Admin Analytics Dashboard</p>
         <p className="text-white text-[25px] font-semibold p-4">Stats of the Month</p>
 
-        <div className="flex flex-row items-center gap-[200px]">
+        <div className="flex flex-row items-center justify-center ">
+          <YearMonthSelector
+            selectedYear={selectedYear}
+            setSelectedYear={setSelectedYear}
+            selectedMonth={selectedMonth}
+            setSelectedMonth={setSelectedMonth}
+          />
           <LabReservationsPieChart analyticsData={analyticsData} totalCount={totalCount} />
 
           <MostReservedEquipment mostReserved={mostReserved} />
         </div>
-
-        <button
-          onClick={() => setShowDateSelection((prev) => !prev)}
-          className="bg-blue-500 text-white rounded p-2 mb-4"
-        >
-          {showDateSelection ? "Hide Date Selection" : "Select Specific Date"}
-        </button>
-
-        {showDateSelection && (
-          <div className="flex flex-col  mb-4 bg-[#3C4D71] p-4 items-center rounded-[30px]">
-            <div className="items-start">
-              <div className="flex items-center mb-2">
-                <label className="text-white mr-2">Select Year:</label>
-                <input
-                  type="number"
-                  value={selectedYear}
-                  onChange={(e) => setSelectedYear(Number(e.target.value))}
-                  className="bg-[#3C4D71] text-white rounded p-2 shadow-lg shadow-[#2f333a]"
-                />
-              </div>
-              <div className="flex items-center mb-4 ">
-                <label className="text-white mr-2">Select Month:</label>
-                <select
-                  value={selectedMonth}
-                  onChange={(e) => setSelectedMonth(Number(e.target.value))}
-                  className="bg-[#3C4D71] text-white rounded p-2 shadow-lg shadow-[#2f3c58]"
-                >
-                  <option value={1}>January</option>
-                  <option value={2}>February</option>
-                  <option value={3}>March</option>
-                  <option value={4}>April</option>
-                  <option value={5}>May</option>
-                  <option value={6}>June</option>
-                  <option value={7}>July</option>
-                  <option value={8}>August</option>
-                  <option value={9}>September</option>
-                  <option value={10}>October</option>
-                  <option value={11}>November</option>
-                  <option value={12}>December</option>
-                </select>
-              </div>
-            </div>
-
-            <button onClick={handleDateSelection} className="bg-green-500 text-white rounded p-2">
-              Fetch Data
-            </button>
-          </div>
-        )}
       </div>
 
       <div className="flex flex-row items-center">

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const UserLabCard = ({ imgsrc, altname, name, imgWidth = "200px", imgHeight = "200px", labId }) => {
+const TechLabCard = ({ imgsrc, altname, name, imgWidth = "200px", imgHeight = "200px", labId }) => {
   const [error, setError] = useState(null);
   console.log(error);
   const navigate = useNavigate();
@@ -17,7 +17,7 @@ const UserLabCard = ({ imgsrc, altname, name, imgWidth = "200px", imgHeight = "2
         },
       });
       console.log("Fetched equipment:", response.data);
-      navigate("/student-equipment", { state: { equipment: response.data } });
+      navigate("/labtech-equipment", { state: { equipment: response.data } });
     } catch (error) {
       console.error("Error when fetching res", error);
       setError("Failed to load reservations");
@@ -35,4 +35,4 @@ const UserLabCard = ({ imgsrc, altname, name, imgWidth = "200px", imgHeight = "2
   );
 };
 
-export default UserLabCard;
+export default TechLabCard;

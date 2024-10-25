@@ -19,7 +19,7 @@ const AdminDashboard = () => {
     setError(null);
     try {
       const response = await axios.get(
-        "https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/admin/reservations?year=2024&month=11",
+        `${process.env.REACT_APP_BACKEND_API_URL}api/admin/reservations?year=2024&month=11`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("access_token")}`,
@@ -44,7 +44,7 @@ const AdminDashboard = () => {
     setLoading(true);
     setError(null);
     try {
-      const response = await axios.get("https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/user/labs", {
+      const response = await axios.get(`${process.env.REACT_APP_BACKEND_API_URL}api/user/labs`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("access_token")}`,
         },
@@ -63,14 +63,11 @@ const AdminDashboard = () => {
     setLoading(true);
     setError(null);
     try {
-      const response = await axios.get(
-        "https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/admin/users",
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-          },
+      const response = await axios.get(`${process.env.REACT_APP_BACKEND_API_URL}api/admin/users`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
         },
-      );
+      });
       setUsers(response.data);
       navigate("/user-profiles", { state: { users: response.data } });
     } catch (errror) {
@@ -82,8 +79,9 @@ const AdminDashboard = () => {
   };
 
   return (
-    <div className="min-h-screen w-full bg-[#202652] flex relative flex-col items-center justify-center">
-      <div className="h-full w-full flex justify-center items-center">
+    <div className="min-h-screen w-full bg-[#202652] flex relative flex-col items-center ">
+      <div className="text-white text-[25px] font-semibold tracking-[0.06rem] pt-4">ADMIN DASHBOARD</div>
+      <div className="h-full w-full flex justify-center items-center mt-[180px]">
         <div className="h-full w-[1000px] grid grid-cols-3 gap-3">
           <div className="flex justify-center items-center">
             <Link to="/user-profiles">
