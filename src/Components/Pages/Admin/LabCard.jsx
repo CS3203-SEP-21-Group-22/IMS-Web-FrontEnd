@@ -102,7 +102,7 @@ const LabCard = ({ imgsrc, altname, labData, imgWidth = "200px", imgHeight = "20
       ) : (
         <>
           <img
-            className="object-contain rounded-[20px]"
+            className="object-contain "
             src={labData.imageUrl}
             alt={altname}
             style={{ width: imgWidth, height: imgHeight }}

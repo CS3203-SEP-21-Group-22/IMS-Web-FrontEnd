@@ -56,7 +56,8 @@ export const ViewLabs = () => {
     setNewLab((prev) => ({ ...prev, [name]: value }));
   };
   return (
-    <div className="h-full w-full bg-[#202652]  flex relative flex-col items-center justify-center p-10">
+    <div className="h-full w-full bg-[#202652]  flex relative flex-col items-center">
+      <div className="text-white text-[25px] font-semibold tracking-[0.06rem] pt-4">AVAILABLE LABS</div>
       <div className="flex flex-row items-center justify-center bg-[#3C4D71] rounded-[40px] p-4 m-6">
         <input
           type="text"
@@ -64,7 +65,7 @@ export const ViewLabs = () => {
           value={newLab.labName}
           onChange={handleInput}
           placeholder="Enter Lab Name"
-          className="bg-[#3C4D71] rounded-l-[30px] text-center text-[20px] shadow-lg shadow-[#32405e]"
+          className="bg-[#3C4D71] rounded-l-[30px] text-center text-[20px] placeholder-white shadow-lg shadow-[#32405e]"
         />
         <input
           type="text"
@@ -72,7 +73,7 @@ export const ViewLabs = () => {
           value={newLab.labCode}
           onChange={handleInput}
           placeholder="Enter Lab Code"
-          className="bg-[#3C4D71] text-center text-[20px] shadow-lg shadow-[#32405e]"
+          className="bg-[#3C4D71] text-center text-[20px] placeholder-white shadow-lg shadow-[#32405e]"
         />
         <input
           type="text"
@@ -80,11 +81,11 @@ export const ViewLabs = () => {
           value={newLab.imageURL}
           onChange={handleInput}
           placeholder="Enter Lab Image URL"
-          className="bg-[#3C4D71] text-center text-[20px] shadow-lg shadow-[#32405e]"
+          className="bg-[#3C4D71] text-center placeholder-white text-[20px] shadow-lg shadow-[#32405e]"
         />
 
         <div
-          className="px-4 text-center text-[20px] bg-blue-300 rounded-r-[30px] cursor-pointer shadow-[#32405e] shadow-lg"
+          className="px-4 text-center text-[20px] bg-[#00ABE4] text-white rounded-r-[30px] cursor-pointer shadow-[#32405e] shadow-lg"
           onClick={sendLab}
         >
           +

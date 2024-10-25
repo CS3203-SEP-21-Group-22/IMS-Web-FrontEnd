@@ -11,11 +11,11 @@ const TableUsers = ({ userData }) => {
           <thead className="sticky top-0">
             <tr className="bg-[#6D7AA4] shadow-lg border-none text-center h-[50px]">
               <th className="px-4">USER ID</th>
-              <th className="px-4">FIRST NAME</th>
+              <th className="px-4 bg-[#657097]">FIRST NAME</th>
               <th className="px-4">LAST NAME</th>
-              <th className="px-4">CONTACT NO</th>
+              <th className="px-4 bg-[#657097]">CONTACT NO</th>
               <th className="px-4">EMAIL</th>
-              <th className="px-4">ROLE</th>
+              <th className="px-4 bg-[#657097]">ROLE</th>
             </tr>
           </thead>
           <tbody className="">

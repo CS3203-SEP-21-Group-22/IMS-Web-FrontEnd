@@ -67,7 +67,7 @@ const ItemRowUsers = ({ userID, firstName, lastName, contactNumber, email, role 
         // Edit mode: Show input fields
         <>
           <td>{userID}</td>
-          <td className="w-32">
+          <td className="w-36">
             <input
               type="text"
               name="firstName"
@@ -76,7 +76,7 @@ const ItemRowUsers = ({ userID, firstName, lastName, contactNumber, email, role 
               className=" bg-[#6D7AA4] text-center shadow-lg shadow-[#535d7c] py-2 w-32 "
             />
           </td>
-          <td className="w-32">
+          <td className="w-36">
             <input
               type="text"
               name="lastName"
@@ -85,7 +85,7 @@ const ItemRowUsers = ({ userID, firstName, lastName, contactNumber, email, role 
               className=" bg-[#6D7AA4] text-center shadow-lg shadow-[#535d7c] py-2 w-32 "
             />
           </td>
-          <td className="w-32">
+          <td className="w-36">
             <input
               type="text"
               name="contactNumber"
@@ -94,7 +94,7 @@ const ItemRowUsers = ({ userID, firstName, lastName, contactNumber, email, role 
               className=" bg-[#6D7AA4] text-center shadow-lg shadow-[#535d7c] py-2 w-32 "
             />
           </td>
-          <td className="w-32">
+          <td className="w-36">
             <input
               type="email"
               name="email"
@@ -103,7 +103,7 @@ const ItemRowUsers = ({ userID, firstName, lastName, contactNumber, email, role 
               className=" bg-[#6D7AA4] text-center shadow-lg shadow-[#535d7c] py-2 w-32"
             />
           </td>
-          <td className="w-32">
+          <td className="w-36">
             <input
               type="text"
               name="role"
@@ -113,7 +113,7 @@ const ItemRowUsers = ({ userID, firstName, lastName, contactNumber, email, role 
             />
           </td>
           <td className="py-2">
-            <button onClick={editUser} className="bg-blue-300 p-2 rounded text-white mr-2">
+            <button onClick={editUser} className="bg-[#00ABE4] p-2 rounded text-white mr-2">
               SAVE
             </button>
           </td>
@@ -126,14 +126,14 @@ const ItemRowUsers = ({ userID, firstName, lastName, contactNumber, email, role 
         </>
       ) : (
         <>
-          <td className="w-32">{userID}</td>
-          <td className="w-32">{firstName}</td>
-          <td className="w-32">{lastName}</td>
-          <td className="w-32">{contactNumber}</td>
-          <td className="w-32">{email}</td>
-          <td className="w-32">{role}</td>
+          <td className="w-[200PX] bg-[#6D7AA4] ">{userID}</td>
+          <td className="w-[200PX] bg-[#657097]">{firstName}</td>
+          <td className="w-[200PX] bg-[#6D7AA4]">{lastName}</td>
+          <td className="w-[200PX] bg-[#657097]">{contactNumber}</td>
+          <td className="w-[200PX] bg-[#6D7AA4]">{email}</td>
+          <td className="w-[200PX] bg-[#657097]">{role}</td>
           <td className="p-2 px-4 cursor-pointer" onClick={() => setEditMode(true)}>
-            <button className="bg-blue-300 p-2 rounded">EDIT</button>
+            <button className="bg-[#00ABE4] p-2 rounded">EDIT</button>
           </td>
         </>
       )}
