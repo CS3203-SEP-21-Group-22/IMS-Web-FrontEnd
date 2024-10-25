@@ -63,9 +63,7 @@ const MonthlyReservationsBarChart = () => {
   ];
 
   return (
-    <div className="bg-transparent p-6">
-      <h2 className="text-white text-[20px] font-semibold py-4">Monthly Reservations Bar Chart</h2>
-
+    <div className="bg-transparent  flex-col items-center">
       {loading && <p>Loading...</p>}
       {error && <p className="text-red-400">{error}</p>}
 
