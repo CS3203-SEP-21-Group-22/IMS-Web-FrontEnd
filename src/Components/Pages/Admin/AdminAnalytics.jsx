@@ -134,12 +134,6 @@ const AdminAnalytics = () => {
     }
   }, [selectedEquipmentId]);
 
-  // Handler for fetching data based on the selected year and month
-  const handleDateSelection = () => {
-    fetchAnalytics(selectedYear, selectedMonth);
-    setShowDateSelection(false); // Hide the date selection inputs after fetching
-  };
-
   return (
     <div className="min-h-screen w-full bg-[#202652] flex flex-col items-center justify-center">
       <div className="flex flex-col items-center  h-screen">
@@ -159,49 +153,53 @@ const AdminAnalytics = () => {
         </div>
       </div>
 
-      <div className="flex flex-row items-center">
-        <MonthlyReservationsBarChart />
-        <div>
-          <div className="flex flex-row items-center justify-center bg-[#3C4D71] rounded-[40px] w-[400px] p-4 mb-6">
-            <label className="px-2 text-white">Select Lab</label>
-            <select
-              onChange={(e) => setSelectedLabId(e.target.value)}
-              value={selectedLabId}
-              className="bg-[#3C4D71] rounded-l-[30px] text-center text-[20px] shadow-lg shadow-[#32405e] text-white"
-            >
-              <option value="">Select Lab</option>
-              {labs.map((lab) => (
-                <option key={lab.labId} value={lab.labId}>
-                  {lab.labName}
-                </option>
-              ))}
-            </select>
-          </div>
+      <div className="flex flex-row justify-center pb-20 ">
+        <div className=" flex flex-col items-center">
+          <h2 className="text-white text-[20px] font-semibold mb-[100px]">Monthly Reservations Bar Chart</h2>
+          <MonthlyReservationsBarChart />
+        </div>
 
-          <div className="flex flex-row items-center justify-center bg-[#3C4D71] rounded-[40px] w-[400px] p-4 mb-6">
-            <label className="px-2 text-white">Select Equipment</label>
-            <select
-              onChange={(e) => setSelectedEquipmentId(e.target.value)}
-              value={selectedEquipmentId}
-              disabled={!selectedLabId}
-              className={`bg-[#3C4D71] rounded-l-[30px] text-center text-[20px] shadow-lg shadow-[#32405e] text-white ${
-                !selectedLabId ? "cursor-not-allowed" : ""
-              }`}
-            >
-              <option value="">Select Equipment</option>
-              {equipments.map((equipment) => (
-                <option key={equipment.equipmentId} value={equipment.equipmentId}>
-                  {equipment.name}
-                </option>
-              ))}
-            </select>
+        <div className="flex flex-col items-center  ">
+          <h2 className="text-white text-[20px] font-semibold mb-4">Monthly Equipment Data</h2>
+          <div className="flex flex-row items-center justify-center bg-[#3C4D71] rounded-[40px] w-[400px] mb-6">
+            <div className="flex flex-row items-center justify-center bg-[#3C4D71] rounded-[40px] w-[300px] p-4 ">
+              <select
+                onChange={(e) => setSelectedLabId(e.target.value)}
+                value={selectedLabId}
+                className="bg-[#3C4D71] rounded-l-[30px] text-center text-[20px] shadow-lg shadow-[#252f44] text-white"
+              >
+                <option value="">Select Lab</option>
+                {labs.map((lab) => (
+                  <option key={lab.labId} value={lab.labId}>
+                    {lab.labName}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div className="flex flex-row items-center justify-center bg-[#3C4D71] rounded-[40px] w-[300px] p-4 ">
+              <select
+                onChange={(e) => setSelectedEquipmentId(e.target.value)}
+                value={selectedEquipmentId}
+                disabled={!selectedLabId}
+                className={`bg-[#3C4D71] rounded-r-[30px] text-center text-[20px] shadow-lg shadow-[#252f44] text-white ${
+                  !selectedLabId ? "cursor-not-allowed" : ""
+                }`}
+              >
+                <option value="">Select Equipment</option>
+                {equipments.map((equipment) => (
+                  <option key={equipment.equipmentId} value={equipment.equipmentId}>
+                    {equipment.name}
+                  </option>
+                ))}
+              </select>
+            </div>
           </div>
+          {loading && <LoadingSpinner />}
+
           <MonthlyEquipmentBarChart monthlyCounts={monthlyCounts} />
         </div>
       </div>
-
-      {loading && <LoadingSpinner />}
-      {error && <p className="text-red-400">{error}</p>}
     </div>
   );
 };

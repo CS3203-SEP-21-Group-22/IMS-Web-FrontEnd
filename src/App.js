@@ -14,10 +14,10 @@ import OfficeClerkDashboard from "./Components/Pages/OfficeClerk/OfficeClerkDash
 import LabTechDash2 from "./Components/Pages/LabTechnician/LabTechDash2";
 
 import { StaffProfile } from "./Components/Pages/AcaStaff/StaffProfile";
-import { AdminProfile } from "./Components/Pages/Admin/AdminProfile";
+
 import { OfficeClerkProfile } from "./Components/Pages/OfficeClerk/OfficeClerkProfile";
 
-import { UserProfiles } from "./Components/Pages/UserProfileView";
+import { UserProfiles } from "./Components/Pages/Admin/UserProfileView";
 import { ViewLabs } from "./Components/Pages/Admin/ViewLabs";
 import SendRequest from "./Components/Pages/SendRequest";
 
@@ -83,7 +83,6 @@ function App() {
             <Route path="/officeclerk" element={<ProtectedRoute><OfficeClerkDashboard /></ProtectedRoute>} />
             <Route path="/staff-profile" element={<ProtectedRoute><StaffProfile /></ProtectedRoute>} />
             <Route path="/admin" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
-            <Route path="/admin-profile" element={<ProtectedRoute><AdminProfile /></ProtectedRoute>} />
             <Route path="/admin-analytics" element={<ProtectedRoute><AdminAnalytics /></ProtectedRoute>} />
             <Route path="/officeclerk-profile" element={<ProtectedRoute><OfficeClerkProfile /></ProtectedRoute>} />
             <Route path="/user-profiles" element={<ProtectedRoute><UserProfiles /></ProtectedRoute>} />

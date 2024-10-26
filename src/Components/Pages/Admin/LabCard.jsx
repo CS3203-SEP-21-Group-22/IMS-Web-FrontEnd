@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
-import { useState } from "react";
+import ConfirmationModal from "../../ConfirmationModal";
+import ToastNotification from "../../ToastNotification";
 
 const LabCard = ({ imgsrc, altname, labData, imgWidth = "200px", imgHeight = "200px", onLabDelete }) => {
   const [error, setError] = useState(null);
   const [editMode, setEditMode] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [showToast, setShowToast] = useState(false); // Add state for toast notification
   const [editLabData, setEditLabData] = useState({
     labName: labData.labName,
     labCode: labData.labCode,
@@ -25,16 +28,26 @@ const LabCard = ({ imgsrc, altname, labData, imgWidth = "200px", imgHeight = "20
         },
       });
 
-      console.log("deleted lab:", response.data);
+      console.log("Deleted lab:", response.data);
 
       if (onLabDelete) {
         onLabDelete(labData.labId);
       }
-    } catch (errror) {
-      console.error("Error when fetching res", error);
-      setError("Failed to load reservations");
+
+      // Show the toast notification and close modal
+      setShowDeleteModal(false);
+      setShowToast(true);
+
+      // Hide the notification after 3 seconds
+      setTimeout(() => {
+        setShowToast(false);
+      }, 3000);
+    } catch (error) {
+      console.error("Error when deleting lab:", error);
+      setError("Failed to delete lab");
     }
   };
+
   const editLab = async () => {
     setError(null);
     try {
@@ -52,15 +65,15 @@ const LabCard = ({ imgsrc, altname, labData, imgWidth = "200px", imgHeight = "20
         },
       );
 
-      console.log("edited lab:", response.data);
+      console.log("Edited lab:", response.data);
       setEditMode(false);
 
       if (onLabDelete) {
         onLabDelete(labData.labId);
       }
-    } catch (errror) {
-      console.error("Error when fetching res", error);
-      setError("Failed to load reservations");
+    } catch (error) {
+      console.error("Error when editing lab:", error);
+      setError("Failed to edit lab");
     }
   };
 
@@ -102,26 +115,37 @@ const LabCard = ({ imgsrc, altname, labData, imgWidth = "200px", imgHeight = "20
       ) : (
         <>
           <img
-            className="object-contain rounded-[20px]"
+            className="object-contain"
             src={labData.imageUrl}
             alt={altname}
             style={{ width: imgWidth, height: imgHeight }}
           />
-          <p className="font-josefin-sans font-normal text-[20px] text-white leading-[20px] tracking-[0.06em] ">
+          <p className="font-josefin-sans font-normal text-[20px] text-white leading-[20px] tracking-[0.06em]">
             {labData.labName}
           </p>
-
-          <div
-            className="px-4 bg-[#00ABE4] rounded-[30px] cursor-pointer text-white "
-            onClick={() => setEditMode(true)}
-          >
+          <div className="px-4 bg-[#00ABE4] rounded-[30px] cursor-pointer text-white" onClick={() => setEditMode(true)}>
             EDIT
           </div>
-          <div className="px-4 bg-[#00ABE4] rounded-[30px] cursor-pointer text-white" onClick={deleteLab}>
+          <div
+            className="px-4 bg-[#00ABE4] rounded-[30px] cursor-pointer text-white"
+            onClick={() => setShowDeleteModal(true)}
+          >
             DELETE
           </div>
         </>
       )}
+
+      {/* Delete Confirmation Modal */}
+      {showDeleteModal && (
+        <ConfirmationModal
+          onConfirm={deleteLab}
+          onCancel={() => setShowDeleteModal(false)}
+          message="Are you sure you want to delete this lab?"
+        />
+      )}
+
+      {/* Toast Notification */}
+      {showToast && <ToastNotification message="Lab deleted successfully" onClose={() => setShowToast(false)} />}
     </div>
   );
 };

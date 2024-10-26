@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const LabTechMiniCard = ({ equipmentData }) => {
   const [error, setError] = useState(null);

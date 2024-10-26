@@ -1,45 +1,21 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 
 const ItemRowUsers = ({ userID, firstName, lastName, contactNumber, email, role }) => {
   const [error, setError] = useState(null);
   const [editMode, setEditMode] = useState(false);
-  const [userData, setUserData] = useState({
-    firstName,
-    lastName,
-    contactNumber,
-    email,
-    role,
-  });
+  const [updatedRole, setUpdatedRole] = useState(role);
 
-  const handleInput = (e) => {
-    const { name, value } = e.target;
-    setUserData((prev) => ({ ...prev, [name]: value }));
+  const handleRoleChange = (e) => {
+    setUpdatedRole(e.target.value);
   };
-  const editUser = async () => {
+
+  const editUserRole = async () => {
     setError(null);
     try {
-      console.log("Updating user with data:", {
-        userId: userID, // Ensure userID is correctly passed
-        email: userData.email,
-        firstName: userData.firstName,
-        lastName: userData.lastName,
-        contactNumber: userData.contactNumber,
-        role: userData.role,
-      });
-      console.log(userID);
-
       const response = await axios.patch(
-        `https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/admin/users/${userID}`,
-        {
-          userId: userID,
-          firstName: userData.firstName,
-          lastName: userData.lastName,
-          contactNumber: userData.contactNumber,
-          email: userData.email,
-          role: userData.role,
-        },
+        `https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net/api/admin/users/${userID}?role=${updatedRole}`,
+        {},
         {
           headers: {
             "Content-Type": "application/json",
@@ -48,72 +24,44 @@ const ItemRowUsers = ({ userID, firstName, lastName, contactNumber, email, role 
         },
       );
 
-      console.log("edited user:", response.data);
+      console.log("Updated user role:", response.data);
       setEditMode(false);
     } catch (error) {
-      console.error("Error when fetching res", error);
-      setError("Failed to load reservations");
+      console.error("Error updating role:", error);
+      setError("Failed to update role");
     }
   };
 
   const cancelEdit = () => {
     setEditMode(false);
-    setUserData({ firstName, lastName, contactNumber, email, role });
+    setUpdatedRole(role);
   };
 
   return (
     <tr className="bg-[#6D7AA4] text-center hover:scale-[1.05] duration-200 transition">
       {editMode ? (
-        // Edit mode: Show input fields
         <>
           <td>{userID}</td>
-          <td className="w-32">
-            <input
-              type="text"
-              name="firstName"
-              value={userData.firstName}
-              onChange={handleInput}
-              className=" bg-[#6D7AA4] text-center shadow-lg shadow-[#535d7c] py-2 w-32 "
-            />
-          </td>
-          <td className="w-32">
-            <input
-              type="text"
-              name="lastName"
-              value={userData.lastName}
-              onChange={handleInput}
-              className=" bg-[#6D7AA4] text-center shadow-lg shadow-[#535d7c] py-2 w-32 "
-            />
-          </td>
-          <td className="w-32">
-            <input
-              type="text"
-              name="contactNumber"
-              value={userData.contactNumber}
-              onChange={handleInput}
-              className=" bg-[#6D7AA4] text-center shadow-lg shadow-[#535d7c] py-2 w-32 "
-            />
-          </td>
-          <td className="w-32">
-            <input
-              type="email"
-              name="email"
-              value={userData.email}
-              onChange={handleInput}
-              className=" bg-[#6D7AA4] text-center shadow-lg shadow-[#535d7c] py-2 w-32"
-            />
-          </td>
-          <td className="w-32">
-            <input
-              type="text"
+          <td className="w-36">{firstName}</td>
+          <td className="w-36">{lastName}</td>
+          <td className="w-36">{contactNumber}</td>
+          <td className="w-36">{email}</td>
+          <td className="w-36">
+            <select
               name="role"
-              value={userData.role}
-              onChange={handleInput}
-              className=" bg-[#6D7AA4] text-center shadow-lg shadow-[#535d7c] py-2 w-32"
-            />
+              value={updatedRole}
+              onChange={handleRoleChange}
+              className="bg-[#6D7AA4] text-center shadow-lg shadow-[#535d7c] py-2 w-32"
+            >
+              <option value="Clerk">Clerk</option>
+              <option value="Technician">Technician</option>
+              <option value="Student">Student</option>
+              <option value="AcademicStaff">AcademicStaff</option>
+              <option value="SystemAdmin">SystemAdmin</option>
+            </select>
           </td>
           <td className="py-2">
-            <button onClick={editUser} className="bg-blue-300 p-2 rounded text-white mr-2">
+            <button onClick={editUserRole} className="bg-[#00ABE4] p-2 rounded text-white mr-2">
               SAVE
             </button>
           </td>
@@ -126,14 +74,14 @@ const ItemRowUsers = ({ userID, firstName, lastName, contactNumber, email, role 
         </>
       ) : (
         <>
-          <td className="w-32">{userID}</td>
-          <td className="w-32">{firstName}</td>
-          <td className="w-32">{lastName}</td>
-          <td className="w-32">{contactNumber}</td>
-          <td className="w-32">{email}</td>
-          <td className="w-32">{role}</td>
+          <td className="w-[200PX] bg-[#6D7AA4] ">{userID}</td>
+          <td className="w-[200PX] bg-[#657097]">{firstName}</td>
+          <td className="w-[200PX] bg-[#6D7AA4]">{lastName}</td>
+          <td className="w-[200PX] bg-[#657097]">{contactNumber}</td>
+          <td className="w-[200PX] bg-[#6D7AA4]">{email}</td>
+          <td className="w-[200PX] bg-[#657097]">{role}</td>
           <td className="p-2 px-4 cursor-pointer" onClick={() => setEditMode(true)}>
-            <button className="bg-blue-300 p-2 rounded">EDIT</button>
+            <button className="bg-[#00ABE4] p-2 rounded">EDIT</button>
           </td>
         </>
       )}
