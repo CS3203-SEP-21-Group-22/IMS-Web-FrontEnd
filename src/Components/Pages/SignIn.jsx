@@ -54,7 +54,7 @@ function SignIn() {
     handleLoginRedirect();
   }, []);
 
-  const redirectUri = "http://localhost:3000";
+  const redirectUri = "https://ims-api.azure-api.net";
   const loginUrl = `${AUTH_SERVER_URL}/login?redirectUri=${encodeURIComponent(redirectUri)}&clientId=${AUTH_CLIENT_ID}`;
 
   return (
