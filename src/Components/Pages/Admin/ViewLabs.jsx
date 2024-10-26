@@ -42,17 +42,20 @@ export const ViewLabs = () => {
 
       const presignedUrl = data.presignedUrl;
       const imageBlob = new Blob([newLab.imageFile], { type: newLab.imageFile.type });
+      console.log("pree", presignedUrl);
+      console.log("blob", imageBlob);
+      console.log("type", newLab.imageFile.type);
 
       const response = await fetch(presignedUrl, {
         method: "PUT",
+        body: imageBlob,
         headers: {
           "Content-Type": newLab.imageFile.type,
           "x-ms-blob-type": "BlockBlob",
         },
-        body: imageBlob,
       });
 
-      console.log("status", response.status);
+      console.log("status", response);
 
       if (!response.ok) {
         throw new Error(`Image upload failed with status: ${response.status} ${response.statusText}`);
@@ -73,10 +76,11 @@ export const ViewLabs = () => {
 
     try {
       const presignedUrl = await uploadImage();
+      console.log(presignedUrl.split("?")[0]);
       const labData = {
         labName: newLab.labName,
         labCode: newLab.labCode,
-        imageURL: presignedUrl,
+        imageURL: presignedUrl.split("?")[0],
       };
 
       const response = await axios.post(`${process.env.REACT_APP_BACKEND_API_URL}api/admin/labs`, labData, {
