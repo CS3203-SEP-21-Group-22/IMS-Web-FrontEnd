@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { BarChart } from "@mui/x-charts";
-import { colors } from "@mui/material";
 import { blue } from "@mui/material/colors";
 
 const MonthlyReservationsBarChart = () => {

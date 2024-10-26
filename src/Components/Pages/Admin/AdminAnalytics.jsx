@@ -134,12 +134,6 @@ const AdminAnalytics = () => {
     }
   }, [selectedEquipmentId]);
 
-  // Handler for fetching data based on the selected year and month
-  const handleDateSelection = () => {
-    fetchAnalytics(selectedYear, selectedMonth);
-    setShowDateSelection(false); // Hide the date selection inputs after fetching
-  };
-
   return (
     <div className="min-h-screen w-full bg-[#202652] flex flex-col items-center justify-center">
       <div className="flex flex-col items-center  h-screen">

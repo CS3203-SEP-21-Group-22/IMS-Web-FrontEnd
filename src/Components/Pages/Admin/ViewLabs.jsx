@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 import checklist from "../../../styles/images/checklist.png";
 import axios from "axios";
 import ConfirmationModal from "../../ConfirmationModal";
-import ToastNotification from "../../ToastNotification";
+
 import LabCard from "./LabCard";
 
 export const ViewLabs = () => {

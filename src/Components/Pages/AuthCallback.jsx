@@ -48,11 +48,11 @@ const AuthCallback = () => {
           navigate(roleRoutes[role]);
         } else {
           console.error("Unknown role");
-          navigate("/login");
+          navigate("/sign-in");
         }
       } catch (error) {
         console.error("Failed to fetch role from server", error);
-        navigate("/login");
+        navigate("/sign-in");
       }
     };
 
@@ -64,7 +64,7 @@ const AuthCallback = () => {
       getRoleFromServer(accessToken);
     } else {
       console.error("Authentication failed");
-      navigate("/login"); // Redirect to login on failure
+      navigate("/sign-in"); // Redirect to login on failure
     }
   }, [navigate]);
 
