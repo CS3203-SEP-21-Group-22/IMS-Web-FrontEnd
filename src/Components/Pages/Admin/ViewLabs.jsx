@@ -2,39 +2,36 @@ import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import checklist from "../../../styles/images/checklist.png";
 import axios from "axios";
-
+import ConfirmationModal from "../../ConfirmationModal";
+import ToastNotification from "../../ToastNotification";
 import LabCard from "./LabCard";
 
 export const ViewLabs = () => {
   const [error, setError] = useState(null);
+  const [showConfirmation, setShowConfirmation] = useState(false);
+  const [showToast, setShowToast] = useState(false);
   const [newLab, setNewLab] = useState({
     labName: "",
     labCode: "",
-    imageFile: null, // Store selected image file
+    imageFile: null,
     imageURL: "",
   });
 
   const location = useLocation();
   const [labs, setLabs] = useState(Array.isArray(location.state?.labs) ? location.state.labs : []);
 
-  // Handle image file selection
   const handleFileChange = (e) => {
     setNewLab((prev) => ({ ...prev, imageFile: e.target.files[0] }));
   };
 
-  // Upload image and retrieve URL
   const uploadImage = async () => {
     if (!newLab.imageFile) return null;
 
     try {
-      // Step 1: Get pre-signed URL from backend
       const extension = newLab.imageFile.name.split(".").pop();
-      console.log("Sending request to upload URL:", `${process.env.REACT_APP_BACKEND_API_URL}api/upload-url/lab`);
       const { data } = await axios.post(
         `${process.env.REACT_APP_BACKEND_API_URL}api/upload-url/lab`,
-        {
-          extension,
-        },
+        { extension },
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("access_token")}`,
@@ -42,28 +39,32 @@ export const ViewLabs = () => {
           },
         },
       );
-      const { presignedUrl, uploadUrl } = data;
 
-      // Step 2: Upload the file to the storage
-      await axios.put(presignedUrl, newLab.imageFile, {
-        headers: { "Content-Type": newLab.imageFile.type, "x-ms-blob-type": "BlockBlob" },
+      const presignedUrl = data.presignedUrl;
+      const imageBlob = new Blob([newLab.imageFile], { type: newLab.imageFile.type });
+
+      const response = await fetch(presignedUrl, {
+        method: "PUT",
+        headers: {
+          "Content-Type": newLab.imageFile.type,
+          "x-ms-blob-type": "BlockBlob",
+        },
+        body: imageBlob,
       });
 
-      return uploadUrl; // Return the accessible image URL
-    } catch (error) {
-      console.error("Image upload failed:", error.response ? error.response.data : error.message);
-      console.log("Error Status:", error.response.status);
-      console.log("Error Headers:", error.response.headers);
-      if (error.response) {
-        console.log("Error Status:", error.response.status);
-        console.log("Error Headers:", error.response.headers);
+      console.log("status", response.status);
+
+      if (!response.ok) {
+        throw new Error(`Image upload failed with status: ${response.status} ${response.statusText}`);
       }
+
+      return presignedUrl;
+    } catch (error) {
       setError("Image upload failed");
       return null;
     }
   };
 
-  // Send lab data to backend
   const sendLab = async () => {
     if (!newLab.labName || !newLab.labCode) {
       setError("Please fill in all the fields.");
@@ -71,32 +72,30 @@ export const ViewLabs = () => {
     }
 
     try {
-      const uploadedImageUrl = await uploadImage(); // Upload image and get URL
+      const presignedUrl = await uploadImage();
       const labData = {
         labName: newLab.labName,
         labCode: newLab.labCode,
-        imageURL: uploadedImageUrl, // Use the uploaded image URL
+        imageURL: presignedUrl,
       };
 
-      // Send lab data to backend
       const response = await axios.post(`${process.env.REACT_APP_BACKEND_API_URL}api/admin/labs`, labData, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("access_token")}`,
           "Content-Type": "application/json",
         },
       });
-      console.log("New Lab Added:", response.data);
       setLabs((prevLabs) => [...prevLabs, response.data]);
 
-      // Clear the input fields
       setNewLab({
         labName: "",
         labCode: "",
         imageFile: null,
         imageURL: "",
       });
+
+      setShowToast(true);
     } catch (error) {
-      console.error("Error when fetching response:", error);
       setError("Failed to add lab");
     }
   };
@@ -106,8 +105,22 @@ export const ViewLabs = () => {
     setNewLab((prev) => ({ ...prev, [name]: value }));
   };
 
+  const handleAddLabClick = () => {
+    setShowConfirmation(true);
+  };
+
+  const handleConfirmAddLab = () => {
+    setShowConfirmation(false);
+    sendLab();
+  };
+
+  // Function to display toast when a lab is deleted
+  const handleLabDeleteSuccess = () => {
+    setShowToast(true);
+  };
+
   return (
-    <div className="h-full w-full bg-[#202652] flex relative flex-col items-center">
+    <div className="min-h-screen w-full bg-[#202652] flex relative flex-col items-center pb-10">
       <div className="text-white text-[25px] font-semibold tracking-[0.06rem] pt-4">AVAILABLE LABS</div>
       <div className="flex flex-row items-center justify-center bg-[#3C4D71] rounded-[40px] p-4 m-6">
         <input
@@ -135,7 +148,7 @@ export const ViewLabs = () => {
 
         <div
           className="px-4 text-center text-[20px] bg-[#00ABE4] text-white rounded-r-[30px] cursor-pointer shadow-[#32405e] shadow-lg"
-          onClick={sendLab}
+          onClick={handleAddLabClick}
         >
           +
         </div>
@@ -149,10 +162,22 @@ export const ViewLabs = () => {
               altname="staff profile"
               labData={lab}
               onLabDelete={(labId) => setLabs((prevLabs) => prevLabs.filter((delLab) => delLab.labId !== labId))}
+              onDeleteSuccess={handleLabDeleteSuccess} // Pass handleLabDeleteSuccess as a prop
             />
           </div>
         ))}
       </div>
+
+      {/* Confirmation Modal */}
+      {showConfirmation && (
+        <ConfirmationModal
+          message="Are you sure you want to add this lab?"
+          onConfirm={handleConfirmAddLab}
+          onCancel={() => setShowConfirmation(false)}
+        />
+      )}
     </div>
   );
 };
+
+export default ViewLabs;

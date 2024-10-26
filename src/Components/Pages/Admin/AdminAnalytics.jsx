@@ -202,7 +202,7 @@ const AdminAnalytics = () => {
             </div>
           </div>
           {loading && <LoadingSpinner />}
-          {error && <p className="text-red-400">{error}</p>}
+
           <MonthlyEquipmentBarChart monthlyCounts={monthlyCounts} />
         </div>
       </div>

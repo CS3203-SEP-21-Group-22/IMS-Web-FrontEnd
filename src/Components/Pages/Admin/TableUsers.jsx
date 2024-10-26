@@ -9,7 +9,7 @@ const TableUsers = ({ userData }) => {
       <div className="w-full h-full overflow-y-auto flex-col flex items-center justify-center p-4">
         <table className="table-auto w-[744px]  border-collapse ">
           <thead className="sticky top-0">
-            <tr className="bg-[#6D7AA4] shadow-lg border-none text-center h-[50px]">
+            <tr className="bg-[#6D7AA4] shadow-lg  border-none text-center h-[50px]">
               <th className="px-4">USER ID</th>
               <th className="px-4 bg-[#657097]">FIRST NAME</th>
               <th className="px-4">LAST NAME</th>
