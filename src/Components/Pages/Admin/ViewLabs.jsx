@@ -10,44 +10,94 @@ export const ViewLabs = () => {
   const [newLab, setNewLab] = useState({
     labName: "",
     labCode: "",
+    imageFile: null, // Store selected image file
     imageURL: "",
   });
 
   const location = useLocation();
   const [labs, setLabs] = useState(Array.isArray(location.state?.labs) ? location.state.labs : []);
 
-  const sendLab = async () => {
-    const labData = {
-      labName: newLab.labName,
-      labCode: newLab.labCode,
-      imageURL: newLab.imageURL.trim() ? newLab.imageURL : null,
-    };
+  // Handle image file selection
+  const handleFileChange = (e) => {
+    setNewLab((prev) => ({ ...prev, imageFile: e.target.files[0] }));
+  };
 
-    if (!labData.labName || !labData.labCode) {
+  // Upload image and retrieve URL
+  const uploadImage = async () => {
+    if (!newLab.imageFile) return null;
+
+    try {
+      // Step 1: Get pre-signed URL from backend
+      const extension = newLab.imageFile.name.split(".").pop();
+      console.log("Sending request to upload URL:", `${process.env.REACT_APP_BACKEND_API_URL}api/upload-url/lab`);
+      const { data } = await axios.post(
+        `${process.env.REACT_APP_BACKEND_API_URL}api/upload-url/lab`,
+        {
+          extension,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+            "Content-Type": "application/json",
+          },
+        },
+      );
+      const { presignedUrl, uploadUrl } = data;
+
+      // Step 2: Upload the file to the storage
+      await axios.put(presignedUrl, newLab.imageFile, {
+        headers: { "Content-Type": newLab.imageFile.type, "x-ms-blob-type": "BlockBlob" },
+      });
+
+      return uploadUrl; // Return the accessible image URL
+    } catch (error) {
+      console.error("Image upload failed:", error.response ? error.response.data : error.message);
+      console.log("Error Status:", error.response.status);
+      console.log("Error Headers:", error.response.headers);
+      if (error.response) {
+        console.log("Error Status:", error.response.status);
+        console.log("Error Headers:", error.response.headers);
+      }
+      setError("Image upload failed");
+      return null;
+    }
+  };
+
+  // Send lab data to backend
+  const sendLab = async () => {
+    if (!newLab.labName || !newLab.labCode) {
       setError("Please fill in all the fields.");
-      console.log(error);
       return;
     }
 
     try {
-      console.log(labData);
+      const uploadedImageUrl = await uploadImage(); // Upload image and get URL
+      const labData = {
+        labName: newLab.labName,
+        labCode: newLab.labCode,
+        imageURL: uploadedImageUrl, // Use the uploaded image URL
+      };
+
+      // Send lab data to backend
       const response = await axios.post(`${process.env.REACT_APP_BACKEND_API_URL}api/admin/labs`, labData, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("access_token")}`,
           "Content-Type": "application/json",
         },
       });
-      console.log("i am here");
       console.log("New Lab Added:", response.data);
       setLabs((prevLabs) => [...prevLabs, response.data]);
+
+      // Clear the input fields
       setNewLab({
         labName: "",
         labCode: "",
+        imageFile: null,
         imageURL: "",
       });
-    } catch (errror) {
-      console.error("Error when fetching res", error);
-      setError("Failed to load reservations");
+    } catch (error) {
+      console.error("Error when fetching response:", error);
+      setError("Failed to add lab");
     }
   };
 
@@ -55,8 +105,9 @@ export const ViewLabs = () => {
     const { name, value } = e.target;
     setNewLab((prev) => ({ ...prev, [name]: value }));
   };
+
   return (
-    <div className="h-full w-full bg-[#202652]  flex relative flex-col items-center">
+    <div className="h-full w-full bg-[#202652] flex relative flex-col items-center">
       <div className="text-white text-[25px] font-semibold tracking-[0.06rem] pt-4">AVAILABLE LABS</div>
       <div className="flex flex-row items-center justify-center bg-[#3C4D71] rounded-[40px] p-4 m-6">
         <input
@@ -76,11 +127,9 @@ export const ViewLabs = () => {
           className="bg-[#3C4D71] text-center text-[20px] placeholder-white shadow-lg shadow-[#32405e]"
         />
         <input
-          type="text"
-          name="imageURL"
-          value={newLab.imageURL}
-          onChange={handleInput}
-          placeholder="Enter Lab Image URL"
+          type="file"
+          accept="image/*"
+          onChange={handleFileChange}
           className="bg-[#3C4D71] text-center placeholder-white text-[20px] shadow-lg shadow-[#32405e]"
         />
 
@@ -92,21 +141,17 @@ export const ViewLabs = () => {
         </div>
       </div>
 
-      <div className="h-full w-[1000px]  grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 justify-items-center">
-        {labs.map((lab, index) => {
-          return (
-            <div key={index} className="flex justify-center items-center ">
-              <div className="flex justify-center items-center ">
-                <LabCard
-                  imgsrc={checklist}
-                  altname="staff profile"
-                  labData={lab}
-                  onLabDelete={(labId) => setLabs((prevLabs) => prevLabs.filter((delLab) => delLab.labId !== labId))}
-                />
-              </div>
-            </div>
-          );
-        })}
+      <div className="h-full w-[1000px] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 justify-items-center">
+        {labs.map((lab, index) => (
+          <div key={index} className="flex justify-center items-center">
+            <LabCard
+              imgsrc={lab.imageURL || checklist}
+              altname="staff profile"
+              labData={lab}
+              onLabDelete={(labId) => setLabs((prevLabs) => prevLabs.filter((delLab) => delLab.labId !== labId))}
+            />
+          </div>
+        ))}
       </div>
     </div>
   );
