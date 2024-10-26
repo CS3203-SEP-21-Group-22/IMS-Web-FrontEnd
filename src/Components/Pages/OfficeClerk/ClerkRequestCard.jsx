@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import mouse from "../../../../src/styles/images/mouse.png";
 
 const ClerkRequestCard = ({ requestData, onRemoveRequest }) => {
   const [error, setError] = useState("");
@@ -118,7 +117,7 @@ const ClerkRequestCard = ({ requestData, onRemoveRequest }) => {
     <div className="w-[487px] h-auto bg-[#3C4D71] rounded-[20px] flex flex-row p-4 items-center justify-center hover:scale-105 transition duration-200">
       {/* Left side: Image and Name */}
       <div className="w-[250px] h-[350px] flex flex-col items-center justify-center bg-[#3C4D71] shadow-lg shadow-[#2e3a56] rounded-[20px] p-2">
-        <img src={mouse} alt="mouse" className="mb-4" />
+        <img src={requestData.imageUrl} alt="mouse" className="mb-4" />
         <p className="text-white text-center text-[20px] font-semibold">{requestData.itemName}</p>
         <p className="text-white text-center text-[16px] font-medium">MODEL: {requestData.itemModel}</p>
         <p className="text-white text-center text-[16px] font-medium">LAB: {requestData.labName}</p>

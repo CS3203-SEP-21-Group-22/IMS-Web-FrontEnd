@@ -4,7 +4,6 @@ import ConfirmationModal from "../../ConfirmationModal";
 import ToastNotification from "../../ToastNotification";
 
 const LabCard = ({ imgsrc, altname, labData, imgWidth = "200px", imgHeight = "200px", onLabDelete }) => {
-  const [error, setError] = useState(null);
   const [editMode, setEditMode] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showToast, setShowToast] = useState(false); // Add state for toast notification
@@ -20,7 +19,6 @@ const LabCard = ({ imgsrc, altname, labData, imgWidth = "200px", imgHeight = "20
   };
 
   const deleteLab = async () => {
-    setError(null);
     try {
       const response = await axios.delete(`${process.env.REACT_APP_BACKEND_API_URL}api/admin/labs/${labData.labId}`, {
         headers: {
@@ -44,12 +42,10 @@ const LabCard = ({ imgsrc, altname, labData, imgWidth = "200px", imgHeight = "20
       }, 3000);
     } catch (error) {
       console.error("Error when deleting lab:", error);
-      setError("Failed to delete lab");
     }
   };
 
   const editLab = async () => {
-    setError(null);
     try {
       const response = await axios.patch(
         `${process.env.REACT_APP_BACKEND_API_URL}api/admin/labs/${labData.labId}`,
@@ -73,7 +69,6 @@ const LabCard = ({ imgsrc, altname, labData, imgWidth = "200px", imgHeight = "20
       }
     } catch (error) {
       console.error("Error when editing lab:", error);
-      setError("Failed to edit lab");
     }
   };
 

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import mouse from "../../../../src/styles/images/mouse.png";
 
 const ClerkReserveCard = ({ reservationData }) => {
   const [error, setError] = useState("");

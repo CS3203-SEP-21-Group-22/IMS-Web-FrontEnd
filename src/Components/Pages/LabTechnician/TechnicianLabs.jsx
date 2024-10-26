@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import UserLabCard from "../Student/UserLabCard";
 import TechLabCard from "./TechLabCard";
 
 export const TechnicianLabs = () => {

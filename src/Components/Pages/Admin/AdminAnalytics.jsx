@@ -9,7 +9,6 @@ import YearMonthSelector from "./YearMonthSelector";
 
 const AdminAnalytics = () => {
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
   const [labs, setLabs] = useState([]);
   const [equipments, setEquipments] = useState([]);
   const [selectedLabId, setSelectedLabId] = useState("");
@@ -23,7 +22,6 @@ const AdminAnalytics = () => {
   // New states for year and month selection
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
   const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth() + 1);
-  const [showDateSelection, setShowDateSelection] = useState(false);
 
   console.log("Equipment Data:", equipmentData);
 
@@ -38,7 +36,6 @@ const AdminAnalytics = () => {
       setLabs(response.data);
     } catch (error) {
       console.error("Error fetching labs", error);
-      setError("Failed to load labs");
     }
   };
 
@@ -54,7 +51,6 @@ const AdminAnalytics = () => {
       setEquipments(response.data);
     } catch (error) {
       console.error("Error fetching equipments", error);
-      setError("Failed to load equipments");
     } finally {
       setLoading(false);
     }
@@ -81,7 +77,6 @@ const AdminAnalytics = () => {
       setMostReserved(mostReservedItems);
     } catch (error) {
       console.error("Error fetching analytics data", error);
-      setError("Failed to load analytics");
     } finally {
       setLoading(false);
     }
@@ -123,7 +118,6 @@ const AdminAnalytics = () => {
           setMonthlyCounts(formattedData);
         } catch (error) {
           console.error("Error fetching equipment data", error);
-          setError("Failed to load equipment data");
         } finally {
           setLoading(false);
         }

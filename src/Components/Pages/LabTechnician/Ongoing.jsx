@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import AssignedMiniCard from "./AssignedMiniCard";
+
 import OngoingMiniCard from "./OngoinMiniCard";
 
 const Ongoing = () => {

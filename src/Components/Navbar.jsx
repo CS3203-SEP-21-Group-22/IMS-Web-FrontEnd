@@ -2,27 +2,20 @@ import React from "react";
 import "../styles/css/palette.scss";
 import "../styles/css/palette.css";
 import logo from "../styles/images/logo.png";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import walrus from "../styles/images/walrus.png";
 import { useState } from "react";
-import { AUTH_CLIENT_ID, AUTH_SERVER_URL } from "../config";
+
 import NavBarMenu from "./NavBarMenu";
 
 export const Navbar = () => {
   const location = useLocation();
 
-  const navigate = useNavigate();
   const [box, setBox] = useState(false);
   const toggleBox = () => {
     setBox(!box);
   };
 
-  const handleLogOut = () => {
-    localStorage.removeItem("access_token");
-    localStorage.removeItem("refresh_token");
-    console.log("hi");
-    navigate("/sign-in");
-  };
   return (
     <div className="w-full h-[60px] bg-[#202652] ">
       <div className="grid grid-cols-[1fr_500px_1fr] shadow-lg">
@@ -123,7 +116,7 @@ export const Navbar = () => {
               )}
             </div>
           )}
-          {location.pathname == "/staff" && (
+          {location.pathname === "/staff" && (
             <div className="flex flex-col justify-center items-center">
               <button onClick={toggleBox}>
                 <img src={walrus} className="h-[40px] w-[40px] cursor-pointer" alt="walrus" />

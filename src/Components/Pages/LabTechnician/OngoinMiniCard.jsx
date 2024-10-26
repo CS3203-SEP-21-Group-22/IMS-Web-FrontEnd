@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
 const OngoingMiniCard = ({ assignedData }) => {
   const [loading, setLoading] = useState(false);
@@ -9,8 +8,6 @@ const OngoingMiniCard = ({ assignedData }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [submitNote, setSubmitNote] = useState("");
   const [cost, setCost] = useState("");
-
-  const navigate = useNavigate();
 
   const formattedStartDate =
     assignedData.startDate instanceof Date

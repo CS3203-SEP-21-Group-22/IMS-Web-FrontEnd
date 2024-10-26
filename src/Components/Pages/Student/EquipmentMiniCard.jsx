@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import mouse from "../../../../src/styles/images/mouse.png";
+
 import axios from "axios";
 
 const EquipmentMiniCard = ({ equipmentData }) => {
