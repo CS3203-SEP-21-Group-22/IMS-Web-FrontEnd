@@ -6,7 +6,7 @@ const OngoingMaintain = () => {
   const [ongoingMaintenance, setOngoingMaintenance] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [expandedItem, setExpandedItem] = useState(null);
+
   const [showCreateForm, setShowCreateForm] = useState(false);
 
   // Success message state
@@ -20,7 +20,7 @@ const OngoingMaintain = () => {
   const [selectedEquipment, setSelectedEquipment] = useState("");
   const [items, setItems] = useState([]);
   const [selectedItem, setSelectedItem] = useState(null);
-  const [selectedLab, setSelectedLab] = useState("");
+
   const [technicians, setTechnicians] = useState([]);
   const [selectedTechnician, setSelectedTechnician] = useState(null);
 
@@ -138,8 +138,7 @@ const OngoingMaintain = () => {
 
   const handleLabChange = (e) => {
     const labId = e.target.value;
-    const selectedLab = labs.find((lab) => lab.labId === Number(labId));
-    setSelectedLab(selectedLab);
+
     setLabName(labId);
     fetchEquipment(labId);
   };

@@ -7,9 +7,7 @@ import ConfirmationModal from "../../ConfirmationModal";
 import LabCard from "./LabCard";
 
 export const ViewLabs = () => {
-  const [error, setError] = useState(null);
   const [showConfirmation, setShowConfirmation] = useState(false);
-  const [showToast, setShowToast] = useState(false);
   const [newLab, setNewLab] = useState({
     labName: "",
     labCode: "",
@@ -63,14 +61,12 @@ export const ViewLabs = () => {
 
       return presignedUrl;
     } catch (error) {
-      setError("Image upload failed");
       return null;
     }
   };
 
   const sendLab = async () => {
     if (!newLab.labName || !newLab.labCode) {
-      setError("Please fill in all the fields.");
       return;
     }
 
@@ -97,11 +93,7 @@ export const ViewLabs = () => {
         imageFile: null,
         imageURL: "",
       });
-
-      setShowToast(true);
-    } catch (error) {
-      setError("Failed to add lab");
-    }
+    } catch (error) {}
   };
 
   const handleInput = (e) => {
@@ -119,9 +111,7 @@ export const ViewLabs = () => {
   };
 
   // Function to display toast when a lab is deleted
-  const handleLabDeleteSuccess = () => {
-    setShowToast(true);
-  };
+  const handleLabDeleteSuccess = () => {};
 
   return (
     <div className="min-h-screen w-full bg-[#202652] flex relative flex-col items-center pb-10">

@@ -1,58 +1,62 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback } from "react";
 import { AUTH_CLIENT_ID, AUTH_SERVER_URL } from "../../config";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useAuth } from "../AuthContext"; // Import useAuth
+import { useAuth } from "../AuthContext";
 import signindesign from "../../styles/images/signindesign.png";
 
 function SignIn() {
   const navigate = useNavigate();
-  const { login } = useAuth(); // Get login function
+  const { login } = useAuth();
 
-  const getRoleFromServer = async (token) => {
-    try {
-      const { data } = await axios.get("/api/user/role", {
-        baseURL: "https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-      });
-      const { role } = data;
-      const roleRoutes = {
-        SystemAdmin: "/admin",
-        Clerk: "/officeclerk",
-        Student: "/student",
-        AcademicStaff: "/staff",
-        Technician: "/labTechnician2",
-      };
+  // Use useCallback to make getRoleFromServer stable and avoid re-creation on each render
+  const getRoleFromServer = useCallback(
+    async (token) => {
+      try {
+        const { data } = await axios.get("/api/user/role", {
+          baseURL: "https://ims-api-fbf3hheffacqe5ak.westus2-01.azurewebsites.net",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+        });
+        const { role } = data;
+        const roleRoutes = {
+          SystemAdmin: "/admin",
+          Clerk: "/officeclerk",
+          Student: "/student",
+          AcademicStaff: "/staff",
+          Technician: "/labTechnician2",
+        };
 
-      // Save the token in localStorage and update the auth state
-      localStorage.setItem("access_token", token);
-      login(); // Update the auth state to authenticated
+        // Save the token and update the auth state
+        localStorage.setItem("access_token", token);
+        login();
 
-      if (roleRoutes[role]) {
-        navigate(roleRoutes[role]);
-      } else {
-        console.error("Unknown role");
+        // Navigate to the route based on the role
+        if (roleRoutes[role]) {
+          navigate(roleRoutes[role]);
+        } else {
+          console.error("Unknown role");
+        }
+      } catch (error) {
+        console.error(error);
+        navigate("/sign-in");
       }
-    } catch (error) {
-      console.error(error);
-      navigate("/sign-in");
-    }
-  };
-
-  const handleLoginRedirect = async () => {
-    const token = localStorage.getItem("access_token");
-    if (token) {
-      await getRoleFromServer(token);
-    }
-  };
+    },
+    [login, navigate],
+  );
 
   useEffect(() => {
+    const handleLoginRedirect = async () => {
+      const token = localStorage.getItem("access_token");
+      if (token) {
+        await getRoleFromServer(token);
+      }
+    };
     handleLoginRedirect();
-  }, []);
+  }, [getRoleFromServer]);
 
   const redirectUri = "https://ims-api.azure-api.net";
   const loginUrl = `${AUTH_SERVER_URL}/login?redirectUri=${encodeURIComponent(redirectUri)}&clientId=${AUTH_CLIENT_ID}`;

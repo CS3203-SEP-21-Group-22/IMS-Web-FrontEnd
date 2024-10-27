@@ -23,17 +23,6 @@ const NavBarMenu = ({ pathname, firstLinkTo }) => {
     }
   }
 
-  const accessToken = localStorage.getItem("access_token");
-  let decodedAccessToken = {};
-
-  if (accessToken) {
-    try {
-      decodedAccessToken = jwtDecode(accessToken); // Decode only if accessToken exists
-    } catch (error) {
-      console.error("Invalid access token:", error);
-    }
-  }
-
   const handleLogOut = () => {
     localStorage.removeItem("access_token");
     localStorage.removeItem("refresh_token");

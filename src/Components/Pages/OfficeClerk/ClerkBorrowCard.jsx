@@ -1,11 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
-const ClerkBorrowCard = ({ borrowData, onRemoveRequest }) => {
-  const [error, setError] = useState("");
-  const [itemId, setItemId] = useState("");
-  const [rejectNote, setRejectNote] = useState("");
-  const [items, setItems] = useState([]);
-
+const ClerkBorrowCard = ({ borrowData }) => {
   const formatDate = (date) => {
     return date instanceof Date ? date.toISOString().split("T")[0] : new Date(date).toISOString().split("T")[0];
   };

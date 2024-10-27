@@ -1,5 +1,4 @@
 import React from "react";
-import mouse from "../../../../src/styles/images/mouse.png";
 
 const ReservationMiniCard = ({ reservationData }) => {
   const formattedStartDate =

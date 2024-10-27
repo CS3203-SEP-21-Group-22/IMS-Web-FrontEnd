@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 const OngoingCard = ({ ongoingData }) => {
   const formatDate = (date) => {
@@ -7,7 +7,6 @@ const OngoingCard = ({ ongoingData }) => {
 
   const formattedStartDate = formatDate(ongoingData.startDate);
   const formattedEndDate = formatDate(ongoingData.endDate);
-  const formattedReqDate = formatDate(ongoingData.createdAt);
 
   return (
     <div className="w-[487px] h-auto bg-[#3C4D71] rounded-[20px] flex flex-row p-4 items-center justify-center hover:scale-105 transition duration-200">

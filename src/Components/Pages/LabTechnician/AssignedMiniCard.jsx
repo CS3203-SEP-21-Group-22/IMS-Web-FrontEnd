@@ -1,14 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
 const AssignedMiniCard = ({ assignedData }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [additionalInfo, setAdditionalInfo] = useState(null); // State to store additional fetched information
   const [isExpanded, setIsExpanded] = useState(false); // Track if the card is expanded
-
-  const navigate = useNavigate();
 
   const formattedStartDate =
     assignedData.startDate instanceof Date
